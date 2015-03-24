@@ -14,9 +14,10 @@
         "php": ">=5.5.9"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*",
         "phpmd/phpmd": "@stable",
-        "phpunit/phpunit": "~4.4"
+        "phpunit/phpunit": "~4.4",
+        "satooshi/php-coveralls": "*",
+        "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
         "psr-4": {
