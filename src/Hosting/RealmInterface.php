@@ -24,6 +24,15 @@ interface RealmInterface
     const HOST_NAME_ROOT = 'hosting.acquia.com';
 
     /**
+     * Factory method for Realm classes.
+     *
+     * @param array $realmData
+     *
+     * @return RealmInterface
+     */
+    public static function create($realmData);
+
+    /**
      * Returns a description of the realm. Minimally this will be the machine-
      * name of the realm. However decorator classes may embellish this.
      *
