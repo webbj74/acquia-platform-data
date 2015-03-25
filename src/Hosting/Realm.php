@@ -28,18 +28,21 @@ final class Realm implements RealmInterface
         $this->name = $name;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     /**
-     * Factory method for Realm class
+     * {@inheritdoc}
      */
     public static function create($realmData)
     {
         $realm = new static($realmData['name']);
         return $realm;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
