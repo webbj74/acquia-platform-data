@@ -95,13 +95,13 @@ class RealmTest extends \PHPUnit_Framework_TestCase
         return array(
             'test1' => ['test1', 'test1.hosting.acquia.com', 'test1.acquia-sites.com'],
             'test2' => ['test2', 'test2.hosting.acquia.com', 'test2.acquia-sites.com'],
+            'test-3' => ['test-3', 'test-3.hosting.acquia.com', 'test-3.acquia-sites.com'],
         );
     }
 
     public function invalidNameDataProvider()
     {
         return [
-            'hyphen' => ['test-1'],
             'space' => ['test 1'],
             'empty string' => [''],
             'NULL' => [null],
