@@ -33,7 +33,7 @@ class RealmListTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::filter()
+     * @covers ::filterByName()
      */
     public function testRealmListCanReturnAFilteredListOfContents()
     {
@@ -41,7 +41,7 @@ class RealmListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(12, $realmList->count());
 
         // filter by array
-        $realmsOfSons = $realmList->filter($this->sonsOfUranus);
+        $realmsOfSons = $realmList->filterByName($this->sonsOfUranus);
         $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Realm\RealmList', $realmsOfSons);
         $this->assertEquals(6, $realmsOfSons->count());
         $iterator = $realmsOfSons->getIterator();
@@ -55,7 +55,7 @@ class RealmListTest extends \PHPUnit_Framework_TestCase
         }
 
         // filter by comma-delimited string
-        $realmsOfDaughters = $realmList->filter(implode(',', $this->daughtersOfGaia));
+        $realmsOfDaughters = $realmList->filterByName(implode(',', $this->daughtersOfGaia));
         $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Realm\RealmList', $realmsOfDaughters);
         $this->assertEquals(6, $realmsOfDaughters->count());
         $iterator = $realmsOfDaughters->getIterator();
@@ -70,14 +70,14 @@ class RealmListTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::filter
+     * @covers ::filterByName
      * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
         $realmList = $this->getBasicRealmList();
-        $realmList->filter($filter);
+        $realmList->filterByName($filter);
     }
 
     public function exceptionalFilterProvider()
