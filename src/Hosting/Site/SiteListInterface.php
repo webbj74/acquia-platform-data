@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Realm;
+namespace Acquia\Platform\Cloud\Hosting\Site;
 
-interface RealmListInterface
+interface SiteListInterface
 {
     /**
-     * Returns a subset of known realms matching the provided names
+     * Returns a subset of known sites matching the provided names
      *
-     * @param array|string $names An array of realm names, or a comma-delimited string of names
+     * @param array|string $names An array of site names, or a comma-delimited string of names
      *
-     * @return RealmListInterface
+     * @return SiteListInterface
      */
     public function filterByName($names);
 }

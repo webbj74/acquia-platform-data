@@ -9,28 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Realm;
+namespace Acquia\Platform\Cloud\Hosting\Site;
 
-use Acquia\Platform\Cloud\Hosting\RealmInterface;
-
-class RealmList extends \ArrayObject implements RealmListInterface
+class SiteList extends \ArrayObject implements SiteListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
      * Overrides ArrayObject::offsetSet() to validate that the value set at the
-     * specified offset is a Realm.
+     * specified offset is a Site.
      *
      * No value is returned.
      *
      * @param mixed $offset
-     * @param RealmInterface $value
+     * @param SiteInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\RealmInterface')) {
+        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\SiteInterface')) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $value must be an implementation of RealmInterface', __METHOD__)
+                sprintf('%s: $value must be an implementation of SiteInterface', __METHOD__)
             );
         }
         parent::offsetSet($offset, $value);
@@ -51,15 +49,15 @@ class RealmList extends \ArrayObject implements RealmListInterface
             );
         }
 
-        $filteredRealmList = new static();
+        $filteredSiteList = new static();
         $iterator = $this->getIterator();
         while ($iterator->valid()) {
             if (in_array($iterator->current()->getName(), $names)) {
-                $filteredRealmList->append($iterator->current());
+                $filteredSiteList->append($iterator->current());
             }
             $iterator->next();
         }
 
-        return $filteredRealmList;
+        return $filteredSiteList;
     }
 }
