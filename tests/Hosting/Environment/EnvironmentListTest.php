@@ -27,7 +27,9 @@ class EnvironmentListTest extends \PHPUnit_Framework_TestCase
         $environmentList = new EnvironmentList();
         $childrenOfTitans = array_merge($this->childrenOfLeto, $this->childrenOfAtlas);
         foreach ($childrenOfTitans as $titanName) {
-            $environmentList->append(new Environment($titanName));
+            $env = new Environment($titanName);
+            $env->setMachineName('sitegroup' . $titanName);
+            $environmentList->append($env);
         }
         return $environmentList;
     }
@@ -105,5 +107,19 @@ class EnvironmentListTest extends \PHPUnit_Framework_TestCase
             'null' => [null],
             'stdClass' => [new \stdClass()],
         ];
+    }
+
+    /**
+     * @covers ::getNames
+     */
+    public function testGetNames()
+    {
+        $environmentList = $this->getBasicEnvironmentList()->filterByName($this->childrenOfLeto);
+        ;
+        $expected = [
+            'Apollo' => 'sitegroupApollo',
+            'Artemis' => 'sitegroupArtemis',
+        ];
+        $this->assertEquals($expected, $environmentList->getNames());
     }
 }
