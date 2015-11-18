@@ -278,6 +278,45 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         $environment->setUnixUserName($value);
     }
 
+    /**
+     * @covers ::getMachineName
+     * @covers ::setMachineName
+     */
+    public function testMachineNamePropertyMayBeAccessedViaMethods()
+    {
+        $environment = new Environment('test');
+        $machineNames = [
+            'sitegroupdev',
+            'sitegroupstg',
+            'sitegroupf4f4f5g',
+        ];
+        foreach ($machineNames as $machineName) {
+            $environment->setMachineName($machineName);
+            $this->assertEquals($machineName, $environment->getMachineName());
+        }
+    }
+
+    /**
+     * @covers ::getMachineName
+     * @expectedException \RuntimeException
+     */
+    public function testMachineNamePropertyWhenUnset()
+    {
+        $environment = new Environment('test');
+        $environment->getMachineName();
+    }
+
+    /**
+     * @covers ::setMachineName
+     * @dataProvider nonStringProvider()
+     * @expectedException \InvalidArgumentException
+     */
+    public function testMachineNamePropertyRejectsNonString($value)
+    {
+        $environment = new Environment('test');
+        $environment->setMachineName($value);
+    }
+
     public function commonDataProvider()
     {
         return array(

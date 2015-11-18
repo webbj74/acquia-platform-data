@@ -48,6 +48,11 @@ final class Environment implements EnvironmentInterface
      */
     private $unixUserName;
 
+    /**
+     * @var string
+     */
+    private $machineName;
+
     public function __construct($name)
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
@@ -156,7 +161,7 @@ final class Environment implements EnvironmentInterface
     {
         if ($this->defaultDomainName === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Environment object does not know the default domain name.', __METHOD__)
+                sprintf('%s: This Environment object does not know its default domain name.', __METHOD__)
             );
         }
         return $this->defaultDomainName;
@@ -208,7 +213,7 @@ final class Environment implements EnvironmentInterface
     {
         if ($this->unixUserName === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Environment object does not know the UNIX user name.', __METHOD__)
+                sprintf('%s: This Environment object does not know its UNIX user name.', __METHOD__)
             );
         }
         return $this->unixUserName;
@@ -225,5 +230,31 @@ final class Environment implements EnvironmentInterface
             );
         }
         $this->unixUserName = $unixUserName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMachineName()
+    {
+        if ($this->machineName === null) {
+            throw new \RuntimeException(
+                sprintf('%s: This Environment object does not know its machine name.', __METHOD__)
+            );
+        }
+        return $this->machineName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMachineName($machineName)
+    {
+        if (!is_string($machineName) || empty($machineName)) {
+            throw new \InvalidArgumentException(
+                sprintf('%s: $machineName expects a string.', __METHOD__)
+            );
+        }
+        $this->machineName = $machineName;
     }
 }

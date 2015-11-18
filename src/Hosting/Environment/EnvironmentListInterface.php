@@ -21,4 +21,11 @@ interface EnvironmentListInterface
      * @return EnvironmentListInterface
      */
     public function filterByName($names);
+
+    /**
+     * Returns a simple array of environment names.
+     *
+     * @return array Associative array of Environments in the form envName => machineName
+     */
+    public function getNames();
 }

@@ -60,4 +60,18 @@ final class EnvironmentList extends \ArrayObject implements EnvironmentListInter
 
         return $filteredList;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNames()
+    {
+        $names = [];
+        $iterator = $this->getIterator();
+        while ($iterator->valid()) {
+            $names[$iterator->current()->getName()] = $iterator->current()->getMachineName();
+            $iterator->next();
+        }
+        return $names;
+    }
 }
