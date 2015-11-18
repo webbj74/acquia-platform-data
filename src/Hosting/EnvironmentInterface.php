@@ -14,11 +14,11 @@ namespace Acquia\Platform\Cloud\Hosting;
 interface EnvironmentInterface
 {
     /**
-     * Returns the machine-name of the environment. Examples:
+     * Returns the human readable name of the environment. Examples:
      * - test
      * - prod
      *
-     * @return string The machine-name of the environment.
+     * @return string The human readable name of the environment.
      */
     public function getName();
 
@@ -105,4 +105,18 @@ interface EnvironmentInterface
      * @param string $unixUserName
      */
     public function setUnixUserName($unixUserName);
+
+    /**
+     * Returns the machine name of the environment.
+     *
+     * @return string
+     */
+    public function getMachineName();
+
+    /**
+     * Assigns the machine name of the environment.
+     *
+     * @param string $machineName
+     */
+    public function setMachineName($machineName);
 }
