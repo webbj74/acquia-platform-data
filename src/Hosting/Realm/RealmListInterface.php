@@ -21,4 +21,11 @@ interface RealmListInterface
      * @return RealmListInterface
      */
     public function filterByName($names);
+
+    /**
+     * Returns a subset of known realms which are flagged as default.
+     *
+     * @return RealmListInterface
+     */
+    public function getDefaultRealms();
 }

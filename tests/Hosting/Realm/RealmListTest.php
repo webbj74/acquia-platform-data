@@ -21,13 +21,18 @@ class RealmListTest extends \PHPUnit_Framework_TestCase
 {
     private $daughtersOfGaia = ['Mnemosyne',  'Tethys', 'Theia', 'Phoebe', 'Rhea', 'Themis'];
     private $sonsOfUranus = ['Oceanus', 'Hyperion', 'Coeus', 'Cronus', 'Crius', 'Iapetus'];
+    private $defaultRealms = ['Mnemosyne', 'Oceanus'];
 
     protected function getBasicRealmList()
     {
         $realmList = new RealmList();
         $titans = array_merge($this->daughtersOfGaia, $this->sonsOfUranus);
         foreach ($titans as $titanName) {
-            $realmList->append(new Realm($titanName));
+            $realm = new Realm($titanName);
+            if (in_array($titanName, $this->defaultRealms)) {
+                $realm->setDefault(true);
+            }
+            $realmList->append($realm);
         }
         return $realmList;
     }
@@ -105,5 +110,26 @@ class RealmListTest extends \PHPUnit_Framework_TestCase
             'null' => [null],
             'stdClass' => [new \stdClass()],
         ];
+    }
+
+    /**
+     * @covers ::getDefaultRealms()
+     */
+    public function testRealmListCanReturnAListOfDefaultRealms()
+    {
+        $realmList = $this->getBasicRealmList()->getDefaultRealms();
+        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Realm\RealmList', $realmList);
+        $this->assertEquals(count($this->defaultRealms), $realmList->count());
+
+        // filter by array
+        $iterator = $realmList->getIterator();
+        while ($iterator->valid()) {
+            /** @var \Acquia\Platform\Cloud\Hosting\Realm $realm */
+            $realm = $iterator->current();
+            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Realm', $realm);
+            $this->assertTrue($realm->isDefault());
+            $this->assertTrue(in_array($realm->getName(), $this->defaultRealms));
+            $iterator->next();
+        }
     }
 }
