@@ -90,6 +90,20 @@ class RealmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($name, (string) $realm);
     }
 
+    /**
+     * @covers ::setDefault()
+     * @covers ::isDefault()
+     */
+    public function testRealmCanBeLabeledDefault()
+    {
+        $realm = new Realm('test1');
+        $this->assertFalse($realm->isDefault());
+        $realm->setDefault(true);
+        $this->assertTrue($realm->isDefault());
+        $realm->setDefault(false);
+        $this->assertFalse($realm->isDefault());
+    }
+
     public function commonDataProvider()
     {
         return array(

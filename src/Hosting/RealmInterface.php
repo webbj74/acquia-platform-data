@@ -66,4 +66,24 @@ interface RealmInterface
      * @return string The DNS root for site domains in the realm.
      */
     public function getDefaultSiteDomainNameRoot();
+
+    /**
+     * Indicate if the Realm is a default realm.
+     *
+     * Multiple realms may be default. This allows application configuration
+     * to indicate a subset of realms to be used for default behavior. For
+     * example if you manage twenty Acquia Cloud Professional sites (devcloud)
+     * and one Acquia Cloud Enterprise site (prod), you may want to set
+     * devcloud as the default realm.
+     *
+     * @param bool $isDefault
+     */
+    public function setDefault($isDefault);
+
+    /**
+     * Returns true if the Realm is a default realm.
+     *
+     * @return bool
+     */
+    public function isDefault();
 }

@@ -62,4 +62,21 @@ class RealmList extends \ArrayObject implements RealmListInterface
 
         return $filteredRealmList;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultRealms()
+    {
+        $filteredRealmList = new static();
+        $iterator = $this->getIterator();
+        while ($iterator->valid()) {
+            if ($iterator->current()->isDefault()) {
+                $filteredRealmList->append($iterator->current());
+            }
+            $iterator->next();
+        }
+
+        return $filteredRealmList;
+    }
 }
