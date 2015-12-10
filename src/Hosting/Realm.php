@@ -14,6 +14,11 @@ namespace Acquia\Platform\Cloud\Hosting;
 final class Realm implements RealmInterface
 {
     /**
+     * @var bool $isDefault - True if this realm is a default realm
+     */
+    private $isDefaultRealm = false;
+
+    /**
      * @var string
      */
     private $name;
@@ -34,6 +39,7 @@ final class Realm implements RealmInterface
     public static function create($realmData)
     {
         $realm = new static($realmData['name']);
+        $realm->setDefault(isset($realmData['default']) ? $realmData['default'] : false);
         return $realm;
     }
 
@@ -67,5 +73,21 @@ final class Realm implements RealmInterface
     public function getDefaultSiteDomainNameRoot()
     {
         return sprintf('%s.%s', $this->name, RealmInterface::DOMAIN_NAME_ROOT);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefault($isDefault)
+    {
+        $this->isDefaultRealm = $isDefault;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDefault()
+    {
+        return $this->isDefaultRealm;
     }
 }
