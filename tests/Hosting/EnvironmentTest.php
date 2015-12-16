@@ -247,9 +247,9 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     {
         $environment = new Environment('test');
         $users = [
-            'sitegroup.dev',
-            'sitegroup.test',
-            'sitegroup.prod',
+            'myapp.dev',
+            'myapp.test',
+            'myapp.prod',
         ];
         foreach ($users as $user) {
             $environment->setUnixUserName($user);
@@ -286,9 +286,9 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     {
         $environment = new Environment('test');
         $machineNames = [
-            'sitegroupdev',
-            'sitegroupstg',
-            'sitegroupf4f4f5g',
+            'myappdev',
+            'myappstg',
+            'myappf4f4f5g',
         ];
         foreach ($machineNames as $machineName) {
             $environment->setMachineName($machineName);

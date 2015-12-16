@@ -9,26 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Site;
+namespace Acquia\Platform\Cloud\Hosting\Application;
 
-class SiteList extends \ArrayObject implements SiteListInterface
+use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
+
+class ApplicationList extends \ArrayObject implements ApplicationListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
      * Overrides ArrayObject::offsetSet() to validate that the value set at the
-     * specified offset is a Site.
+     * specified offset is a Application.
      *
      * No value is returned.
      *
      * @param mixed $offset
-     * @param SiteInterface $value
+     * @param ApplicationInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\SiteInterface')) {
+        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ApplicationInterface')) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $value must be an implementation of SiteInterface', __METHOD__)
+                sprintf('%s: $value must be an implementation of ApplicationInterface', __METHOD__)
             );
         }
         parent::offsetSet($offset, $value);
@@ -49,15 +51,15 @@ class SiteList extends \ArrayObject implements SiteListInterface
             );
         }
 
-        $filteredSiteList = new static();
-        $iterator = $this->getIterator();
-        while ($iterator->valid()) {
-            if (in_array($iterator->current()->getName(), $names)) {
-                $filteredSiteList->append($iterator->current());
+        $filteredAppList = new static();
+        $appListIterator = $this->getIterator();
+        while ($appListIterator->valid()) {
+            if (in_array($appListIterator->current()->getName(), $names)) {
+                $filteredAppList->append($appListIterator->current());
             }
-            $iterator->next();
+            $appListIterator->next();
         }
 
-        return $filteredSiteList;
+        return $filteredAppList;
     }
 }

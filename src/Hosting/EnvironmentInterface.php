@@ -79,7 +79,7 @@ interface EnvironmentInterface
     public function setDefaultDomainName($defaultDomainName);
 
     /**
-     * Returns true if the site is in Live Development mode.
+     * Returns true if the environment is in Live Development mode.
      *
      * @return bool
      */
