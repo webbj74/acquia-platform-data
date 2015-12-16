@@ -11,13 +11,13 @@
 
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
-use Acquia\Platform\Cloud\Hosting\Site;
+use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Realm;
 
 /**
- * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Site
+ * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Application
  */
-class SiteTest extends \PHPUnit_Framework_TestCase
+class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers ::__construct
@@ -26,10 +26,10 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testNamePropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
-        $this->assertEquals('test', $site->getName());
-        $site->setRealm(new Realm('foo'));
-        $this->assertEquals('foo:test', $site->getRealmQualifiedName());
+        $application = new Application('test');
+        $this->assertEquals('test', $application->getName());
+        $application->setRealm(new Realm('foo'));
+        $this->assertEquals('foo:test', $application->getRealmQualifiedName());
     }
 
     /**
@@ -38,10 +38,10 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testVcsTypePropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         foreach (['git', 'svn'] as $vcs) {
-            $site->setVcsType($vcs);
-            $this->assertEquals($vcs, $site->getVcsType());
+            $application->setVcsType($vcs);
+            $this->assertEquals($vcs, $application->getVcsType());
         }
     }
 
@@ -51,8 +51,8 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetVcsTypeWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->getVcsType();
+        $application = new Application('test');
+        $application->getVcsType();
     }
 
     /**
@@ -61,14 +61,14 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testVcsRepositoryUrlPropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         $vcsUrls = [
-            'https://vcs-123.prod.hosting.acquia.com/mysite',
+            'https://vcs-123.prod.hosting.acquia.com/myapp',
             'examplecom@vcs-456.devcloud.hosting.acquia.com:examplecom.git',
         ];
         foreach ($vcsUrls as $url) {
-            $site->setVcsRepositoryUrl($url);
-            $this->assertEquals($url, $site->getVcsRepositoryUrl());
+            $application->setVcsRepositoryUrl($url);
+            $this->assertEquals($url, $application->getVcsRepositoryUrl());
         }
     }
 
@@ -78,8 +78,8 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetVcsRepositoryUrlWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->getVcsRepositoryUrl();
+        $application = new Application('test');
+        $application->getVcsRepositoryUrl();
     }
 
     /**
@@ -88,14 +88,14 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testProductionModePropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         $modes = [
             true,
             false,
         ];
         foreach ($modes as $mode) {
-            $site->setProductionMode($mode);
-            $this->assertEquals($mode, $site->isInProduction());
+            $application->setProductionMode($mode);
+            $this->assertEquals($mode, $application->isInProduction());
         }
     }
 
@@ -105,8 +105,8 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsInProductionWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->isInProduction();
+        $application = new Application('test');
+        $application->isInProduction();
     }
 
     /**
@@ -115,14 +115,14 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnixUsernamePropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         $names = [
-            'mysite',
+            'myapp',
             'examplecom',
         ];
         foreach ($names as $name) {
-            $site->setUnixUsername($name);
-            $this->assertEquals($name, $site->getUnixUsername());
+            $application->setUnixUsername($name);
+            $this->assertEquals($name, $application->getUnixUsername());
         }
     }
 
@@ -132,8 +132,8 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUnixUsernameWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->getUnixUsername();
+        $application = new Application('test');
+        $application->getUnixUsername();
     }
 
     /**
@@ -142,14 +142,14 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testTitlePropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         $titles = [
-            'My Very First Acquia Cloud Site',
+            'My Very First Acquia Cloud Application',
             'example.com - D7 Rebuild',
         ];
         foreach ($titles as $title) {
-            $site->setTitle($title);
-            $this->assertEquals($title, $site->getTitle());
+            $application->setTitle($title);
+            $this->assertEquals($title, $application->getTitle());
         }
     }
 
@@ -159,8 +159,8 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTitleWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->getTitle();
+        $application = new Application('test');
+        $application->getTitle();
     }
 
     /**
@@ -169,14 +169,14 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testUUIDPropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         $uuids = [
             '0e88acab-0123-feeb-daed-45bccbd68888',
             '45bcfeeb-acab-0123-8888-daedcbd6d8eb',
         ];
         foreach ($uuids as $uuid) {
-            $site->setUUID($uuid);
-            $this->assertEquals($uuid, $site->getUUID());
+            $application->setUUID($uuid);
+            $this->assertEquals($uuid, $application->getUUID());
         }
     }
 
@@ -186,8 +186,8 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUUIDWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->getUUID();
+        $application = new Application('test');
+        $application->getUUID();
     }
 
     /**
@@ -196,15 +196,15 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testRealmPropertyMayBeAccessedViaMethods()
     {
-        $site = new Site('test');
+        $application = new Application('test');
         $realms = [
             new Realm('test1'),
             new Realm('test2'),
         ];
         /** @var \Acquia\Platform\Cloud\Hosting\RealmInterface $realm */
         foreach ($realms as $realm) {
-            $site->setRealm($realm);
-            $this->assertEquals($realm->getName(), $site->getRealm()->getName());
+            $application->setRealm($realm);
+            $this->assertEquals($realm->getName(), $application->getRealm()->getName());
         }
     }
 
@@ -214,7 +214,7 @@ class SiteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRealmWillThrowExceptionIfPropertyNotSet()
     {
-        $site = new Site('test');
-        $site->getRealm();
+        $application = new Application('test');
+        $application->getRealm();
     }
 }

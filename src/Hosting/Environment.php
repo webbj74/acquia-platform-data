@@ -187,7 +187,7 @@ final class Environment implements EnvironmentInterface
     {
         if ($this->inLiveDevelopment === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Environment object does not know if the site is in Live Dev mode.', __METHOD__)
+                sprintf('%s: This Environment object does not know if the application is in Live Dev mode.', __METHOD__)
             );
         }
         return $this->inLiveDevelopment;

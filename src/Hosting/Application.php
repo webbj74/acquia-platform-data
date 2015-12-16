@@ -11,7 +11,7 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
-final class Site implements SiteInterface
+final class Application implements ApplicationInterface
 {
     /**
      * @var string
@@ -57,7 +57,7 @@ final class Site implements SiteInterface
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: Site name must be an alphanumeric string (%s)', __METHOD__, $name)
+                sprintf('%s: Application name must be an alphanumeric string (%s)', __METHOD__, $name)
             );
         }
         $this->name = $name;
@@ -86,7 +86,7 @@ final class Site implements SiteInterface
     {
         if ($this->title === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the title.', __METHOD__)
+                sprintf('%s: This Application object does not know the title.', __METHOD__)
             );
         }
         return $this->title;
@@ -114,7 +114,7 @@ final class Site implements SiteInterface
     {
         if ($this->uuid === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the UUID.', __METHOD__)
+                sprintf('%s: This Application object does not know the UUID.', __METHOD__)
             );
         }
         return $this->uuid;
@@ -142,7 +142,7 @@ final class Site implements SiteInterface
     {
         if ($this->vcsType === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the VCS type.', __METHOD__)
+                sprintf('%s: This Application object does not know the VCS type.', __METHOD__)
             );
         }
         return $this->vcsType;
@@ -170,7 +170,7 @@ final class Site implements SiteInterface
     {
         if ($this->vcsUrl === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the VCS URL.', __METHOD__)
+                sprintf('%s: This Application object does not know the VCS URL.', __METHOD__)
             );
         }
         return $this->vcsUrl;
@@ -198,7 +198,7 @@ final class Site implements SiteInterface
     {
         if ($this->productionMode === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the production mode.', __METHOD__)
+                sprintf('%s: This Application object does not know the production mode.', __METHOD__)
             );
         }
         return $this->productionMode;
@@ -226,7 +226,7 @@ final class Site implements SiteInterface
     {
         if ($this->unixUsername === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the unix username.', __METHOD__)
+                sprintf('%s: This Application object does not know the unix username.', __METHOD__)
             );
         }
         return $this->unixUsername;
@@ -255,7 +255,7 @@ final class Site implements SiteInterface
     {
         if ($this->realm === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Site object does not know the realm.', __METHOD__)
+                sprintf('%s: This Application object does not know the realm.', __METHOD__)
             );
         }
         return $this->realm;
@@ -264,7 +264,7 @@ final class Site implements SiteInterface
     /**
      * Add a string.
      *
-     * @param RealmInterface $realm The realm this site is hosted in.
+     * @param RealmInterface $realm The realm this application is hosted in.
      */
     public function setRealm(RealmInterface $realm)
     {

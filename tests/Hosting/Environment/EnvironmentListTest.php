@@ -28,7 +28,7 @@ class EnvironmentListTest extends \PHPUnit_Framework_TestCase
         $childrenOfTitans = array_merge($this->childrenOfLeto, $this->childrenOfAtlas);
         foreach ($childrenOfTitans as $titanName) {
             $env = new Environment($titanName);
-            $env->setMachineName('sitegroup' . $titanName);
+            $env->setMachineName('myapp' . $titanName);
             $environmentList->append($env);
         }
         return $environmentList;
@@ -117,8 +117,8 @@ class EnvironmentListTest extends \PHPUnit_Framework_TestCase
         $environmentList = $this->getBasicEnvironmentList()->filterByName($this->childrenOfLeto);
         ;
         $expected = [
-            'Apollo' => 'sitegroupApollo',
-            'Artemis' => 'sitegroupArtemis',
+            'Apollo' => 'myappApollo',
+            'Artemis' => 'myappArtemis',
         ];
         $this->assertEquals($expected, $environmentList->getNames());
     }
