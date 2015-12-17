@@ -57,7 +57,11 @@ final class Application implements ApplicationInterface
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: Application name must be an alphanumeric string (%s)', __METHOD__, $name)
+                sprintf(
+                    '%s: Application name must be an alphanumeric string (%s given)',
+                    __METHOD__,
+                    is_string($name) ? $name : gettype($name)
+                )
             );
         }
         $this->name = $name;

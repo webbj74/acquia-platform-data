@@ -33,6 +33,24 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::__construct
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNamePropertyMustBeAString()
+    {
+        $application = new Application([]);
+    }
+
+    /**
+     * @covers ::__construct
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNamePropertyMustBeAnAlphanumericString()
+    {
+        $application = new Application(' ');
+    }
+
+    /**
      * @covers ::getVcsType
      * @covers ::setVcsType
      */
@@ -53,6 +71,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application('test');
         $application->getVcsType();
+    }
+
+    /**
+     * @covers ::setVcsType
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetVcsTypeWillThrowExceptionIfNotAString()
+    {
+        $application = new Application('test');
+        $application->setVcsType([]);
+    }
+
+    /**
+     * @covers ::setVcsType
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetVcsTypeWillThrowExceptionIfEmptyString()
+    {
+        $application = new Application('test');
+        $application->setVcsType('');
     }
 
     /**
@@ -83,6 +121,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::setVcsRepositoryUrl
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetVcsRepositoryUrlWillThrowExceptionIfNotAString()
+    {
+        $application = new Application('test');
+        $application->setVcsRepositoryUrl([]);
+    }
+
+    /**
+     * @covers ::setVcsRepositoryUrl
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetVcsRepositoryUrlWillThrowExceptionIfEmptyString()
+    {
+        $application = new Application('test');
+        $application->setVcsRepositoryUrl('');
+    }
+
+    /**
      * @covers ::isInProduction
      * @covers ::setProductionMode
      */
@@ -107,6 +165,16 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application('test');
         $application->isInProduction();
+    }
+
+    /**
+     * @covers ::setProductionMode
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetProductionModeWillThrowExceptionIfNotABoolean()
+    {
+        $application = new Application('test');
+        $application->setProductionMode([]);
     }
 
     /**
@@ -137,6 +205,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::setUnixUsername
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetUnixUsernameWillThrowExceptionIfNotAString()
+    {
+        $application = new Application('test');
+        $application->setUnixUsername([]);
+    }
+
+    /**
+     * @covers ::setUnixUsername
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetUnixUsernameWillThrowExceptionIfEmptyString()
+    {
+        $application = new Application('test');
+        $application->setUnixUsername('');
+    }
+
+    /**
      * @covers ::getTitle
      * @covers ::setTitle
      */
@@ -164,6 +252,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::setTitle
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetTitleWillThrowExceptionIfNotAString()
+    {
+        $application = new Application('test');
+        $application->setTitle([]);
+    }
+
+    /**
+     * @covers ::setTitle
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetTitleWillThrowExceptionIfEmptyString()
+    {
+        $application = new Application('test');
+        $application->setTitle('');
+    }
+
+    /**
      * @covers ::getUUID
      * @covers ::setUUID
      */
@@ -188,6 +296,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application('test');
         $application->getUUID();
+    }
+
+    /**
+     * @covers ::setUUID
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetUUIDWillThrowExceptionIfNotAString()
+    {
+        $application = new Application('test');
+        $application->setUUID([]);
+    }
+
+    /**
+     * @covers ::setUUID
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetUUIDWillThrowExceptionIfEmptyString()
+    {
+        $application = new Application('test');
+        $application->setUUID('');
     }
 
     /**
