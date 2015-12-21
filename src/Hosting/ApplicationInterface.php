@@ -24,6 +24,15 @@ namespace Acquia\Platform\Cloud\Hosting;
 interface ApplicationInterface
 {
     /**
+     * Factory method for Application classes.
+     *
+     * @param array $applicationData
+     *
+     * @return ApplicationInterface
+     */
+    public static function create(array $applicationData);
+
+    /**
      * Returns the machine-name of the application. Examples:
      * - myapp
      * - examplecom

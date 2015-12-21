@@ -51,6 +51,31 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::create()
+     */
+    public function testApplicationCanBeInstantiatedWithFactoryMethod()
+    {
+        $app = Application::create(['name' => 'sitegroup']);
+        $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\Application', $app);
+        $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\ApplicationInterface', $app);
+
+        $app = Application::create(
+            [
+                'name' => 'application',
+                'production_mode' => 1,
+                'realm' => new Realm('realm1'),
+                'title' => 'My Site',
+                'unix_username' => 'application',
+                'uuid' => 'd2e64aca-a1de-492e-ab9e-e2866555760d',
+                'vcs_type' => 'git',
+                'vcs_url' => 'git@github.com:webbj74/acquia-platform-cloud-data-model.git',
+            ]
+        );
+        $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\Application', $app);
+        $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\ApplicationInterface', $app);
+    }
+
+    /**
      * @covers ::getVcsType
      * @covers ::setVcsType
      */

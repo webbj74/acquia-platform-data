@@ -70,6 +70,37 @@ final class Application implements ApplicationInterface
     /**
      * {@inheritdoc}
      */
+    public static function create(array $applicationData)
+    {
+        $app = new static($applicationData['name']);
+        if (isset($applicationData['production_mode']) && is_numeric($applicationData['production_mode'])) {
+            $app->setProductionMode((bool)$applicationData['production_mode']);
+        }
+        if (isset($applicationData['realm'])) {
+            $app->setRealm($applicationData['realm']);
+        }
+        if (isset($applicationData['title'])) {
+            $app->setTitle($applicationData['title']);
+        }
+        if (isset($applicationData['unix_username'])) {
+            $app->setUnixUsername($applicationData['unix_username']);
+        }
+        if (isset($applicationData['uuid'])) {
+            $app->setUUID($applicationData['uuid']);
+        }
+        if (isset($applicationData['vcs_type'])) {
+            $app->setVcsType($applicationData['vcs_type']);
+        }
+        if (isset($applicationData['vcs_url'])) {
+            $app->setVcsRepositoryUrl($applicationData['vcs_url']);
+        }
+
+        return $app;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -217,7 +248,7 @@ final class Application implements ApplicationInterface
     {
         if (!is_bool($productionMode)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $productionMode expects a string.', __METHOD__)
+                sprintf('%s: $productionMode expects a boolean.', __METHOD__)
             );
         }
         $this->productionMode = $productionMode;
