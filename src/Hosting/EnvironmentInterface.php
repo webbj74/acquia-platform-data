@@ -14,6 +14,15 @@ namespace Acquia\Platform\Cloud\Hosting;
 interface EnvironmentInterface
 {
     /**
+     * Factory method for Environment classes.
+     *
+     * @param array $environmentData
+     *
+     * @return EnvironmentInterface
+     */
+    public static function create(array $environmentData);
+
+    /**
      * Returns the human readable name of the environment. Examples:
      * - test
      * - prod

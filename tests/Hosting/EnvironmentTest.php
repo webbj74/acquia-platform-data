@@ -45,9 +45,21 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
      */
     public function testRealmCanBeInstantiatedWithFactoryMethod($envName)
     {
-        $environment = Environment::create(['name' => $envName]);
+        $environment = Environment::create(
+            [
+                'name' => $envName,
+                'vcs_path' => 'tags/WELCOME',
+                'ssh_host' => 'srv-1234.test',
+                'db_clusters' => [123],
+                'default_domain' => 'myappf4f4f5g.test',
+                'livedev' => 'disabled',
+                'unix_username' => 'myapp.' . $envName,
+            ]
+        );
         $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\Environment', $environment);
         $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\EnvironmentInterface', $environment);
+        $this->assertEquals('myappf4f4f5g', $environment->getMachineName());
+        $this->assertFalse($environment->isInLiveDev());
     }
 
     /**
