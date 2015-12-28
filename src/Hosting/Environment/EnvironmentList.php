@@ -11,7 +11,7 @@
 
 namespace Acquia\Platform\Cloud\Hosting\Environment;
 
-final class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
+class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
