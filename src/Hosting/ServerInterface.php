@@ -94,4 +94,16 @@ interface ServerInterface
      * @param string $availZone EC2 Availability zone for the server.
      */
     public function setEc2AvailabilityZone($availZone);
+
+    /**
+     * Get the services information associated with the server.
+     * @return array Services associated with the server.
+     */
+    public function getServices();
+
+    /**
+     * Set the services information associated with the server.
+     * @param array $services An array of services.
+     */
+    public function setServices($services);
 }

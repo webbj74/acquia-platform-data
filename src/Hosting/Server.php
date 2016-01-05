@@ -11,7 +11,7 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
-final class Application implements ApplicationInterface
+final class Server implements ServerInterface
 {
     /**
      * @var string
@@ -19,46 +19,36 @@ final class Application implements ApplicationInterface
     private $name;
 
     /**
-     * @var boolean
+     * @var string
      */
-    private $productionMode;
-
-    /**
-     * @var RealmInterface
-     */
-    private $realm;
+    private $fullyQualifiedDomainName;
 
     /**
      * @var string
      */
-    private $title;
+    private $amiType;
 
     /**
      * @var string
      */
-    private $unixUsername;
+    private $ec2Region;
 
     /**
      * @var string
      */
-    private $uuid;
+    private $ec2AvailabilityZone;
 
     /**
-     * @var string
+     * @var array
      */
-    private $vcsType;
-
-    /**
-     * @var string
-     */
-    private $vcsUrl;
+    private $services;
 
     public function __construct($name)
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    '%s: Application name must be an alphanumeric string (%s given)',
+                    '%s: Server name must be an alphanumeric string (%s given)',
                     __METHOD__,
                     is_string($name) ? $name : gettype($name)
                 )
@@ -70,29 +60,20 @@ final class Application implements ApplicationInterface
     /**
      * {@inheritdoc}
      */
-    public static function create(array $applicationData)
+    public static function create(array $serverData)
     {
-        $app = new static($applicationData['name']);
-        if (isset($applicationData['production_mode']) && is_numeric($applicationData['production_mode'])) {
-            $app->setProductionMode((bool)$applicationData['production_mode']);
+        $app = new static($serverData['name']);
+        if (isset($serverData['ami_type'])) {
+            $app->setAmiType($serverData['ami_type']);
         }
-        if (isset($applicationData['realm'])) {
-            $app->setRealm($applicationData['realm']);
+        if (isset($serverData['ec2_region'])) {
+            $app->setAmiType($serverData['ec2_region']);
         }
-        if (isset($applicationData['title'])) {
-            $app->setTitle($applicationData['title']);
+        if (isset($serverData['ec2_availability_zone'])) {
+            $app->setAmiType($serverData['ec2_availability_zone']);
         }
-        if (isset($applicationData['unix_username'])) {
-            $app->setUnixUsername($applicationData['unix_username']);
-        }
-        if (isset($applicationData['uuid'])) {
-            $app->setUUID($applicationData['uuid']);
-        }
-        if (isset($applicationData['vcs_type'])) {
-            $app->setVcsType($applicationData['vcs_type']);
-        }
-        if (isset($applicationData['vcs_url'])) {
-            $app->setVcsRepositoryUrl($applicationData['vcs_url']);
+        if (isset($serverData['services']) && is_array($serverData['services'])) {
+            $app->setServices($serverData['services']);
         }
 
         return $app;
@@ -109,200 +90,120 @@ final class Application implements ApplicationInterface
     /**
      * {@inheritdoc}
      */
-    public function getRealmQualifiedName()
+    public function getFullyQualifiedDomainName()
     {
-        return sprintf('%s:%s', $this->getRealm()->getName(), $this->name);
+        return $this->name . ".prod.hosting.acquia.com";
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
+    public function getAmiType()
     {
-        if ($this->title === null) {
+        if ($this->amiType === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the title.', __METHOD__)
+                sprintf('%s: This Server object does not know the AMI Type.', __METHOD__)
             );
         }
-        return $this->title;
+        return $this->amiType;
     }
 
     /**
      * Add a string.
      *
-     * @param array $title A string.
+     * @param string $amiType A string.
      */
-    public function setTitle($title)
+    public function setAmiType($amiType)
     {
-        if (!is_string($title) || empty($title)) {
+        if (!is_string($amiType) || empty($amiType)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $title expects a string.', __METHOD__)
+                sprintf('%s: $amiType expects a string.', __METHOD__)
             );
         }
-        $this->title = $title;
+        $this->amiType = $amiType;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUUID()
+    public function getEc2Region()
     {
-        if ($this->uuid === null) {
+        if ($this->ec2Region === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the UUID.', __METHOD__)
+              sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
             );
         }
-        return $this->uuid;
+        return $this->ec2Region;
     }
 
     /**
      * Add a string.
      *
-     * @param array $uuid A string.
+     * @param string $ec2Region A string.
      */
-    public function setUUID($uuid)
+    public function setEc2Region($ec2Region)
     {
-        if (!is_string($uuid) || empty($uuid)) {
+        if (!is_string($ec2Region) || empty($ec2Region)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $uuid expects a string.', __METHOD__)
+              sprintf('%s: $ec2Region expects a string.', __METHOD__)
             );
         }
-        $this->uuid = $uuid;
+        $this->ec2Region = $ec2Region;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getVcsType()
+    public function getEc2AvailabilityZone()
     {
-        if ($this->vcsType === null) {
+        if ($this->ec2AvailabilityZone === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the VCS type.', __METHOD__)
+              sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
             );
         }
-        return $this->vcsType;
+        return $this->ec2AvailabilityZone;
     }
 
     /**
      * Add a string.
      *
-     * @param array $vcsType A string.
+     * @param string $ec2AvailabilityZone A string.
      */
-    public function setVcsType($vcsType)
+    public function setEc2AvailabilityZone($ec2AvailabilityZone)
     {
-        if (!is_string($vcsType) || empty($vcsType)) {
+        if (!is_string($ec2AvailabilityZone) || empty($ec2AvailabilityZone)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $vcsType expects a string.', __METHOD__)
+              sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
             );
         }
-        $this->vcsType = $vcsType;
+        $this->ec2AvailabilityZone = $ec2AvailabilityZone;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getVcsRepositoryUrl()
+    public function getServices()
     {
-        if ($this->vcsUrl === null) {
+        if ($this->services === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the VCS URL.', __METHOD__)
+              sprintf('%s: This Server object does not know the services array.', __METHOD__)
             );
         }
-        return $this->vcsUrl;
+        return $this->services;
     }
 
     /**
-     * Add a string.
+     * Add an array.
      *
-     * @param array $vcsUrl A string.
+     * @param array $services An array.
      */
-    public function setVcsRepositoryUrl($vcsUrl)
+    public function setServices($services)
     {
-        if (!is_string($vcsUrl) || empty($vcsUrl)) {
+        if (!is_array($services) || empty($services)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $vcsUrl expects a string.', __METHOD__)
+              sprintf('%s: $ec2AvailabilityZone expects an array.', __METHOD__)
             );
         }
-        $this->vcsUrl = $vcsUrl;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isInProduction()
-    {
-        if ($this->productionMode === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the production mode.', __METHOD__)
-            );
-        }
-        return $this->productionMode;
-    }
-
-    /**
-     * Add a string.
-     *
-     * @param bool $productionMode A string.
-     */
-    public function setProductionMode($productionMode)
-    {
-        if (!is_bool($productionMode)) {
-            throw new \InvalidArgumentException(
-                sprintf('%s: $productionMode expects a boolean.', __METHOD__)
-            );
-        }
-        $this->productionMode = $productionMode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUnixUsername()
-    {
-        if ($this->unixUsername === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the unix username.', __METHOD__)
-            );
-        }
-        return $this->unixUsername;
-
-    }
-
-    /**
-     * Add a string.
-     *
-     * @param array $unixUsername A string.
-     */
-    public function setUnixUsername($unixUsername)
-    {
-        if (!is_string($unixUsername) || empty($unixUsername)) {
-            throw new \InvalidArgumentException(
-                sprintf('%s: $unixUsername expects a string.', __METHOD__)
-            );
-        }
-        $this->unixUsername = $unixUsername;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRealm()
-    {
-        if ($this->realm === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Application object does not know the realm.', __METHOD__)
-            );
-        }
-        return $this->realm;
-    }
-
-    /**
-     * Add a string.
-     *
-     * @param RealmInterface $realm The realm this application is hosted in.
-     */
-    public function setRealm(RealmInterface $realm)
-    {
-        $this->realm = $realm;
+        $this->services = $services;
     }
 }
