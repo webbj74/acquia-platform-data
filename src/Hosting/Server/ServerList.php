@@ -9,28 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Application;
+namespace Acquia\Platform\Cloud\Hosting\Server;
 
-use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
+use Acquia\Platform\Cloud\Hosting\ServerInterface;
 
-class ApplicationList extends \ArrayObject implements ApplicationListInterface
+class ServerList extends \ArrayObject implements ServerListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
      * Overrides ArrayObject::offsetSet() to validate that the value set at the
-     * specified offset is a Application.
+     * specified offset is a Server.
      *
      * No value is returned.
      *
      * @param mixed $offset
-     * @param ApplicationInterface $value
+     * @param ServerInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ApplicationInterface')) {
+        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ServerInterface')) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $value must be an implementation of ApplicationInterface', __METHOD__)
+                sprintf('%s: $value must be an implementation of ServerInterface', __METHOD__)
             );
         }
         parent::offsetSet($offset, $value);
