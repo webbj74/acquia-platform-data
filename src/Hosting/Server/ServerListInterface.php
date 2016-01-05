@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Application;
+namespace Acquia\Platform\Cloud\Hosting\Server;
 
-interface ApplicationListInterface
+interface ServerListInterface
 {
     /**
-     * Returns a subset of known applications matching the provided names
+     * Returns a subset of known servers matching the provided names
      *
-     * @param array|string $names An array of application names, or a comma-
+     * @param array|string $names An array of server names, or a comma-
      *                            delimited string of application names.
      *
-     * @return ApplicationListInterface
+     * @return ServerListInterface
      */
     public function filterByName($names);
 }
