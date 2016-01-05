@@ -9,36 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Application;
+namespace Acquia\Platform\Cloud\Hosting\Server;
 
-use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
-use Acquia\Platform\Cloud\Hosting\RealmInterface;
+use Acquia\Platform\Cloud\Hosting\ServerInterface;
 
-trait ApplicationDecoratorMethods
+trait ServerDecoratorMethods
 {
     /**
-     * @var ApplicationInterface
+     * @var ServerInterface
      */
-    protected $application;
+    protected $server;
 
     /**
-     * Returns the decorated application instance.
+     * Returns the decorated server instance.
      *
-     * @return ApplicationInterface the decorated Application
+     * @return ServerInterface the decorated Server
      */
-    public function getApplication()
+    public function getServer()
     {
-        return $this->application;
+        return $this->server;
     }
 
     /**
-     * Sets the application instance being decorated.
+     * Sets the server instance being decorated.
      *
-     * @param ApplicationInterface $application the Application to decorate
+     * @param ServerInterface $server the Server to decorate
      */
-    public function setApplication(ApplicationInterface $application)
+    public function setServer(ServerInterface $server)
     {
-        $this->application = $application;
+        $this->server = $server;
     }
 
     /**
@@ -46,126 +45,78 @@ trait ApplicationDecoratorMethods
      */
     public function getName()
     {
-        return $this->application->getName();
+        return $this->server->getName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRealmQualifiedName()
+    public function getFullyQualifiedDomainName()
     {
-        return $this->application->getRealmQualifiedName();
+        return $this->server->getFullyQualifiedDomainName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getVcsType()
+    public function getAmiType()
     {
-        return $this->application->getVcsType();
+        return $this->server->getAmiType();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setVcsType($vcsType)
+    public function setAmiType($amiType)
     {
-        $this->application->setVcsType($vcsType);
+        $this->server->setAmiType($amiType);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getVcsRepositoryUrl()
+    public function getEc2Region()
     {
-        return $this->application->getVcsRepositoryUrl();
+        return $this->server->getEc2Region();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setVcsRepositoryUrl($vcsUrl)
+    public function setEc2Region($ec2Region)
     {
-        $this->application->setVcsRepositoryUrl($vcsUrl);
+        $this->server->setEc2Region($ec2Region);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isInProduction()
+    public function getEc2AvailabilityZone()
     {
-        return $this->application->isInProduction();
+        return $this->server->getEc2AvailabilityZone();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProductionMode($productionMode)
+    public function setEc2AvailabilityZone($ec2Zone)
     {
-        $this->application->setProductionMode($productionMode);
+        $this->server->setEc2AvailabilityZone($ec2Zone);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUnixUsername()
+    public function getServices()
     {
-        return $this->application->getUnixUsername();
+        return $this->server->getServices();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUnixUsername($unixUsername)
+    public function setServices($services)
     {
-        $this->application->setUnixUsername($unixUsername);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTitle()
-    {
-        return $this->application->getTitle();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        $this->application->setTitle($title);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUUID()
-    {
-        return $this->application->getUUID();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUUID($uuid)
-    {
-        $this->application->setUUID($uuid);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRealm()
-    {
-        return $this->application->getRealm();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRealm(RealmInterface $realm)
-    {
-        $this->application->setRealm($realm);
+        $this->server->setServices($services);
     }
 }
