@@ -9,28 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Server;
+namespace Acquia\Platform\Cloud\Hosting\Task;
 
-use Acquia\Platform\Cloud\Hosting\ServerInterface;
+use Acquia\Platform\Cloud\Hosting\TaskInterface;
 
-class ServerList extends \ArrayObject implements ServerListInterface
+class TaskList extends \ArrayObject implements TaskListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
      * Overrides ArrayObject::offsetSet() to validate that the value set at the
-     * specified offset is a Server.
+     * specified offset is a Task.
      *
      * No value is returned.
      *
      * @param mixed $offset
-     * @param ServerInterface $value
+     * @param TaskInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ServerInterface')) {
+        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\TaskInterface')) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $value must be an implementation of ServerInterface', __METHOD__)
+                sprintf('%s: $value must be an implementation of TaskInterface', __METHOD__)
             );
         }
         parent::offsetSet($offset, $value);
@@ -39,27 +39,27 @@ class ServerList extends \ArrayObject implements ServerListInterface
     /**
      * {@inheritdoc}
      */
-    public function filterByName($names)
+    public function filterByIDs($ids)
     {
-        if (is_string($names)) {
-            $names = explode(',', $names);
+        if (is_string($ids)) {
+            $ids = explode(',', $ids);
         }
 
-        if (!is_array($names)) {
+        if (!is_array($ids)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $names must be an array (or comma-delimited string)', __METHOD__)
+                sprintf('%s: $ids must be an array (or comma-delimited string)', __METHOD__)
             );
         }
 
-        $filteredAppList = new static();
+        $filteredTaskList = new static();
         $appListIterator = $this->getIterator();
         while ($appListIterator->valid()) {
-            if (in_array($appListIterator->current()->getName(), $names)) {
-                $filteredAppList->append($appListIterator->current());
+            if (in_array($appListIterator->current()->getName(), $ids)) {
+                $filteredTaskList->append($appListIterator->current());
             }
             $appListIterator->next();
         }
 
-        return $filteredAppList;
+        return $filteredTaskList;
     }
 }
