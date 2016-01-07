@@ -9,28 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\Server;
+namespace Acquia\Platform\Cloud\Hosting\DbInstance;
 
-use Acquia\Platform\Cloud\Hosting\ServerInterface;
+use Acquia\Platform\Cloud\Hosting\DbInstanceInterface;
 
-class ServerList extends \ArrayObject implements ServerListInterface
+class DbInstanceList extends \ArrayObject implements DbInstanceListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
      * Overrides ArrayObject::offsetSet() to validate that the value set at the
-     * specified offset is a Server.
+     * specified offset is a DbInstance.
      *
      * No value is returned.
      *
      * @param mixed $offset
-     * @param ServerInterface $value
+     * @param DbInstanceInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ServerInterface')) {
+        if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\DbInstanceInterface')) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $value must be an implementation of ServerInterface', __METHOD__)
+                sprintf('%s: $value must be an implementation of DbInstanceInterface', __METHOD__)
             );
         }
         parent::offsetSet($offset, $value);
@@ -51,15 +51,15 @@ class ServerList extends \ArrayObject implements ServerListInterface
             );
         }
 
-        $filteredAppList = new static();
+        $filteredDbInstanceList = new static();
         $appListIterator = $this->getIterator();
         while ($appListIterator->valid()) {
             if (in_array($appListIterator->current()->getName(), $names)) {
-                $filteredAppList->append($appListIterator->current());
+                $filteredDbInstanceList->append($appListIterator->current());
             }
             $appListIterator->next();
         }
 
-        return $filteredAppList;
+        return $filteredDbInstanceList;
     }
 }
