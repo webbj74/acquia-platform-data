@@ -11,69 +11,112 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
-final class Server implements ServerInterface
+final class Task implements TaskInterface
 {
     /**
-     * @var string
+     * @var int
      */
-    private $name;
+    private $id;
 
     /**
      * @var string
      */
-    private $fullyQualifiedDomainName;
+    private $queue;
 
     /**
      * @var string
      */
-    private $amiType;
+    private $state;
 
     /**
      * @var string
      */
-    private $ec2Region;
+    private $description;
+
+    /**
+     * @var int
+     */
+    private $created;
+
+    /**
+     * @var int
+     */
+    private $started;
+
+    /**
+     * @var int
+     */
+    private $completed;
 
     /**
      * @var string
      */
-    private $ec2AvailabilityZone;
+    private $sender;
 
     /**
-     * @var array
+     * @var string
      */
-    private $services;
+    private $result;
 
-    public function __construct($name)
+    /**
+     * @var string
+     */
+    private $cookie;
+
+    /**
+     * @var string
+     */
+    private $logs;
+
+    public function __construct($id)
     {
-        if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
+        if (!is_int($id)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    '%s: Server name must be an alphanumeric string (%s given)',
+                    '%s: Task ID must be an integer (%s given)',
                     __METHOD__,
-                    is_string($name) ? $name : gettype($name)
+                    is_int($id) ? $id : gettype($id)
                 )
             );
         }
-        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function create(array $serverData)
+    public static function create(array $taskData)
     {
-        $app = new static($serverData['name']);
-        if (isset($serverData['ami_type'])) {
-            $app->setAmiType($serverData['ami_type']);
+        $app = new static($taskData['id']);
+        if (isset($taskData['queue'])) {
+            $app->setQueue($taskData['queue']);
         }
-        if (isset($serverData['ec2_region'])) {
-            $app->setAmiType($serverData['ec2_region']);
+        if (isset($taskData['state'])) {
+            $app->setState($taskData['state']);
         }
-        if (isset($serverData['ec2_availability_zone'])) {
-            $app->setAmiType($serverData['ec2_availability_zone']);
+        if (isset($taskData['description'])) {
+            $app->setDescription($taskData['description']);
         }
-        if (isset($serverData['services']) && is_array($serverData['services'])) {
-            $app->setServices($serverData['services']);
+        if (isset($taskData['created'])) {
+            $app->setCreated($taskData['created']);
+        }
+        if (isset($taskData['started'])) {
+            $app->setStarted($taskData['started']);
+        }
+        if (isset($taskData['completed'])) {
+            $app->setCompleted($taskData['completed']);
+        }
+        if (isset($taskData['sender'])) {
+            $app->setSender($taskData['sender']);
+        }
+        if (isset($taskData['result'])) {
+            $app->setResult($taskData['result']);
+        }
+        if (isset($taskData['cookie'])) {
+            $app->setCookie($taskData['cookie']);
+        }
+        if (isset($taskData['logs'])) {
+            $app->setLogs($taskData['logs']);
         }
 
         return $app;
@@ -82,128 +125,288 @@ final class Server implements ServerInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getID()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFullyQualifiedDomainName()
+    public function getQueue()
     {
-        return $this->name . ".prod.hosting.acquia.com";
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAmiType()
-    {
-        if ($this->amiType === null) {
+        if ($this->queue === null) {
             throw new \RuntimeException(
-                sprintf('%s: This Server object does not know the AMI Type.', __METHOD__)
+                sprintf('%s: This Task object has no the queue.', __METHOD__)
             );
         }
-        return $this->amiType;
+        return $this->queue;
     }
 
     /**
      * Add a string.
      *
-     * @param string $amiType A string.
+     * @param string $queue A string.
      */
-    public function setAmiType($amiType)
+    public function setQueue($queue)
     {
-        if (!is_string($amiType) || empty($amiType)) {
+        if (!is_string($queue) || empty($queue)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $amiType expects a string.', __METHOD__)
+                sprintf('%s: $queue expects a string.', __METHOD__)
             );
         }
-        $this->amiType = $amiType;
+        $this->queue = $queue;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEc2Region()
+    public function getState()
     {
-        if ($this->ec2Region === null) {
+        if ($this->state === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
+              sprintf('%s: This Task object has no the state.', __METHOD__)
             );
         }
-        return $this->ec2Region;
+        return $this->state;
     }
 
     /**
      * Add a string.
      *
-     * @param string $ec2Region A string.
+     * @param string $state A string.
      */
-    public function setEc2Region($ec2Region)
+    public function setState($state)
     {
-        if (!is_string($ec2Region) || empty($ec2Region)) {
+        if (!is_string($state) || empty($state)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2Region expects a string.', __METHOD__)
+              sprintf('%s: $state expects a string.', __METHOD__)
             );
         }
-        $this->ec2Region = $ec2Region;
+        $this->state = $state;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getEc2AvailabilityZone()
+    public function getDescription()
     {
-        if ($this->ec2AvailabilityZone === null) {
+        if ($this->description === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
+              sprintf('%s: This Task object has no description.', __METHOD__)
             );
         }
-        return $this->ec2AvailabilityZone;
+        return $this->description;
     }
 
     /**
      * Add a string.
      *
-     * @param string $ec2AvailabilityZone A string.
+     * @param string $description A string.
      */
-    public function setEc2AvailabilityZone($ec2AvailabilityZone)
+    public function setDescription($description)
     {
-        if (!is_string($ec2AvailabilityZone) || empty($ec2AvailabilityZone)) {
+        if (!is_string($description) || empty($description)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
+              sprintf('%s: $description expects a string.', __METHOD__)
             );
         }
-        $this->ec2AvailabilityZone = $ec2AvailabilityZone;
+        $this->description = $description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getServices()
+    public function getCreated()
     {
-        if ($this->services === null) {
+        if ($this->created === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the services array.', __METHOD__)
+              sprintf('%s: This Task object has no created date.', __METHOD__)
             );
         }
-        return $this->services;
+        return $this->created;
     }
 
     /**
-     * Add an array.
+     * Add an integer.
      *
-     * @param array $services An array.
+     * @param int $created A UNIX timestamp integer.
      */
-    public function setServices($services)
+    public function setCreated($created)
     {
-        if (!is_array($services) || empty($services)) {
+        if (!is_int($created) || empty($created)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2AvailabilityZone expects an array.', __METHOD__)
+              sprintf('%s: $created expects an integer.', __METHOD__)
             );
         }
-        $this->services = $services;
+        $this->created = $created;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStarted()
+    {
+        if ($this->started === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Task object has no started date.', __METHOD__)
+            );
+        }
+        return $this->started;
+    }
+
+    /**
+     * Add an integer.
+     *
+     * @param int $started A UNIX timestamp integer.
+     */
+    public function setStarted($started)
+    {
+        if (!is_int($started) || empty($started)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $started expects an integer.', __METHOD__)
+            );
+        }
+        $this->started = $started;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompleted()
+    {
+        if ($this->completed === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Task object has no completed.', __METHOD__)
+            );
+        }
+        return $this->completed;
+    }
+
+    /**
+     * Add an integer.
+     *
+     * @param int $completed A UNIX timestamp integer.
+     */
+    public function setCompleted($completed)
+    {
+        if (!is_int($completed) || empty($completed)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $completed expects an integer.', __METHOD__)
+            );
+        }
+        $this->completed = $completed;
+    }
+
+    /**
+ * {@inheritdoc}
+ */
+    public function getSender()
+    {
+        if ($this->sender === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Task object does not know sender.', __METHOD__)
+            );
+        }
+        return $this->sender;
+    }
+
+    /**
+     * Add a string.
+     *
+     * @param string $sender A string
+     */
+    public function setSender($sender)
+    {
+        if (!is_string($sender) || empty($sender)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $sender expects an integer.', __METHOD__)
+            );
+        }
+        $this->sender = $sender;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResult()
+    {
+        if ($this->result === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Task object does not know result.', __METHOD__)
+            );
+        }
+        return $this->result;
+    }
+
+    /**
+     * Add a string.
+     *
+     * @param string $result A string
+     */
+    public function setResult($result)
+    {
+        if (!is_string($result) || empty($result)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $result expects a string.', __METHOD__)
+            );
+        }
+        $this->result = $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCookie()
+    {
+        if ($this->cookie === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Task object does not know cookie.', __METHOD__)
+            );
+        }
+        return $this->cookie;
+    }
+
+    /**
+     * Add a string.
+     *
+     * @param string $cookie A string
+     */
+    public function setCookie($cookie)
+    {
+        if (!is_string($cookie) || empty($cookie)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $cookie expects a string.', __METHOD__)
+            );
+        }
+        $this->cookie = $cookie;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogs()
+    {
+        if ($this->logs === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Task object has no log data.', __METHOD__)
+            );
+        }
+        return $this->logs;
+    }
+
+    /**
+     * Add a string.
+     *
+     * @param string $logs A string
+     */
+    public function setLogs($logs)
+    {
+        if (!is_string($logs) || empty($logs)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $logs expects a string.', __METHOD__)
+            );
+        }
+        $this->logs = $logs;
     }
 }
