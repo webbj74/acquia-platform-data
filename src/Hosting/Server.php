@@ -201,7 +201,7 @@ final class Server implements ServerInterface
     {
         if (!is_array($services) || empty($services)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2AvailabilityZone expects an array.', __METHOD__)
+              sprintf('%s: $services expects an array.', __METHOD__)
             );
         }
         $this->services = $services;
