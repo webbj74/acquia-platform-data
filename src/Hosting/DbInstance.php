@@ -21,7 +21,7 @@ final class DbInstance implements DbInstanceInterface
     /**
      * @var string
      */
-    private $instance_name;
+    private $instanceName;
 
     /**
      * @var string
@@ -43,18 +43,18 @@ final class DbInstance implements DbInstanceInterface
      */
     private $clusterID;
 
-    public function __construct($instance_name)
+    public function __construct($instanceName)
     {
-        if (!is_string($instance_name) || !preg_match('#^[a-z0-9]+$#i', $instance_name)) {
+        if (!is_string($instanceName) || !preg_match('#^[a-z0-9]+$#i', $instanceName)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%s: DbInstance name must be an alphanumeric string (%s given)',
                     __METHOD__,
-                    is_string($instance_name) ? $instance_name : gettype($instance_name)
+                    is_string($instanceName) ? $instanceName : gettype($instanceName)
                 )
             );
         }
-        $this->instance_name = $instance_name;
+        $this->instanceName = $instanceName;
     }
 
     /**
@@ -97,7 +97,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->name === null) {
             throw new \RuntimeException(
-              sprintf('%s: This DbInstance object does not know the name.', __METHOD__)
+                sprintf('%s: This DbInstance object does not know the name.', __METHOD__)
             );
         }
         return $this->name;
@@ -106,10 +106,11 @@ final class DbInstance implements DbInstanceInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         if (!is_string($name) || empty($name)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $name expects a string.', __METHOD__)
+                sprintf('%s: $name expects a string.', __METHOD__)
             );
         }
         $this->name = $name;
@@ -122,7 +123,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->username === null) {
             throw new \RuntimeException(
-              sprintf('%s: This DbInstance object does not know the username.', __METHOD__)
+                sprintf('%s: This DbInstance object does not know the username.', __METHOD__)
             );
         }
         return $this->username;
@@ -131,10 +132,11 @@ final class DbInstance implements DbInstanceInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsername($username) {
+    public function setUsername($username)
+    {
         if (!is_string($username) || empty($username)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $username expects a string.', __METHOD__)
+                sprintf('%s: $username expects a string.', __METHOD__)
             );
         }
         $this->username = $username;
@@ -147,7 +149,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->password === null) {
             throw new \RuntimeException(
-              sprintf('%s: This DbInstance object does not know the password.', __METHOD__)
+                sprintf('%s: This DbInstance object does not know the password.', __METHOD__)
             );
         }
         return $this->password;
@@ -156,10 +158,11 @@ final class DbInstance implements DbInstanceInterface
     /**
      * {@inheritdoc}
      */
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         if (!is_string($password) || empty($password)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $password expects a string.', __METHOD__)
+                sprintf('%s: $password expects a string.', __METHOD__)
             );
         }
         $this->password = $password;
@@ -172,7 +175,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->host === null) {
             throw new \RuntimeException(
-              sprintf('%s: This DbInstance object does not know the host.', __METHOD__)
+                sprintf('%s: This DbInstance object does not know the host.', __METHOD__)
             );
         }
         return $this->host;
@@ -181,10 +184,11 @@ final class DbInstance implements DbInstanceInterface
     /**
      * {@inheritdoc}
      */
-    public function setHost($host) {
+    public function setHost($host)
+    {
         if (!is_string($host) || empty($host)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $host expects a string.', __METHOD__)
+                sprintf('%s: $host expects a string.', __METHOD__)
             );
         }
         $this->host = $host;
@@ -197,7 +201,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->clusterID === null) {
             throw new \RuntimeException(
-              sprintf('%s: This DbInstance object does not know the clusterID.', __METHOD__)
+                sprintf('%s: This DbInstance object does not know the clusterID.', __METHOD__)
             );
         }
         return $this->clusterID;
@@ -206,13 +210,13 @@ final class DbInstance implements DbInstanceInterface
     /**
      * {@inheritdoc}
      */
-    public function setClusterID($clusterID) {
+    public function setClusterID($clusterID)
+    {
         if (!is_string($clusterID) || empty($clusterID)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $clusterID expects a string.', __METHOD__)
+                sprintf('%s: $clusterID expects a string.', __METHOD__)
             );
         }
         $this->clusterID = $clusterID;
     }
-
 }
