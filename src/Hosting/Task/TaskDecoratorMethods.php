@@ -125,7 +125,7 @@ trait TaskDecoratorMethods
      */
     public function setStarted($started)
     {
-        $this->task->setState($started);
+        $this->task->setStarted($started);
     }
 
     /**
@@ -205,7 +205,6 @@ trait TaskDecoratorMethods
      */
     public function setLogs($logs)
     {
-        $this->task->getLogs($logs);
+        $this->task->setLogs($logs);
     }
-
 }
