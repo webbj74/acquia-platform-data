@@ -63,6 +63,9 @@ final class Server implements ServerInterface
     public static function create(array $serverData)
     {
         $app = new static($serverData['name']);
+        if (isset($serverData['fully_qualified_domain_name'])) {
+            $app->setFullyQualifiedDomainName($serverData['fully_qualified_domain_name']);
+        }
         if (isset($serverData['ami_type'])) {
             $app->setAmiType($serverData['ami_type']);
         }
@@ -92,7 +95,27 @@ final class Server implements ServerInterface
      */
     public function getFullyQualifiedDomainName()
     {
-        return $this->name . ".prod.hosting.acquia.com";
+        if ($this->fullyQualifiedDomainName === null) {
+            throw new \RuntimeException(
+              sprintf('%s: This Server object does not know the Fully Qualified Domain Name.', __METHOD__)
+            );
+        }
+        return $this->fullyQualifiedDomainName;
+    }
+
+    /**
+     * Add a string.
+     *
+     * @param string $fullyQualifiedDomainName A string.
+     */
+    public function setFullyQualifiedDomainName($fullyQualifiedDomainName)
+    {
+        if (!is_string($fullyQualifiedDomainName) || empty($fullyQualifiedDomainName)) {
+            throw new \InvalidArgumentException(
+              sprintf('%s: $fullyQualifiedDomainName expects a string.', __METHOD__)
+            );
+        }
+        $this->fullyQualifiedDomainName = $fullyQualifiedDomainName;
     }
 
     /**

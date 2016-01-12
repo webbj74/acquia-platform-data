@@ -58,6 +58,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = Server::create(
             [
                 'name' => 'web-123',
+                'fully_qualified_domain_name' => 'web-123.prod.hosting.acquia.com',
                 'ami_type' => 'm2.xlarge',
                 'ec2_region' => 'us-east-1',
                 'ec2_availability_zone' => 'us-east-1d',
@@ -66,6 +67,48 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\Server', $server);
         $this->assertInstanceOf('\Acquia\Platform\Cloud\Hosting\ServerInterface', $server);
+    }
+
+    /**
+     * @covers ::getFullyQualifiedDomainName
+     * @covers ::setFullyQualifiedDomainName
+     */
+    public function testFullyQualifiedDomainNamePropertyMayBeAccessedViaMethods()
+    {
+        $fqdn = 'web-123.prod.hosting.acquia.com';
+        $server = new Server('test');
+        $server->setFullyQualifiedDomainName($fqdn);
+        $this->assertEquals($fqdn, $server->getFullyQualifiedDomainName());
+    }
+
+    /**
+     * @covers ::getFullyQualifiedDomainName
+     * @expectedException \RuntimeException
+     */
+    public function testGetFullyQualifiedDomainNameWillThrowExceptionIfPropertyNotSet()
+    {
+        $server = new Server('test');
+        $server->getFullyQualifiedDomainName();
+    }
+
+    /**
+     * @covers ::setFullyQualifiedDomainName
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetFullyQualifiedDomainNameWillThrowExceptionIfNotAString()
+    {
+        $server = new Server('test');
+        $server->setFullyQualifiedDomainName([]);
+    }
+
+    /**
+     * @covers ::setFullyQualifiedDomainName
+     * @expectedException \InvalidArgumentException
+     */
+    public function testSetFullyQualifiedDomainNameWillThrowExceptionIfEmptyString()
+    {
+        $server = new Server('test');
+        $server->setFullyQualifiedDomainName('');
     }
 
     /**

@@ -59,6 +59,14 @@ trait ServerDecoratorMethods
     /**
      * {@inheritdoc}
      */
+    public function setFullyQualifiedDomainName($fullyQualifiedDomainName)
+    {
+        $this->server->setFullyQualifiedDomainName($fullyQualifiedDomainName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAmiType()
     {
         return $this->server->getAmiType();
