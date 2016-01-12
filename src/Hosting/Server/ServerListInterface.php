@@ -17,7 +17,7 @@ interface ServerListInterface
      * Returns a subset of known servers matching the provided names
      *
      * @param array|string $names An array of server names, or a comma-
-     *                            delimited string of application names.
+     *                            delimited string of server names.
      *
      * @return ServerListInterface
      */
