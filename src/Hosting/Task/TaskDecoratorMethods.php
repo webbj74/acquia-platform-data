@@ -207,5 +207,4 @@ trait TaskDecoratorMethods
     {
         $this->task->setLogs($logs);
     }
-
 }
