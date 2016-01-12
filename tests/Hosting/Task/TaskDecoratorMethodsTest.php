@@ -9,46 +9,51 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Tests\Hosting\Server;
+namespace Acquia\Platform\Cloud\Tests\Hosting\Task;
 
-use Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods;
-use Acquia\Platform\Cloud\Hosting\ServerInterface;
+use Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods;
+use Acquia\Platform\Cloud\Hosting\TaskInterface;
 
 /**
- * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods
+ * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods
  */
-class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class TaskDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
 {
-    const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods';
-    const TEST_APP = 'Acquia\Platform\Cloud\Hosting\ServerInterface';
+    const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods';
+    const TEST_APP = 'Acquia\Platform\Cloud\Hosting\TaskInterface';
 
     /**
-     * @covers ::getServer
-     * @covers ::setServer
+     * @covers ::getTask
+     * @covers ::setTask
      */
-    public function testServerDecoratorMethodsMaySetDecoratedServer()
+    public function testTaskDecoratorMethodsMaySetDecoratedTask()
     {
-        /** @var ServerDecoratorMethods $mockTrait */
+        /** @var TaskDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        /** @var ServerInterface $mockApp   */
+        /** @var TaskInterface $mockApp   */
         $mockApp = $this->getMockBuilder(self::TEST_APP)->getMock();
 
-        $mockTrait->setServer($mockApp);
-        $this->assertEquals($mockApp, $mockTrait->getServer());
+        $mockTrait->setTask($mockApp);
+        $this->assertEquals($mockApp, $mockTrait->getTask());
     }
 
     /**
-     * @covers ::getName
-     * @covers ::getFullyQualifiedDomainName
-     * @covers ::getAmiType
-     * @covers ::setEc2Region
-     * @covers ::getEc2AvailabilityZone
-     * @covers ::getServices
-     * @dataProvider getServerInterfaceGetters
+     * @covers ::getID
+     * @covers ::getQueue
+     * @covers ::getState
+     * @covers ::setDescription
+     * @covers ::getCreated
+     * @covers ::getStarted
+     * @covers ::getCompleted
+     * @covers ::getSender
+     * @covers ::getResult
+     * @covers ::getCookie
+     * @covers ::getLogs
+     * @dataProvider getTaskInterfaceGetters
      */
-    public function testServerDecoratorMethodsPassesGettersToServer($getter, $expected)
+    public function testTaskDecoratorMethodsPassesGettersToTask($getter, $expected)
     {
-        /** @var ServerDecoratorMethods $mockTrait */
+        /** @var TaskDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
         $mockApp = $this->getMockBuilder(self::TEST_APP)
             ->getMock();
@@ -56,20 +61,26 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
             ->method($getter)
             ->willReturn($expected);
 
-        $mockTrait->setServer($mockApp);
+        $mockTrait->setTask($mockApp);
         $this->assertEquals($expected, call_user_func([$mockTrait, $getter]));
     }
 
     /**
-     * @covers ::setAmiType
-     * @covers ::setEc2Region
-     * @covers ::setEc2AvailabilityZone
-     * @covers ::setServices
-     * @dataProvider getServerInterfaceSetters
+     * @covers ::getQueue
+     * @covers ::getState
+     * @covers ::setDescription
+     * @covers ::getCreated
+     * @covers ::getStarted
+     * @covers ::getCompleted
+     * @covers ::getSender
+     * @covers ::getResult
+     * @covers ::getCookie
+     * @covers ::getLogs
+     * @dataProvider getTaskInterfaceSetters
      */
-    public function testServerDecoratorMethodsPassesSettersToServer($setter, $expected)
+    public function testTaskDecoratorMethodsPassesSettersToTask($setter, $expected)
     {
-        /** @var ServerDecoratorMethods $mockTrait */
+        /** @var TaskDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
         $mockApp = $this->getMockBuilder(self::TEST_APP)
             ->getMock();
@@ -77,29 +88,40 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
             ->method($setter)
             ->with($expected);
 
-        $mockTrait->setServer($mockApp);
+        $mockTrait->setTask($mockApp);
         call_user_func([$mockTrait, $setter], $expected);
     }
 
-    public function getServerInterfaceGetters()
+    public function getTaskInterfaceGetters()
     {
         return [
-            ['getName', 'web-123'],
-            ['getFullyQualifiedDomainName', 'web-123.prod.hosting.acquia.com'],
-            ['getAmiType', 'm2.xlarge'],
-            ['getEc2Region', 'us-east-1'],
-            ['getEc2AvailabilityZone', 'us-east-1d'],
-            ['getServices', array('web' => array('status' => 'online'))],
+            ['getID', 1234],
+            ['getQueue', 'code-push'],
+            ['getState', 'done'],
+            ['getDescription', 'Deploy code to dev'],
+            ['getCreated', 12345678],
+            ['getStarted', 12345678],
+            ['getCompleted', 12345678],
+            ['getSender', 'cloud-api'],
+            ['getResult', 'all done'],
+            ['getCookie', 'oatmeal'],
+            ['getLogs', "It's log log log"],
         ];
     }
 
-    public function getServerInterfaceSetters()
+    public function getTaskInterfaceSetters()
     {
         return [
-            ['setAmiType', 'm2.xlarge'],
-            ['setEc2Region', 'us-east-1'],
-            ['setEc2AvailabilityZone', 'us-east-1d'],
-            ['setServices', array('web' => array('status' => 'online'))],
+          ['setQueue', 'code-push'],
+          ['setState', 'done'],
+          ['setDescription', 'Deploy code to dev'],
+          ['setCreated', 12345678],
+          ['setStarted', 12345678],
+          ['setCompleted', 12345678],
+          ['setSender', 'cloud-api'],
+          ['setResult', 'all done'],
+          ['setCookie', 'oatmeal'],
+          ['setLogs', "It's log log log"],
         ];
     }
 }

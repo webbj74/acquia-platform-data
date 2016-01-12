@@ -9,84 +9,84 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Tests\Hosting\Server;
+namespace Acquia\Platform\Cloud\Tests\Hosting\Task;
 
-use Acquia\Platform\Cloud\Hosting\Server;
-use Acquia\Platform\Cloud\Hosting\Server\ServerList;
+use Acquia\Platform\Cloud\Hosting\Task;
+use Acquia\Platform\Cloud\Hosting\Task\TaskList;
 
 /**
- * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Server\ServerList
+ * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Task\TaskList
  */
-class ServerListTest extends \PHPUnit_Framework_TestCase
+class TaskListTest extends \PHPUnit_Framework_TestCase
 {
-    private $childrenOfHyperion = ['Helios', 'Selene', 'Eos'];
-    private $childrenOfCoeus = ['Lelantos', 'Leto', 'Asteria'];
-    private $childrenOfIapetus = ['Atlas', 'Prometheus', 'Epimetheus', 'Menoetius'];
-    private $childrenOfOceanus = ['Metis'];
-    private $childrenOfCrius = ['Astraeus', 'Pallas', 'Perses'];
+    private $idsOfHyperion = [123, 345, 567];
+    private $idsOfCoeus = [890, 980, 827];
+    private $idsOfIapetus = [999, 888, 777];
+    private $idsOfOceanus = [1234];
+    private $idsOfCrius = [666, 999];
 
-    protected function getBasicServerList()
+    protected function getBasicTaskList()
     {
-        $serverList = new ServerList();
-        $childrenOfTitans = array_merge(
-            $this->childrenOfHyperion,
-            $this->childrenOfCoeus,
-            $this->childrenOfIapetus,
-            $this->childrenOfOceanus,
-            $this->childrenOfCrius
+        $taskList = new TaskList();
+        $idsOfTitans = array_merge(
+            $this->idsOfHyperion,
+            $this->idsOfCoeus,
+            $this->idsOfIapetus,
+            $this->idsOfOceanus,
+            $this->idsOfCrius
         );
-        foreach ($childrenOfTitans as $titanName) {
-            $serverList->append(new Server($titanName));
+        foreach ($idsOfTitans as $titanID) {
+            $taskList->append(new Task($titanID));
         }
-        return $serverList;
+        return $taskList;
     }
 
     /**
-     * @covers ::filterByName()
+     * @covers ::filterByIDs()
      */
-    public function testServerListCanReturnAFilteredListOfContents()
+    public function testTaskListCanReturnAFilteredListOfContents()
     {
-        $serverList = $this->getBasicServerList();
-        $this->assertEquals(14, $serverList->count());
+        $taskList = $this->getBasicTaskList();
+        $this->assertEquals(12, $taskList->count());
 
         // filter by array
-        $childrenOfHyperion = $serverList->filterByName($this->childrenOfHyperion);
-        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server\ServerList', $childrenOfHyperion);
-        $this->assertEquals(3, $childrenOfHyperion->count());
-        $iterator = $childrenOfHyperion->getIterator();
+        $idsOfHyperion = $taskList->filterByIDs($this->idsOfHyperion);
+        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Task\TaskList', $idsOfHyperion);
+        $this->assertEquals(3, $idsOfHyperion->count());
+        $iterator = $idsOfHyperion->getIterator();
         while ($iterator->valid()) {
-            /** @var \Acquia\Platform\Cloud\Hosting\Server $server */
-            $server = $iterator->current();
-            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server', $server);
-            $this->assertTrue(in_array($server->getName(), $this->childrenOfHyperion));
-            $this->assertFalse(in_array($server->getName(), $this->childrenOfIapetus));
+            /** @var \Acquia\Platform\Cloud\Hosting\Task $task */
+            $task = $iterator->current();
+            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Task', $task);
+            $this->assertTrue(in_array($task->getID(), $this->idsOfHyperion));
+            $this->assertFalse(in_array($task->getID(), $this->idsOfIapetus));
             $iterator->next();
         }
 
         // filter by comma-delimited string
-        $childrenOfIapetus = $serverList->filterByName(implode(',', $this->childrenOfIapetus));
-        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server\ServerList', $childrenOfIapetus);
-        $this->assertEquals(4, $childrenOfIapetus->count());
-        $iterator = $childrenOfIapetus->getIterator();
+        $idsOfIapetus = $taskList->filterByIDs(implode(',', $this->idsOfIapetus));
+        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Task\TaskList', $idsOfIapetus);
+        $this->assertEquals(4, $idsOfIapetus->count());
+        $iterator = $idsOfIapetus->getIterator();
         while ($iterator->valid()) {
-            /** @var \Acquia\Platform\Cloud\Hosting\Server $server */
-            $server = $iterator->current();
-            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server', $server);
-            $this->assertTrue(in_array($server->getName(), $this->childrenOfIapetus));
-            $this->assertFalse(in_array($server->getName(), $this->childrenOfHyperion));
+            /** @var \Acquia\Platform\Cloud\Hosting\Task $task */
+            $task = $iterator->current();
+            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Task', $task);
+            $this->assertTrue(in_array($task->getID(), $this->idsOfIapetus));
+            $this->assertFalse(in_array($task->getID(), $this->idsOfHyperion));
             $iterator->next();
         }
     }
 
     /**
-     * @covers ::filterByName
+     * @covers ::filterByIDs
      * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
-        $serverList = $this->getBasicServerList();
-        $serverList->filterByName($filter);
+        $taskList = $this->getBasicTaskList();
+        $taskList->filterByIDs($filter);
     }
 
     public function exceptionalFilterProvider()
@@ -102,10 +102,10 @@ class ServerListTest extends \PHPUnit_Framework_TestCase
      * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
-    public function testOffsetSetWillThrowExceptionForNonServer($value)
+    public function testOffsetSetWillThrowExceptionForNonTask($value)
     {
-        $serverList = $this->getBasicServerList();
-        $serverList->offsetSet(0, $value);
+        $taskList = $this->getBasicTaskList();
+        $taskList->offsetSet(0, $value);
     }
 
     public function exceptionalValueProvider()
