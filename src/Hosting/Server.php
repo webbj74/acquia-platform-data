@@ -97,7 +97,7 @@ final class Server implements ServerInterface
     {
         if ($this->fullyQualifiedDomainName === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the Fully Qualified Domain Name.', __METHOD__)
+                sprintf('%s: This Server object does not know the Fully Qualified Domain Name.', __METHOD__)
             );
         }
         return $this->fullyQualifiedDomainName;
@@ -112,7 +112,7 @@ final class Server implements ServerInterface
     {
         if (!is_string($fullyQualifiedDomainName) || empty($fullyQualifiedDomainName)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $fullyQualifiedDomainName expects a string.', __METHOD__)
+                sprintf('%s: $fullyQualifiedDomainName expects a string.', __METHOD__)
             );
         }
         $this->fullyQualifiedDomainName = $fullyQualifiedDomainName;
@@ -153,7 +153,7 @@ final class Server implements ServerInterface
     {
         if ($this->ec2Region === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
+                sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
             );
         }
         return $this->ec2Region;
@@ -168,7 +168,7 @@ final class Server implements ServerInterface
     {
         if (!is_string($ec2Region) || empty($ec2Region)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2Region expects a string.', __METHOD__)
+                sprintf('%s: $ec2Region expects a string.', __METHOD__)
             );
         }
         $this->ec2Region = $ec2Region;
@@ -181,7 +181,7 @@ final class Server implements ServerInterface
     {
         if ($this->ec2AvailabilityZone === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
+                sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
             );
         }
         return $this->ec2AvailabilityZone;
@@ -196,7 +196,7 @@ final class Server implements ServerInterface
     {
         if (!is_string($ec2AvailabilityZone) || empty($ec2AvailabilityZone)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
+                sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
             );
         }
         $this->ec2AvailabilityZone = $ec2AvailabilityZone;
@@ -209,7 +209,7 @@ final class Server implements ServerInterface
     {
         if ($this->services === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the services array.', __METHOD__)
+                sprintf('%s: This Server object does not know the services array.', __METHOD__)
             );
         }
         return $this->services;
@@ -224,7 +224,7 @@ final class Server implements ServerInterface
     {
         if (!is_array($services) || empty($services)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $services expects an array.', __METHOD__)
+                sprintf('%s: $services expects an array.', __METHOD__)
             );
         }
         $this->services = $services;
