@@ -127,5 +127,4 @@ trait DbInstanceDecoratorMethods
     {
         $this->dbInstance->setClusterID($clusterID);
     }
-
 }

@@ -51,15 +51,15 @@ class DbInstanceList extends \ArrayObject implements DbInstanceListInterface
             );
         }
 
-        $filteredDbInstanceList = new static();
-        $appListIterator = $this->getIterator();
-        while ($appListIterator->valid()) {
-            if (in_array($appListIterator->current()->getName(), $names)) {
-                $filteredDbInstanceList->append($appListIterator->current());
+        $dbInstanceSubset = new static();
+        $listIterator = $this->getIterator();
+        while ($listIterator->valid()) {
+            if (in_array($listIterator->current()->getInstanceName(), $names)) {
+                $dbInstanceSubset->append($listIterator->current());
             }
-            $appListIterator->next();
+            $listIterator->next();
         }
 
-        return $filteredDbInstanceList;
+        return $dbInstanceSubset;
     }
 }
