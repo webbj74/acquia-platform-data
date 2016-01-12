@@ -20,7 +20,7 @@ use Acquia\Platform\Cloud\Hosting\DbInstanceInterface;
 class DbInstanceDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceDecoratorMethods';
-    const TEST_APP = 'Acquia\Platform\Cloud\Hosting\DbInstanceInterface';
+    const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\DbInstanceInterface';
 
     /**
      * @covers ::getDbInstance
@@ -30,11 +30,11 @@ class DbInstanceDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var DbInstanceDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        /** @var DbInstanceInterface $mockApp   */
-        $mockApp = $this->getMockBuilder(self::TEST_APP)->getMock();
+        /** @var DbInstanceInterface $mockClass   */
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)->getMock();
 
-        $mockTrait->setDbInstance($mockApp);
-        $this->assertEquals($mockApp, $mockTrait->getDbInstance());
+        $mockTrait->setDbInstance($mockClass);
+        $this->assertEquals($mockClass, $mockTrait->getDbInstance());
     }
 
     /**
@@ -50,13 +50,13 @@ class DbInstanceDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var DbInstanceDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        $mockApp = $this->getMockBuilder(self::TEST_APP)
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)
             ->getMock();
-        $mockApp->expects($this->once())
+        $mockClass->expects($this->once())
             ->method($getter)
             ->willReturn($expected);
 
-        $mockTrait->setDbInstance($mockApp);
+        $mockTrait->setDbInstance($mockClass);
         $this->assertEquals($expected, call_user_func([$mockTrait, $getter]));
     }
 
@@ -72,13 +72,13 @@ class DbInstanceDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var DbInstanceDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        $mockApp = $this->getMockBuilder(self::TEST_APP)
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)
             ->getMock();
-        $mockApp->expects($this->once())
+        $mockClass->expects($this->once())
             ->method($setter)
             ->with($expected);
 
-        $mockTrait->setDbInstance($mockApp);
+        $mockTrait->setDbInstance($mockClass);
         call_user_func([$mockTrait, $setter], $expected);
     }
 
