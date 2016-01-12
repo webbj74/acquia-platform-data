@@ -21,7 +21,7 @@ final class Server implements ServerInterface
     /**
      * @var string
      */
-    private $fullyQualifiedDomainName;
+    private $fqdn;
 
     /**
      * @var string
@@ -95,25 +95,25 @@ final class Server implements ServerInterface
      */
     public function getFullyQualifiedDomainName()
     {
-        if ($this->fullyQualifiedDomainName === null) {
+        if ($this->fqdn === null) {
             throw new \RuntimeException(
                 sprintf('%s: This Server object does not know the Fully Qualified Domain Name.', __METHOD__)
             );
         }
-        return $this->fullyQualifiedDomainName;
+        return $this->fqdn;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFullyQualifiedDomainName($fullyQualifiedDomainName)
+    public function setFullyQualifiedDomainName($fqdn)
     {
-        if (!is_string($fullyQualifiedDomainName) || empty($fullyQualifiedDomainName)) {
+        if (!is_string($fqdn) || empty($fqdn)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $fullyQualifiedDomainName expects a string.', __METHOD__)
             );
         }
-        $this->fullyQualifiedDomainName = $fullyQualifiedDomainName;
+        $this->fqdn = $fqdn;
     }
 
     /**

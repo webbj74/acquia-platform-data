@@ -50,9 +50,9 @@ interface ServerInterface
 
     /**
      * Sets the fully qualified domain name.
-     * @param string $fullyQualifiedDomainName The fully qualified domain name.
+     * @param string $fqdn The fully qualified domain name.
      */
-    public function setFullyQualifiedDomainName($fullyQualifiedDomainName);
+    public function setFullyQualifiedDomainName($fqdn);
 
     /**
      * Returns the Amazon Instance type for the server.

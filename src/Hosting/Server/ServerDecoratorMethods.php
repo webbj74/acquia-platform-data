@@ -59,9 +59,9 @@ trait ServerDecoratorMethods
     /**
      * {@inheritdoc}
      */
-    public function setFullyQualifiedDomainName($fullyQualifiedDomainName)
+    public function setFullyQualifiedDomainName($fqdn)
     {
-        $this->server->setFullyQualifiedDomainName($fullyQualifiedDomainName);
+        $this->server->setFullyQualifiedDomainName($fqdn);
     }
 
     /**
