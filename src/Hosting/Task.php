@@ -163,7 +163,7 @@ final class Task implements TaskInterface
     {
         if ($this->state === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object has no the state.', __METHOD__)
+                sprintf('%s: This Task object has no the state.', __METHOD__)
             );
         }
         return $this->state;
@@ -176,7 +176,7 @@ final class Task implements TaskInterface
     {
         if (!is_string($state) || empty($state)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $state expects a string.', __METHOD__)
+                sprintf('%s: $state expects a string.', __METHOD__)
             );
         }
         $this->state = $state;
@@ -189,7 +189,7 @@ final class Task implements TaskInterface
     {
         if ($this->description === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object has no description.', __METHOD__)
+                sprintf('%s: This Task object has no description.', __METHOD__)
             );
         }
         return $this->description;
@@ -202,7 +202,7 @@ final class Task implements TaskInterface
     {
         if (!is_string($description) || empty($description)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $description expects a string.', __METHOD__)
+                sprintf('%s: $description expects a string.', __METHOD__)
             );
         }
         $this->description = $description;
@@ -215,7 +215,7 @@ final class Task implements TaskInterface
     {
         if ($this->created === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object has no created date.', __METHOD__)
+                sprintf('%s: This Task object has no created date.', __METHOD__)
             );
         }
         return $this->created;
@@ -228,7 +228,7 @@ final class Task implements TaskInterface
     {
         if (!is_numeric($created) || empty($created)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $created expects an integer.', __METHOD__)
+                sprintf('%s: $created expects an integer.', __METHOD__)
             );
         }
         $this->created = $created;
@@ -241,7 +241,7 @@ final class Task implements TaskInterface
     {
         if ($this->started === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object has no started date.', __METHOD__)
+                sprintf('%s: This Task object has no started date.', __METHOD__)
             );
         }
         return $this->started;
@@ -254,7 +254,7 @@ final class Task implements TaskInterface
     {
         if (!is_numeric($started) || empty($started)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $started expects an integer.', __METHOD__)
+                sprintf('%s: $started expects an integer.', __METHOD__)
             );
         }
         $this->started = $started;
@@ -267,7 +267,7 @@ final class Task implements TaskInterface
     {
         if ($this->completed === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object has no completed.', __METHOD__)
+                sprintf('%s: This Task object has no completed.', __METHOD__)
             );
         }
         return $this->completed;
@@ -280,7 +280,7 @@ final class Task implements TaskInterface
     {
         if (!is_numeric($completed) || empty($completed)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $completed expects an integer.', __METHOD__)
+                sprintf('%s: $completed expects an integer.', __METHOD__)
             );
         }
         $this->completed = $completed;
@@ -293,7 +293,7 @@ final class Task implements TaskInterface
     {
         if ($this->sender === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object does not know sender.', __METHOD__)
+                sprintf('%s: This Task object does not know sender.', __METHOD__)
             );
         }
         return $this->sender;
@@ -306,7 +306,7 @@ final class Task implements TaskInterface
     {
         if (!is_string($sender) || empty($sender)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $sender expects an integer.', __METHOD__)
+                sprintf('%s: $sender expects an integer.', __METHOD__)
             );
         }
         $this->sender = $sender;
@@ -319,7 +319,7 @@ final class Task implements TaskInterface
     {
         if ($this->result === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object does not know result.', __METHOD__)
+                sprintf('%s: This Task object does not know result.', __METHOD__)
             );
         }
         return $this->result;
@@ -332,7 +332,7 @@ final class Task implements TaskInterface
     {
         if (!is_string($result) || empty($result)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $result expects a string.', __METHOD__)
+                sprintf('%s: $result expects a string.', __METHOD__)
             );
         }
         $this->result = $result;
@@ -345,7 +345,7 @@ final class Task implements TaskInterface
     {
         if ($this->cookie === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object does not know cookie.', __METHOD__)
+                sprintf('%s: This Task object does not know cookie.', __METHOD__)
             );
         }
         return $this->cookie;
@@ -358,7 +358,7 @@ final class Task implements TaskInterface
     {
         if (!is_string($cookie) || empty($cookie)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $cookie expects a string.', __METHOD__)
+                sprintf('%s: $cookie expects a string.', __METHOD__)
             );
         }
         $this->cookie = $cookie;
@@ -371,7 +371,7 @@ final class Task implements TaskInterface
     {
         if ($this->logs === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Task object has no log data.', __METHOD__)
+                sprintf('%s: This Task object has no log data.', __METHOD__)
             );
         }
         return $this->logs;
@@ -384,7 +384,7 @@ final class Task implements TaskInterface
     {
         if (!is_string($logs) || empty($logs)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $logs expects a string.', __METHOD__)
+                sprintf('%s: $logs expects a string.', __METHOD__)
             );
         }
         $this->logs = $logs;
