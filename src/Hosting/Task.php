@@ -70,12 +70,12 @@ final class Task implements TaskInterface
 
     public function __construct($id)
     {
-        if (!is_int($id)) {
+        if (!is_numeric($id)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%s: Task ID must be an integer (%s given)',
                     __METHOD__,
-                    is_int($id) ? $id : gettype($id)
+                    is_numeric($id) ? $id : gettype($id)
                 )
             );
         }
@@ -87,39 +87,39 @@ final class Task implements TaskInterface
      */
     public static function create(array $taskData)
     {
-        $app = new static($taskData['id']);
+        $task = new static($taskData['id']);
         if (isset($taskData['queue'])) {
-            $app->setQueue($taskData['queue']);
+            $task->setQueue($taskData['queue']);
         }
         if (isset($taskData['state'])) {
-            $app->setState($taskData['state']);
+            $task->setState($taskData['state']);
         }
         if (isset($taskData['description'])) {
-            $app->setDescription($taskData['description']);
+            $task->setDescription($taskData['description']);
         }
         if (isset($taskData['created'])) {
-            $app->setCreated($taskData['created']);
+            $task->setCreated($taskData['created']);
         }
         if (isset($taskData['started'])) {
-            $app->setStarted($taskData['started']);
+            $task->setStarted($taskData['started']);
         }
         if (isset($taskData['completed'])) {
-            $app->setCompleted($taskData['completed']);
+            $task->setCompleted($taskData['completed']);
         }
         if (isset($taskData['sender'])) {
-            $app->setSender($taskData['sender']);
+            $task->setSender($taskData['sender']);
         }
         if (isset($taskData['result'])) {
-            $app->setResult($taskData['result']);
+            $task->setResult($taskData['result']);
         }
         if (isset($taskData['cookie'])) {
-            $app->setCookie($taskData['cookie']);
+            $task->setCookie($taskData['cookie']);
         }
         if (isset($taskData['logs'])) {
-            $app->setLogs($taskData['logs']);
+            $task->setLogs($taskData['logs']);
         }
 
-        return $app;
+        return $task;
     }
 
     /**
@@ -144,9 +144,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $queue A string.
+     * {@inheritdoc}
      */
     public function setQueue($queue)
     {
@@ -172,9 +170,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $state A string.
+     * {@inheritdoc}
      */
     public function setState($state)
     {
@@ -200,9 +196,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $description A string.
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
@@ -228,13 +222,11 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add an integer.
-     *
-     * @param int $created A UNIX timestamp integer.
+     * {@inheritdoc}
      */
     public function setCreated($created)
     {
-        if (!is_int($created) || empty($created)) {
+        if (!is_numeric($created) || empty($created)) {
             throw new \InvalidArgumentException(
               sprintf('%s: $created expects an integer.', __METHOD__)
             );
@@ -256,13 +248,11 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add an integer.
-     *
-     * @param int $started A UNIX timestamp integer.
+     * {@inheritdoc}
      */
     public function setStarted($started)
     {
-        if (!is_int($started) || empty($started)) {
+        if (!is_numeric($started) || empty($started)) {
             throw new \InvalidArgumentException(
               sprintf('%s: $started expects an integer.', __METHOD__)
             );
@@ -284,13 +274,11 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add an integer.
-     *
-     * @param int $completed A UNIX timestamp integer.
+     * {@inheritdoc}
      */
     public function setCompleted($completed)
     {
-        if (!is_int($completed) || empty($completed)) {
+        if (!is_numeric($completed) || empty($completed)) {
             throw new \InvalidArgumentException(
               sprintf('%s: $completed expects an integer.', __METHOD__)
             );
@@ -312,9 +300,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $sender A string
+     * {@inheritdoc}
      */
     public function setSender($sender)
     {
@@ -340,9 +326,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $result A string
+     * {@inheritdoc}
      */
     public function setResult($result)
     {
@@ -368,9 +352,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $cookie A string
+     * {@inheritdoc}
      */
     public function setCookie($cookie)
     {
@@ -396,9 +378,7 @@ final class Task implements TaskInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $logs A string
+     * {@inheritdoc}
      */
     public function setLogs($logs)
     {

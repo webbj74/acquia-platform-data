@@ -104,9 +104,7 @@ final class Server implements ServerInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $fullyQualifiedDomainName A string.
+     * {@inheritdoc}
      */
     public function setFullyQualifiedDomainName($fullyQualifiedDomainName)
     {
@@ -132,9 +130,7 @@ final class Server implements ServerInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $amiType A string.
+     * {@inheritdoc}
      */
     public function setAmiType($amiType)
     {
@@ -160,9 +156,7 @@ final class Server implements ServerInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $ec2Region A string.
+     * {@inheritdoc}
      */
     public function setEc2Region($ec2Region)
     {
@@ -188,9 +182,7 @@ final class Server implements ServerInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $ec2AvailabilityZone A string.
+     * {@inheritdoc}
      */
     public function setEc2AvailabilityZone($ec2AvailabilityZone)
     {
@@ -216,9 +208,7 @@ final class Server implements ServerInterface
     }
 
     /**
-     * Add an array.
-     *
-     * @param array $services An array.
+     * {@inheritdoc}
      */
     public function setServices($services)
     {
