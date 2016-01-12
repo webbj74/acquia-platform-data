@@ -16,7 +16,7 @@ final class Task implements TaskInterface
     /**
      * @var int
      */
-    private $id;
+    private $taskID;
 
     /**
      * @var string
@@ -68,18 +68,18 @@ final class Task implements TaskInterface
      */
     private $logs;
 
-    public function __construct($id)
+    public function __construct($taskID)
     {
-        if (!is_numeric($id)) {
+        if (!is_numeric($taskID)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%s: Task ID must be an integer (%s given)',
                     __METHOD__,
-                    is_numeric($id) ? $id : gettype($id)
+                    is_numeric($taskID) ? $taskID : gettype($taskID)
                 )
             );
         }
-        $this->id = $id;
+        $this->id = $taskID;
     }
 
     /**
