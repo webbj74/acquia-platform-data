@@ -5,7 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Yaml\Yaml;
 
-$travis = Yaml::parse(__DIR__ . '/../.travis.yml');
+$travis = Yaml::parse(file_get_contents(__DIR__ . '/../.travis.yml'));
 
 $errors = array();
 $break = "\033[1m" . str_repeat("-", 78) . "\033[0m\n";
