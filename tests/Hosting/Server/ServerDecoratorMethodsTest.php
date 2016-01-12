@@ -41,7 +41,7 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
      * @covers ::getName
      * @covers ::getFullyQualifiedDomainName
      * @covers ::getAmiType
-     * @covers ::setEc2Region
+     * @covers ::getEc2Region
      * @covers ::getEc2AvailabilityZone
      * @covers ::getServices
      * @dataProvider getServerInterfaceGetters
@@ -61,6 +61,7 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::setFullyQualifiedDomainName
      * @covers ::setAmiType
      * @covers ::setEc2Region
      * @covers ::setEc2AvailabilityZone
@@ -96,6 +97,7 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     public function getServerInterfaceSetters()
     {
         return [
+            ['setFullyQualifiedDomainName', 'web-123.prod.hosting.acquia.com'],
             ['setAmiType', 'm2.xlarge'],
             ['setEc2Region', 'us-east-1'],
             ['setEc2AvailabilityZone', 'us-east-1d'],
