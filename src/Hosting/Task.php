@@ -88,35 +88,24 @@ final class Task implements TaskInterface
     public static function create(array $taskData)
     {
         $task = new static($taskData['id']);
-        if (isset($taskData['queue'])) {
-            $task->setQueue($taskData['queue']);
-        }
-        if (isset($taskData['state'])) {
-            $task->setState($taskData['state']);
-        }
-        if (isset($taskData['description'])) {
-            $task->setDescription($taskData['description']);
-        }
-        if (isset($taskData['created'])) {
-            $task->setCreated($taskData['created']);
-        }
-        if (isset($taskData['started'])) {
-            $task->setStarted($taskData['started']);
-        }
-        if (isset($taskData['completed'])) {
-            $task->setCompleted($taskData['completed']);
-        }
-        if (isset($taskData['sender'])) {
-            $task->setSender($taskData['sender']);
-        }
-        if (isset($taskData['result'])) {
-            $task->setResult($taskData['result']);
-        }
-        if (isset($taskData['cookie'])) {
-            $task->setCookie($taskData['cookie']);
-        }
-        if (isset($taskData['logs'])) {
-            $task->setLogs($taskData['logs']);
+
+        $propertySetters = [
+             'queue' => 'setQueue',
+             'state' => 'setState',
+             'description' => 'setDescription',
+             'created' => 'setCreated',
+             'started' => 'setStarted',
+             'completed' => 'setCompleted',
+             'sender' => 'setSender',
+             'result' => 'setResult',
+             'cookie' => 'setCookie',
+             'logs' => 'setLogs',
+        ];
+
+        foreach ($propertySetters as $property => $setter) {
+            if (isset($taskData[$property])) {
+                call_user_func([$task, $setter], $taskData[$property]);
+            }
         }
 
         return $task;
