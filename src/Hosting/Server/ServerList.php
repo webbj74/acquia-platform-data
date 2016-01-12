@@ -51,15 +51,15 @@ class ServerList extends \ArrayObject implements ServerListInterface
             );
         }
 
-        $filteredAppList = new static();
-        $appListIterator = $this->getIterator();
-        while ($appListIterator->valid()) {
-            if (in_array($appListIterator->current()->getName(), $names)) {
-                $filteredAppList->append($appListIterator->current());
+        $filteredServerList = new static();
+        $serverListIterator = $this->getIterator();
+        while ($serverListIterator->valid()) {
+            if (in_array($serverListIterator->current()->getName(), $names)) {
+                $filteredServerList->append($serverListIterator->current());
             }
-            $appListIterator->next();
+            $serverListIterator->next();
         }
 
-        return $filteredAppList;
+        return $filteredServerList;
     }
 }
