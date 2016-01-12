@@ -41,7 +41,7 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
      * @covers ::getName
      * @covers ::getFullyQualifiedDomainName
      * @covers ::getAmiType
-     * @covers ::setEc2Region
+     * @covers ::getEc2Region
      * @covers ::getEc2AvailabilityZone
      * @covers ::getServices
      * @dataProvider getServerInterfaceGetters

@@ -45,7 +45,7 @@ final class DbInstance implements DbInstanceInterface
 
     public function __construct($instance_name)
     {
-        if (!is_string($instance_name) || !preg_match('#^[a-z0-9-]+$#i', $instance_name)) {
+        if (!is_string($instance_name) || !preg_match('#^[a-z0-9]+$#i', $instance_name)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%s: DbInstance name must be an alphanumeric string (%s given)',
@@ -97,7 +97,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->name === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the name.', __METHOD__)
+              sprintf('%s: This DbInstance object does not know the name.', __METHOD__)
             );
         }
         return $this->name;
@@ -122,7 +122,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->username === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the username.', __METHOD__)
+              sprintf('%s: This DbInstance object does not know the username.', __METHOD__)
             );
         }
         return $this->username;
@@ -147,7 +147,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->password === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the password.', __METHOD__)
+              sprintf('%s: This DbInstance object does not know the password.', __METHOD__)
             );
         }
         return $this->password;
@@ -172,7 +172,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->host === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the host.', __METHOD__)
+              sprintf('%s: This DbInstance object does not know the host.', __METHOD__)
             );
         }
         return $this->host;
@@ -197,7 +197,7 @@ final class DbInstance implements DbInstanceInterface
     {
         if ($this->clusterID === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the clusterID.', __METHOD__)
+              sprintf('%s: This DbInstance object does not know the clusterID.', __METHOD__)
             );
         }
         return $this->clusterID;
