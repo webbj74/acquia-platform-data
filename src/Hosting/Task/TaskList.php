@@ -52,12 +52,12 @@ class TaskList extends \ArrayObject implements TaskListInterface
         }
 
         $filteredTaskList = new static();
-        $appListIterator = $this->getIterator();
-        while ($appListIterator->valid()) {
-            if (in_array($appListIterator->current()->getID(), $ids)) {
-                $filteredTaskList->append($appListIterator->current());
+        $listIterator = $this->getIterator();
+        while ($listIterator->valid()) {
+            if (in_array($listIterator->current()->getID(), $ids)) {
+                $filteredTaskList->append($listIterator->current());
             }
-            $appListIterator->next();
+            $listIterator->next();
         }
 
         return $filteredTaskList;
