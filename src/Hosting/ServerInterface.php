@@ -49,6 +49,12 @@ interface ServerInterface
     public function getFullyQualifiedDomainName();
 
     /**
+     * Sets the fully qualified domain name.
+     * @param string $fqdn The fully qualified domain name.
+     */
+    public function setFullyQualifiedDomainName($fqdn);
+
+    /**
      * Returns the Amazon Instance type for the server.
      * @see http://www.ec2instances.info/
      * For example:

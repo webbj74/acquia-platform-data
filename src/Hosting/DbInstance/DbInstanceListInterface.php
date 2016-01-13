@@ -17,7 +17,7 @@ interface DbInstanceListInterface
      * Returns a subset of known servers matching the provided instance names
      *
      * @param array|string $names An array of server names, or a comma-
-     *                            delimited string of application names.
+     *                            delimited string of database instance names.
      *
      * @return DbInstanceListInterface
      */

@@ -21,7 +21,7 @@ final class Server implements ServerInterface
     /**
      * @var string
      */
-    private $fullyQualifiedDomainName;
+    private $fqdn;
 
     /**
      * @var string
@@ -63,6 +63,9 @@ final class Server implements ServerInterface
     public static function create(array $serverData)
     {
         $app = new static($serverData['name']);
+        if (isset($serverData['fully_qualified_domain_name'])) {
+            $app->setFullyQualifiedDomainName($serverData['fully_qualified_domain_name']);
+        }
         if (isset($serverData['ami_type'])) {
             $app->setAmiType($serverData['ami_type']);
         }
@@ -92,7 +95,25 @@ final class Server implements ServerInterface
      */
     public function getFullyQualifiedDomainName()
     {
-        return $this->name . ".prod.hosting.acquia.com";
+        if ($this->fqdn === null) {
+            throw new \RuntimeException(
+                sprintf('%s: This Server object does not know the Fully Qualified Domain Name.', __METHOD__)
+            );
+        }
+        return $this->fqdn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFullyQualifiedDomainName($fqdn)
+    {
+        if (!is_string($fqdn) || empty($fqdn)) {
+            throw new \InvalidArgumentException(
+                sprintf('%s: $fullyQualifiedDomainName expects a string.', __METHOD__)
+            );
+        }
+        $this->fqdn = $fqdn;
     }
 
     /**
@@ -109,9 +130,7 @@ final class Server implements ServerInterface
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $amiType A string.
+     * {@inheritdoc}
      */
     public function setAmiType($amiType)
     {
@@ -130,22 +149,20 @@ final class Server implements ServerInterface
     {
         if ($this->ec2Region === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
+                sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
             );
         }
         return $this->ec2Region;
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $ec2Region A string.
+     * {@inheritdoc}
      */
     public function setEc2Region($ec2Region)
     {
         if (!is_string($ec2Region) || empty($ec2Region)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2Region expects a string.', __METHOD__)
+                sprintf('%s: $ec2Region expects a string.', __METHOD__)
             );
         }
         $this->ec2Region = $ec2Region;
@@ -158,22 +175,20 @@ final class Server implements ServerInterface
     {
         if ($this->ec2AvailabilityZone === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
+                sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
             );
         }
         return $this->ec2AvailabilityZone;
     }
 
     /**
-     * Add a string.
-     *
-     * @param string $ec2AvailabilityZone A string.
+     * {@inheritdoc}
      */
     public function setEc2AvailabilityZone($ec2AvailabilityZone)
     {
         if (!is_string($ec2AvailabilityZone) || empty($ec2AvailabilityZone)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
+                sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
             );
         }
         $this->ec2AvailabilityZone = $ec2AvailabilityZone;
@@ -186,22 +201,20 @@ final class Server implements ServerInterface
     {
         if ($this->services === null) {
             throw new \RuntimeException(
-              sprintf('%s: This Server object does not know the services array.', __METHOD__)
+                sprintf('%s: This Server object does not know the services array.', __METHOD__)
             );
         }
         return $this->services;
     }
 
     /**
-     * Add an array.
-     *
-     * @param array $services An array.
+     * {@inheritdoc}
      */
     public function setServices($services)
     {
         if (!is_array($services) || empty($services)) {
             throw new \InvalidArgumentException(
-              sprintf('%s: $services expects an array.', __METHOD__)
+                sprintf('%s: $services expects an array.', __METHOD__)
             );
         }
         $this->services = $services;

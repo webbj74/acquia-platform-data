@@ -20,7 +20,7 @@ use Acquia\Platform\Cloud\Hosting\ServerInterface;
 class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods';
-    const TEST_APP = 'Acquia\Platform\Cloud\Hosting\ServerInterface';
+    const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\ServerInterface';
 
     /**
      * @covers ::getServer
@@ -30,18 +30,18 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var ServerDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        /** @var ServerInterface $mockApp   */
-        $mockApp = $this->getMockBuilder(self::TEST_APP)->getMock();
+        /** @var ServerInterface $mockClass   */
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)->getMock();
 
-        $mockTrait->setServer($mockApp);
-        $this->assertEquals($mockApp, $mockTrait->getServer());
+        $mockTrait->setServer($mockClass);
+        $this->assertEquals($mockClass, $mockTrait->getServer());
     }
 
     /**
      * @covers ::getName
      * @covers ::getFullyQualifiedDomainName
      * @covers ::getAmiType
-     * @covers ::setEc2Region
+     * @covers ::getEc2Region
      * @covers ::getEc2AvailabilityZone
      * @covers ::getServices
      * @dataProvider getServerInterfaceGetters
@@ -50,17 +50,18 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var ServerDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        $mockApp = $this->getMockBuilder(self::TEST_APP)
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)
             ->getMock();
-        $mockApp->expects($this->once())
+        $mockClass->expects($this->once())
             ->method($getter)
             ->willReturn($expected);
 
-        $mockTrait->setServer($mockApp);
+        $mockTrait->setServer($mockClass);
         $this->assertEquals($expected, call_user_func([$mockTrait, $getter]));
     }
 
     /**
+     * @covers ::setFullyQualifiedDomainName
      * @covers ::setAmiType
      * @covers ::setEc2Region
      * @covers ::setEc2AvailabilityZone
@@ -71,13 +72,13 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var ServerDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        $mockApp = $this->getMockBuilder(self::TEST_APP)
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)
             ->getMock();
-        $mockApp->expects($this->once())
+        $mockClass->expects($this->once())
             ->method($setter)
             ->with($expected);
 
-        $mockTrait->setServer($mockApp);
+        $mockTrait->setServer($mockClass);
         call_user_func([$mockTrait, $setter], $expected);
     }
 
@@ -96,6 +97,7 @@ class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     public function getServerInterfaceSetters()
     {
         return [
+            ['setFullyQualifiedDomainName', 'web-123.prod.hosting.acquia.com'],
             ['setAmiType', 'm2.xlarge'],
             ['setEc2Region', 'us-east-1'],
             ['setEc2AvailabilityZone', 'us-east-1d'],
