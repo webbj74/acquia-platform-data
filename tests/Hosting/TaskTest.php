@@ -343,36 +343,6 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getResult
-     * @expectedException \RuntimeException
-     */
-    public function testGetResultWillThrowExceptionIfPropertyNotSet()
-    {
-        $task = new Task(1234);
-        $task->getResult();
-    }
-
-    /**
-     * @covers ::setResult
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetResultWillThrowExceptionIfNotAString()
-    {
-        $task = new Task(1234);
-        $task->setResult([]);
-    }
-
-    /**
-     * @covers ::setResult
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetResultWillThrowExceptionIfEmptyString()
-    {
-        $task = new Task(1234);
-        $task->setResult('');
-    }
-
-    /**
      * @covers ::getCookie
      * @covers ::setCookie
      */
@@ -382,36 +352,6 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         $task = new Task(1234);
         $task->setCookie($cookie);
         $this->assertEquals($cookie, $task->getCookie());
-    }
-
-    /**
-     * @covers ::getCookie
-     * @expectedException \RuntimeException
-     */
-    public function testGetCookieWillThrowExceptionIfPropertyNotSet()
-    {
-        $task = new Task(1234);
-        $task->getCookie();
-    }
-
-    /**
-     * @covers ::setCookie
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetCookieWillThrowExceptionIfNotAString()
-    {
-        $task = new Task(1234);
-        $task->setCookie([]);
-    }
-
-    /**
-     * @covers ::setCookie
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetCookieWillThrowExceptionIfEmptyString()
-    {
-        $task = new Task(1234);
-        $task->setCookie('');
     }
 
     /**
@@ -444,15 +384,5 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
         $task = new Task(1234);
         $task->setLogs([]);
-    }
-
-    /**
-     * @covers ::setLogs
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetLogsWillThrowExceptionIfEmptyString()
-    {
-        $task = new Task(1234);
-        $task->setLogs('');
     }
 }

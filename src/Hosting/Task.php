@@ -75,7 +75,7 @@ final class Task implements TaskInterface
                 sprintf(
                     '%s: Task ID must be an integer (%s given)',
                     __METHOD__,
-                    is_numeric($taskID) ? $taskID : gettype($taskID)
+                    gettype($taskID)
                 )
             );
         }
@@ -306,11 +306,6 @@ final class Task implements TaskInterface
      */
     public function getResult()
     {
-        if ($this->result === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Task object does not know result.', __METHOD__)
-            );
-        }
         return $this->result;
     }
 
@@ -319,11 +314,6 @@ final class Task implements TaskInterface
      */
     public function setResult($result)
     {
-        if (!is_string($result) || empty($result)) {
-            throw new \InvalidArgumentException(
-                sprintf('%s: $result expects a string.', __METHOD__)
-            );
-        }
         $this->result = $result;
     }
 
@@ -332,11 +322,6 @@ final class Task implements TaskInterface
      */
     public function getCookie()
     {
-        if ($this->cookie === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Task object does not know cookie.', __METHOD__)
-            );
-        }
         return $this->cookie;
     }
 
@@ -345,11 +330,6 @@ final class Task implements TaskInterface
      */
     public function setCookie($cookie)
     {
-        if (!is_string($cookie) || empty($cookie)) {
-            throw new \InvalidArgumentException(
-                sprintf('%s: $cookie expects a string.', __METHOD__)
-            );
-        }
         $this->cookie = $cookie;
     }
 
@@ -371,7 +351,7 @@ final class Task implements TaskInterface
      */
     public function setLogs($logs)
     {
-        if (!is_string($logs) || empty($logs)) {
+        if (!is_string($logs)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $logs expects a string.', __METHOD__)
             );
