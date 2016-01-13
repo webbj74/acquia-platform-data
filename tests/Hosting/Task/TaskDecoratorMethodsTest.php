@@ -20,7 +20,7 @@ use Acquia\Platform\Cloud\Hosting\TaskInterface;
 class TaskDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods';
-    const TEST_APP = 'Acquia\Platform\Cloud\Hosting\TaskInterface';
+    const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\TaskInterface';
 
     /**
      * @covers ::getTask
@@ -30,11 +30,11 @@ class TaskDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var TaskDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        /** @var TaskInterface $mockApp   */
-        $mockApp = $this->getMockBuilder(self::TEST_APP)->getMock();
+        /** @var TaskInterface $mockClass   */
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)->getMock();
 
-        $mockTrait->setTask($mockApp);
-        $this->assertEquals($mockApp, $mockTrait->getTask());
+        $mockTrait->setTask($mockClass);
+        $this->assertEquals($mockClass, $mockTrait->getTask());
     }
 
     /**
@@ -55,13 +55,13 @@ class TaskDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var TaskDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        $mockApp = $this->getMockBuilder(self::TEST_APP)
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)
             ->getMock();
-        $mockApp->expects($this->once())
+        $mockClass->expects($this->once())
             ->method($getter)
             ->willReturn($expected);
 
-        $mockTrait->setTask($mockApp);
+        $mockTrait->setTask($mockClass);
         $this->assertEquals($expected, call_user_func([$mockTrait, $getter]));
     }
 
@@ -82,13 +82,13 @@ class TaskDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     {
         /** @var TaskDecoratorMethods $mockTrait */
         $mockTrait = $this->getMockForTrait(self::TEST_TRAIT);
-        $mockApp = $this->getMockBuilder(self::TEST_APP)
+        $mockClass = $this->getMockBuilder(self::TEST_CLASS)
             ->getMock();
-        $mockApp->expects($this->once())
+        $mockClass->expects($this->once())
             ->method($setter)
             ->with($expected);
 
-        $mockTrait->setTask($mockApp);
+        $mockTrait->setTask($mockClass);
         call_user_func([$mockTrait, $setter], $expected);
     }
 
