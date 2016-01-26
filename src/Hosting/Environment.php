@@ -55,7 +55,7 @@ final class Environment implements EnvironmentInterface
 
     public function __construct($name)
     {
-        if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
+        if (!is_string($name) || !preg_match('#^[a-z0-9-_]+$#i', $name)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: Environment name must be an alphanumeric string (%s)', __METHOD__, $name)
             );
