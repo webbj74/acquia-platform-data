@@ -11,8 +11,15 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentListInterface;
+
 final class Application implements ApplicationInterface
 {
+    /**
+     * @var EnvironmentListInterface
+     */
+    private $environmentList;
+
     /**
      * @var string
      */
@@ -76,23 +83,20 @@ final class Application implements ApplicationInterface
         if (isset($applicationData['production_mode']) && is_numeric($applicationData['production_mode'])) {
             $app->setProductionMode((bool)$applicationData['production_mode']);
         }
-        if (isset($applicationData['realm'])) {
-            $app->setRealm($applicationData['realm']);
-        }
-        if (isset($applicationData['title'])) {
-            $app->setTitle($applicationData['title']);
-        }
-        if (isset($applicationData['unix_username'])) {
-            $app->setUnixUsername($applicationData['unix_username']);
-        }
-        if (isset($applicationData['uuid'])) {
-            $app->setUUID($applicationData['uuid']);
-        }
-        if (isset($applicationData['vcs_type'])) {
-            $app->setVcsType($applicationData['vcs_type']);
-        }
-        if (isset($applicationData['vcs_url'])) {
-            $app->setVcsRepositoryUrl($applicationData['vcs_url']);
+
+        $propertySetters = [
+            'realm' => 'setRealm',
+            'environments' => 'setEnvironmentList',
+            'title' => 'setTitle',
+            'unix_username' => 'setUnixUsername',
+            'uuid' => 'setUUID',
+            'vcs_type' => 'setVcsType',
+            'vcs_url' => 'setVcsRepositoryUrl',
+        ];
+        foreach ($propertySetters as $property => $setter) {
+            if (isset($applicationData[$property]) && method_exists($app, $setter)) {
+                call_user_func([$app, $setter], $applicationData[$property]);
+            }
         }
 
         return $app;
@@ -265,7 +269,6 @@ final class Application implements ApplicationInterface
             );
         }
         return $this->unixUsername;
-
     }
 
     /**
@@ -304,5 +307,26 @@ final class Application implements ApplicationInterface
     public function setRealm(RealmInterface $realm)
     {
         $this->realm = $realm;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnvironmentList()
+    {
+        if ($this->environmentList === null) {
+            throw new \RuntimeException(
+                sprintf('%s: This Application object does not know the environment list.', __METHOD__)
+            );
+        }
+        return $this->environmentList;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnvironmentList(EnvironmentListInterface $environmentList)
+    {
+        $this->environmentList = $environmentList;
     }
 }

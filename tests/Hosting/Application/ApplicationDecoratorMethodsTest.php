@@ -13,6 +13,8 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Application;
 
 use Acquia\Platform\Cloud\Hosting\Application\ApplicationDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
+use Acquia\Platform\Cloud\Hosting\Environment;
+use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
 use Acquia\Platform\Cloud\Hosting\Realm;
 
 /**
@@ -48,6 +50,7 @@ class ApplicationDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
      * @covers ::getTitle
      * @covers ::getUUID
      * @covers ::getRealm
+     * @covers ::getEnvironmentList
      * @dataProvider getApplicationInterfaceGetters
      */
     public function testApplicationDecoratorMethodsPassesGettersToApplication($getter, $expected)
@@ -72,6 +75,7 @@ class ApplicationDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
      * @covers ::setTitle
      * @covers ::setUUID
      * @covers ::setRealm
+     * @covers ::setEnvironmentList
      * @dataProvider getApplicationInterfaceSetters
      */
     public function testApplicationDecoratorMethodsPassesSettersToApplication($setter, $expected)
@@ -100,6 +104,7 @@ class ApplicationDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
             ['getTitle', 'The Test'],
             ['getUUID', 'cdb73d94-374d-401f-b419-3781fa96fb05'],
             ['getRealm', ['realm']],
+            ['getEnvironmentList', ['environments']],
         ];
     }
 
@@ -113,6 +118,7 @@ class ApplicationDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
             ['setTitle', 'The Test'],
             ['setUUID', 'cdb73d94-374d-401f-b419-3781fa96fb05'],
             ['setRealm', new Realm('realm1')],
+            ['setEnvironmentList', new EnvironmentList([new Environment('environment1')])],
         ];
     }
 }

@@ -12,6 +12,7 @@
 namespace Acquia\Platform\Cloud\Hosting\Application;
 
 use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
+use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentListInterface;
 use Acquia\Platform\Cloud\Hosting\RealmInterface;
 
 trait ApplicationDecoratorMethods
@@ -167,5 +168,21 @@ trait ApplicationDecoratorMethods
     public function setRealm(RealmInterface $realm)
     {
         $this->application->setRealm($realm);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnvironmentList()
+    {
+        return $this->application->getEnvironmentList();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEnvironmentList(EnvironmentListInterface $environmentList)
+    {
+        $this->application->setEnvironmentList($environmentList);
     }
 }

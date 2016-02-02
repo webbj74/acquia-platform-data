@@ -12,6 +12,8 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Application;
+use Acquia\Platform\Cloud\Hosting\Environment;
+use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
 use Acquia\Platform\Cloud\Hosting\Realm;
 
 /**
@@ -64,6 +66,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
                 'name' => 'application',
                 'production_mode' => 1,
                 'realm' => new Realm('realm1'),
+                'environments' => new EnvironmentList([new Environment('environment1')]),
                 'title' => 'My Site',
                 'unix_username' => 'application',
                 'uuid' => 'd2e64aca-a1de-492e-ab9e-e2866555760d',
@@ -369,5 +372,29 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application('test');
         $application->getRealm();
+    }
+
+    /**
+     * @covers ::getEnvironmentList
+     * @covers ::setEnvironmentList
+     */
+    public function testEnvironmentListPropertyMayBeAccessedViaMethods()
+    {
+        $application = new Application('test');
+        $environments = new EnvironmentList();
+        $environments->append(new Environment('environment1'));
+        $environments->append(new Environment('environment2'));
+        $application->setEnvironmentList($environments);
+        $this->assertEquals($environments, $application->getEnvironmentList());
+    }
+
+    /**
+     * @covers ::getEnvironmentList
+     * @expectedException \RuntimeException
+     */
+    public function testEnvironmentListWillThrowExceptionIfPropertyNotSet()
+    {
+        $application = new Application('test');
+        $application->getEnvironmentList();
     }
 }
