@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentListInterface;
+
 /**
  * A Hosting Application corresponds to a "child subscription" or "sitegroup"
  * or a cloud api "site". It refers to a web application independent of its
@@ -165,4 +167,19 @@ interface ApplicationInterface
      * @param RealmInterface $realm The realm this application is hosted in.
      */
     public function setRealm(RealmInterface $realm);
+
+    /**
+     * Return the list of environments that belong to this application.
+     *
+     * @return EnvironmentListInterface
+     */
+    public function getEnvironmentList();
+
+    /**
+     * Set the list of environments that belong to this application.
+     *
+     * @param EnvironmentListInterface $environmentList
+     *   The environments that belong to this application.
+     */
+    public function setEnvironmentList(EnvironmentListInterface $environmentList);
 }
