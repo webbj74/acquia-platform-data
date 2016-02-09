@@ -62,7 +62,7 @@ final class Application implements ApplicationInterface
 
     public function __construct($name)
     {
-        if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
+        if (!is_string($name) || !preg_match('#^[a-z0-9_-]+$#i', $name)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%s: Application name must be an alphanumeric string (%s given)',

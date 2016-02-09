@@ -36,6 +36,19 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::__construct
+     * @covers ::getName
+     * @covers ::getRealmQualifiedName
+     */
+    public function testNamePropertyMayContainUnderscores()
+    {
+        $application = new Application('test_sf');
+        $this->assertEquals('test_sf', $application->getName());
+        $application->setRealm(new Realm('foo'));
+        $this->assertEquals('foo:test_sf', $application->getRealmQualifiedName());
+    }
+
+    /**
+     * @covers ::__construct
      * @expectedException \InvalidArgumentException
      */
     public function testNamePropertyMustBeAString()
