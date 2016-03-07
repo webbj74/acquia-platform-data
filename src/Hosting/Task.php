@@ -267,7 +267,7 @@ final class Task implements TaskInterface
      */
     public function setCompleted($completed)
     {
-        if (!is_numeric($completed) || empty($completed)) {
+        if (!is_numeric($completed) || is_null($completed)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $completed expects an integer.', __METHOD__)
             );
@@ -276,8 +276,8 @@ final class Task implements TaskInterface
     }
 
     /**
- * {@inheritdoc}
- */
+     * {@inheritdoc}
+     */
     public function getSender()
     {
         if ($this->sender === null) {
