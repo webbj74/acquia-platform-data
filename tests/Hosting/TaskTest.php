@@ -270,12 +270,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::getCompleted
-     * @expectedException \RuntimeException
      */
-    public function testGetCompletedWillThrowExceptionIfPropertyNotSet()
+    public function testGetCompletedWillReturnNullIfPropertyNotSet()
     {
         $task = new Task(1234);
-        $task->getCompleted();
+        $this->assertNull($task->getCompleted());
     }
 
     /**
