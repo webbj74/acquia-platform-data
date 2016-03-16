@@ -254,11 +254,6 @@ final class Task implements TaskInterface
      */
     public function getCompleted()
     {
-        if ($this->completed === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Task object has no completed.', __METHOD__)
-            );
-        }
         return $this->completed;
     }
 
@@ -267,9 +262,9 @@ final class Task implements TaskInterface
      */
     public function setCompleted($completed)
     {
-        if (!is_numeric($completed) || is_null($completed)) {
+        if (!is_numeric($completed) && !is_null($completed)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $completed expects an integer.', __METHOD__)
+                sprintf('%s: $completed expects an integer or null value.', __METHOD__)
             );
         }
         $this->completed = $completed;

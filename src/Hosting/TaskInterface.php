@@ -121,14 +121,14 @@ interface TaskInterface
     /**
      * Returns the UNIX timestamp of when the task was completed.
      *
-     * @return int UNIX Timestamp when the task was completed.
+     * @return int|null UNIX Timestamp when the task was completed.
      */
     public function getCompleted();
 
     /**
      * Sets the UNIX timestamp for when the task was completed.
      *
-     * @param int $completed UNIX timestamp when the task was completed.
+     * @param int|null $completed UNIX timestamp when the task was completed.
      */
     public function setCompleted($completed);
 
