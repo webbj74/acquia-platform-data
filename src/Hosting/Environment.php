@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use Acquia\Platform\Cloud\Hosting\Server\ServerListInterface;
+
 final class Environment implements EnvironmentInterface
 {
     /**
@@ -52,6 +54,11 @@ final class Environment implements EnvironmentInterface
      * @var string
      */
     private $machineName;
+
+    /**
+     * @var ServerListInterface
+     */
+    private $serverList;
 
     public function __construct($name)
     {
@@ -276,5 +283,29 @@ final class Environment implements EnvironmentInterface
             );
         }
         $this->machineName = $machineName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setServerList(ServerListInterface $serverList)
+    {
+        $this->serverList = $serverList;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getServerList()
+    {
+        if ($this->serverList === null) {
+            throw new \RuntimeException(
+                sprintf(
+                    '%s: This object does not know which servers are assigned to the environment.',
+                    __METHOD__
+                )
+            );
+        }
+        return $this->serverList;
     }
 }

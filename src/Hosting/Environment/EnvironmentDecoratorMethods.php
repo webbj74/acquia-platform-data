@@ -12,6 +12,7 @@
 namespace Acquia\Platform\Cloud\Hosting\Environment;
 
 use Acquia\Platform\Cloud\Hosting\EnvironmentInterface;
+use Acquia\Platform\Cloud\Hosting\Server\ServerListInterface;
 
 trait EnvironmentDecoratorMethods
 {
@@ -158,5 +159,21 @@ trait EnvironmentDecoratorMethods
     public function setMachineName($machineName)
     {
         $this->environment->setMachineName($machineName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setServerList(ServerListInterface $serverList)
+    {
+        $this->environment->setServerList($serverList);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getServerList()
+    {
+        $this->environment->getServerList();
     }
 }

@@ -12,6 +12,8 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Environment;
+use Acquia\Platform\Cloud\Hosting\Server;
+use Acquia\Platform\Cloud\Hosting\Server\ServerList;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Environment
@@ -327,6 +329,29 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     {
         $environment = new Environment('test');
         $environment->setMachineName($value);
+    }
+
+    /**
+     * @covers ::getServerList
+     * @covers ::setServerList
+     */
+    public function testServerListPropertyMayBeAccessedViaMethods()
+    {
+        $environment = new Environment('test');
+        $serverList = new ServerList();
+        $serverList->append(new Server('srv-123'));
+        $environment->setServerList($serverList);
+        $this->assertEquals('srv-123', $environment->getServerList()->offsetGet(0)->getName());
+    }
+
+    /**
+     * @covers ::getMachineName
+     * @expectedException \RuntimeException
+     */
+    public function testServerListPropertyWhenUnset()
+    {
+        $environment = new Environment('test');
+        $environment->getServerList();
     }
 
     public function commonDataProvider()
