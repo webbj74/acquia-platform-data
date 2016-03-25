@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use Acquia\Platform\Cloud\Hosting\Server\ServerListInterface;
+
 interface EnvironmentInterface
 {
     /**
@@ -128,4 +130,18 @@ interface EnvironmentInterface
      * @param string $machineName
      */
     public function setMachineName($machineName);
+
+    /**
+     * Assign a list of servers to the environment.
+     *
+     * @param ServerListInterface $serverList
+     */
+    public function setServerList(ServerListInterface $serverList);
+
+    /**
+     * Returns a list of servers assigned to this environment.
+     *
+     * @return ServerListInterface
+     */
+    public function getServerList();
 }
