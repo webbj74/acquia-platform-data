@@ -70,10 +70,10 @@ final class Server implements ServerInterface
             $app->setAmiType($serverData['ami_type']);
         }
         if (isset($serverData['ec2_region'])) {
-            $app->setAmiType($serverData['ec2_region']);
+            $app->setEc2Region($serverData['ec2_region']);
         }
         if (isset($serverData['ec2_availability_zone'])) {
-            $app->setAmiType($serverData['ec2_availability_zone']);
+            $app->setEc2AvailabilityZone($serverData['ec2_availability_zone']);
         }
         if (isset($serverData['services']) && is_array($serverData['services'])) {
             $app->setServices($serverData['services']);
