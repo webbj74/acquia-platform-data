@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting\Server;
 
+use Acquia\Platform\Cloud\Hosting\ServerInterface;
+
 interface ServerListInterface
 {
     /**
@@ -22,4 +24,11 @@ interface ServerListInterface
      * @return ServerListInterface
      */
     public function filterByName($names);
+
+    /**
+     * Returns the lowest numbered server in the list.
+     *
+     * @return ServerInterface
+     */
+    public function getLowestNumberedServer();
 }
