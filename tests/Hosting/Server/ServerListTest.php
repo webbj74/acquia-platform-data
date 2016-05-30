@@ -19,11 +19,11 @@ use Acquia\Platform\Cloud\Hosting\Server\ServerList;
  */
 class ServerListTest extends \PHPUnit_Framework_TestCase
 {
-    private $childrenOfHyperion = ['Helios', 'Selene', 'Eos'];
-    private $childrenOfCoeus = ['Lelantos', 'Leto', 'Asteria'];
-    private $childrenOfIapetus = ['Atlas', 'Prometheus', 'Epimetheus', 'Menoetius'];
-    private $childrenOfOceanus = ['Metis'];
-    private $childrenOfCrius = ['Astraeus', 'Pallas', 'Perses'];
+    private $childrenOfHyperion = ['Helios-10', 'Selene-20', 'Eos-30'];
+    private $childrenOfCoeus = ['Lelantos-100', 'Leto-110', 'Asteria-120'];
+    private $childrenOfIapetus = ['Atlas-5', 'Prometheus-15', 'Epimetheus-25', 'Menoetius-35'];
+    private $childrenOfOceanus = ['Metis-4'];
+    private $childrenOfCrius = ['Astraeus-200', 'Pallas-1', 'Perses-3'];
 
     protected function getBasicServerList()
     {
@@ -114,5 +114,17 @@ class ServerListTest extends \PHPUnit_Framework_TestCase
             'null' => [null],
             'stdClass' => [new \stdClass()],
         ];
+    }
+
+    /**
+     * @covers ::getLowestNumberedServer
+     */
+    public function testGetLowestNumberedServer()
+    {
+        $serverList = new ServerList();
+        $this->assertNull($serverList->getLowestNumberedServer());
+
+        $serverList = $this->getBasicServerList();
+        $this->assertEquals('Pallas-1', $serverList->getLowestNumberedServer()->getName());
     }
 }

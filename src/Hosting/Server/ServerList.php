@@ -62,4 +62,24 @@ class ServerList extends \ArrayObject implements ServerListInterface
 
         return $filteredServerList;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLowestNumberedServer()
+    {
+        $lowestServer = null;
+        $lowestId = 999999;
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            preg_match('/^[^-]+-(\d+)$/', $server->getName(), $matches);
+            if (isset($matches[1]) && intval($matches[1]) < $lowestId && intval($matches[1]) > 0) {
+                $lowestServer = $server;
+                $lowestId = $matches[1];
+            }
+        }
+
+        return $lowestServer;
+    }
 }
