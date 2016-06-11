@@ -16,6 +16,33 @@ use Acquia\Platform\Cloud\Hosting\ServerInterface;
 class ServerList extends \ArrayObject implements ServerListInterface
 {
     /**
+     * Implementation of ArrayAccess::offsetGet()
+     *
+     * Overrides ArrayObject::offsetGet() to allow using server name as key.
+     *
+     * @param int|string $index
+     *
+     * @return ServerInterface|null
+     */
+    public function offsetGet($index)
+    {
+        if (is_numeric($index)) {
+            return parent::offsetGet($index);
+        }
+
+        $matchingServer = null;
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            if ($server->getName() === $index) {
+                $matchingServer = $server;
+                break;
+            }
+        }
+        return $matchingServer;
+    }
+
+    /**
      * Implementation of ArrayAccess::offsetSet()
      *
      * Overrides ArrayObject::offsetSet() to validate that the value set at the

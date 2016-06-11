@@ -127,4 +127,19 @@ class ServerListTest extends \PHPUnit_Framework_TestCase
         $serverList = $this->getBasicServerList();
         $this->assertEquals('Pallas-1', $serverList->getLowestNumberedServer()->getName());
     }
+
+    /**
+     * @covers ::offsetGet
+     */
+    public function testArrayOffsetCanBeServerNameOrInteger()
+    {
+        $serverList = new ServerList();
+        $this->assertNull($serverList['doesntexist']);
+
+        $serverList = $this->getBasicServerList();
+        $this->assertNull($serverList['doesntexist']);
+        $this->assertEquals('Helios-10', $serverList[0]->getName());
+        $this->assertEquals('Leto-110', $serverList[4]->getName());
+        $this->assertEquals('Pallas-1', $serverList['Pallas-1']->getName());
+    }
 }
