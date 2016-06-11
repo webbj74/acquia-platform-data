@@ -274,11 +274,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::setServices
-     * @expectedException \InvalidArgumentException
      */
-    public function testSetServicesWillThrowExceptionIfEmptyArray()
+    public function testSetServicesWillNotThrowExceptionIfEmptyArray()
     {
         $server = new Server('test');
         $server->setServices([]);
+        $this->assertEmpty($server->getServices());
     }
 }
