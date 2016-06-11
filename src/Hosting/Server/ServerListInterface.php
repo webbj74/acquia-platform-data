@@ -31,4 +31,40 @@ interface ServerListInterface
      * @return ServerInterface
      */
     public function getLowestNumberedServer();
+
+
+    /**
+     * Returns a list of load balancer servers
+     *
+     * @return BalancerServerListInterface
+     */
+    public function getBalancerServers();
+
+    /**
+     * Returns a list of database servers
+     *
+     * @return DatabaseServerListInterface
+     */
+    public function getDatabaseServers();
+
+    /**
+     * Returns list of file servers.
+     *
+     * @return FileServerListInterface
+     */
+    public function getFileServers();
+
+    /**
+     * Returns a list of vcs servers
+     *
+     * @return VcsServerListInterface
+     */
+    public function getVcsServers();
+
+    /**
+     * Returns a list of web servers
+     *
+     * @return WebServerListInterface
+     */
+    public function getWebServers();
 }

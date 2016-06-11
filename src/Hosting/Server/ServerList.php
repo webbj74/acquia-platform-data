@@ -109,4 +109,103 @@ class ServerList extends \ArrayObject implements ServerListInterface
 
         return $lowestServer;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBalancerServers()
+    {
+        $balancerServers = new BalancerServerList();
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            if ($server->isBalancerServer()) {
+                $balancerServers->append($server);
+            }
+        }
+
+        return $balancerServers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDatabaseServers()
+    {
+        $databaseServers = new DatabaseServerList();
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            if ($server->isDatabaseServer()) {
+                $databaseServers->append($server);
+            }
+        }
+
+        return $databaseServers;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Cloud API doesn't explicitly tell if the server is a fileserver, so
+     * make an educated guess based on the server name or other services that
+     * are provided.
+     */
+    public function getFileServers()
+    {
+        $fileServers = new FileServerList();
+        $databaseServers = new FileServerList();
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            if ($server->isFileServer()) {
+                $fileServers->append($server);
+                continue;
+            }
+            if ($server->isDatabaseServer()) {
+                $databaseServers->append($server);
+                continue;
+            }
+        }
+
+        if (!$fileServers->count()) {
+            $fileServers = $databaseServers;
+        }
+
+        return $fileServers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVcsServers()
+    {
+        $vcsServers = new VcsServerList();
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            if ($server->isVcsServer()) {
+                $vcsServers->append($server);
+            }
+        }
+
+        return $vcsServers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWebServers()
+    {
+        $webServers = new WebServerList();
+
+        /** @var ServerInterface $server */
+        foreach ($this as $server) {
+            if ($server->isWebServer()) {
+                $webServers->append($server);
+            }
+        }
+
+        return $webServers;
+    }
 }

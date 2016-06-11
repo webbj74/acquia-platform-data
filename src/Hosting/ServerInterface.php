@@ -112,4 +112,39 @@ interface ServerInterface
      * @param array $services An array of services.
      */
     public function setServices($services);
+
+    /**
+     * Is the server a load balancer server?
+     *
+     * @return boolean
+     */
+    public function isBalancerServer();
+
+    /**
+     * Is the server a database server?
+     *
+     * @return boolean
+     */
+    public function isDatabaseServer();
+
+    /**
+     * Is the server a file server?
+     *
+     * @return boolean
+     */
+    public function isFileServer();
+
+    /**
+     * Is the server a VCS server?
+     *
+     * @return boolean
+     */
+    public function isVcsServer();
+
+    /**
+     * Is the server a web server?
+     *
+     * @return boolean
+     */
+    public function isWebServer();
 }
