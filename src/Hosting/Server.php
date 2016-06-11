@@ -212,7 +212,7 @@ final class Server implements ServerInterface
      */
     public function setServices($services)
     {
-        if (!is_array($services) || empty($services)) {
+        if (!is_array($services)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $services expects an array.', __METHOD__)
             );
