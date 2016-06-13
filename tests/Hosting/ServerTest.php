@@ -281,4 +281,68 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->setServices([]);
         $this->assertEmpty($server->getServices());
     }
+
+    /**
+     * @covers ::isBalancerServer
+     */
+    public function testIsBalancerServer()
+    {
+        $server = new Server('test');
+        $server->setServices([]);
+        $this->assertFalse($server->isBalancerServer());
+
+        $server->setServices(['varnish' =>[]]);
+        $this->assertTrue($server->isBalancerServer());
+    }
+
+    /**
+     * @covers ::isDatabaseServer
+     */
+    public function testIsDatabaseServer()
+    {
+        $server = new Server('test');
+        $server->setServices([]);
+        $this->assertFalse($server->isDatabaseServer());
+
+        $server->setServices(['database' =>[]]);
+        $this->assertTrue($server->isDatabaseServer());
+    }
+
+    /**
+     * @covers ::isFileServer
+     */
+    public function testIsFileServer()
+    {
+        $server = new Server('test');
+        $this->assertFalse($server->isFileServer());
+
+        $server = new Server('fs-123');
+        $this->assertTrue($server->isFileServer());
+    }
+
+    /**
+     * @covers ::isVcsServer
+     */
+    public function testIsVcsServer()
+    {
+        $server = new Server('test');
+        $server->setServices([]);
+        $this->assertFalse($server->isVcsServer());
+
+        $server->setServices(['vcs' =>[]]);
+        $this->assertTrue($server->isVcsServer());
+    }
+
+    /**
+     * @covers ::isWebServer
+     */
+    public function testIsWebServer()
+    {
+        $server = new Server('test');
+        $server->setServices([]);
+        $this->assertFalse($server->isWebServer());
+
+        $server->setServices(['web' =>[]]);
+        $this->assertTrue($server->isWebServer());
+    }
 }

@@ -219,4 +219,50 @@ final class Server implements ServerInterface
         }
         $this->services = $services;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBalancerServer()
+    {
+        $services = $this->getServices();
+        return isset($services['varnish']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDatabaseServer()
+    {
+        $services = $this->getServices();
+        return isset($services['database']);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Cloud API result is not explicit so try to guess based on the server name.
+     */
+    public function isFileServer()
+    {
+        return (bool) preg_match('/^fs-/', $this->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isVcsServer()
+    {
+        $services = $this->getServices();
+        return isset($services['vcs']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isWebServer()
+    {
+        $services = $this->getServices();
+        return isset($services['web']);
+    }
 }

@@ -1,0 +1,2 @@
+*.inc text eol=lf whitespace=tabwidth=4,-blank-at-eol diff=php
+*.php text eol=lf whitespace=tabwidth=4,-blank-at-eol diff=php
