@@ -90,6 +90,7 @@ class EnvironmentDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
     public function getEnvironmentInterfaceGetters()
     {
         return [
+            ['getApplicationQualifiedName', 'test1.test'],
             ['getName', 'test1'],
             ['getRevision', 'tags/301'],
             ['getDefaultHostName', 'test1-123.test.hosting.acquia.com'],
