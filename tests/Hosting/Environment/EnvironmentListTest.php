@@ -29,6 +29,7 @@ class EnvironmentListTest extends \PHPUnit_Framework_TestCase
         foreach ($childrenOfTitans as $titanName) {
             $env = new Environment($titanName);
             $env->setMachineName('myapp' . $titanName);
+            $env->setUnixUserName("myapp.{$titanName}");
             $environmentList->append($env);
         }
         return $environmentList;
@@ -115,11 +116,74 @@ class EnvironmentListTest extends \PHPUnit_Framework_TestCase
     public function testGetNames()
     {
         $environmentList = $this->getBasicEnvironmentList()->filterByName($this->childrenOfLeto);
-        ;
         $expected = [
             'Apollo' => 'myappApollo',
             'Artemis' => 'myappArtemis',
         ];
         $this->assertEquals($expected, $environmentList->getNames());
+    }
+
+    /**
+     * @covers ::getEnvironmentByMachineName
+     */
+    public function testGetEnvironmentByMachineName()
+    {
+        $environmentList = $this->getBasicEnvironmentList();
+        $this->assertEquals(
+            'Apollo',
+            $environmentList->getEnvironmentByMachineName('myappApollo')->getName()
+        );
+        $this->assertEquals(
+            'Artemis',
+            $environmentList->getEnvironmentByMachineName('myappArtemis')->getName()
+        );
+    }
+
+    /**
+     * @covers ::getEnvironmentByApplicationQualifiedName
+     */
+    public function testGetEnvironmentByApplicationQualifiedName()
+    {
+        $environmentList = $this->getBasicEnvironmentList();
+        $this->assertEquals(
+            'Apollo',
+            $environmentList->getEnvironmentByApplicationQualifiedName('myapp.Apollo')->getName()
+        );
+        $this->assertEquals(
+            'Artemis',
+            $environmentList->getEnvironmentByApplicationQualifiedName('myapp.Artemis')->getName()
+        );
+    }
+
+    /**
+     * @covers ::offsetGet
+     */
+    public function testCanAccessElementByEnvironmentNameOrIndex()
+    {
+        $environmentList = $this->getBasicEnvironmentList();
+        $this->assertEquals(
+            'Apollo',
+            $environmentList[0]->getName()
+        );
+        $this->assertEquals(
+            'Artemis',
+            $environmentList[1]->getName()
+        );
+        $this->assertEquals(
+            'Apollo',
+            $environmentList['myappApollo']->getName()
+        );
+        $this->assertEquals(
+            'Artemis',
+            $environmentList['myappArtemis']->getName()
+        );
+        $this->assertEquals(
+            'Apollo',
+            $environmentList['myapp.Apollo']->getName()
+        );
+        $this->assertEquals(
+            'Artemis',
+            $environmentList['myapp.Artemis']->getName()
+        );
     }
 }
