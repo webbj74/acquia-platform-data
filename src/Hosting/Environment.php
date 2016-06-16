@@ -308,4 +308,15 @@ final class Environment implements EnvironmentInterface
         }
         return $this->serverList;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getApplicationQualifiedName()
+    {
+        /*
+         * Considering data from Cloud API, Unix Username provides the same result.
+         */
+        return $this->getUnixUserName();
+    }
 }

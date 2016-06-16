@@ -11,8 +11,31 @@
 
 namespace Acquia\Platform\Cloud\Hosting\Environment;
 
+use Acquia\Platform\Cloud\Hosting\EnvironmentInterface;
+
 class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
 {
+    /**
+     * Implementation of ArrayAccess::offsetGet()
+     *
+     * Overrides ArrayObject::offsetGet() to allow using an Environment name as
+     * a key.
+     *
+     * @param mixed $index
+     *
+     * @return mixed|null
+     */
+    public function offsetGet($index)
+    {
+        if (is_numeric($index)) {
+            return parent::offsetGet($index);
+        }
+        if (strpos($index, '.') > 0) {
+            return $this->getEnvironmentByApplicationQualifiedName($index);
+        }
+        return $this->getEnvironmentByMachineName($index);
+    }
+    
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
@@ -59,6 +82,35 @@ class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
         }
 
         return $filteredList;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnvironmentByMachineName($name)
+    {
+        $namedEnvironment = null;
+        foreach ($this as $environment) {
+            if ($environment->getMachineName() === $name) {
+                $namedEnvironment = $environment;
+            }
+        }
+        return $namedEnvironment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnvironmentByApplicationQualifiedName($name)
+    {
+        $namedEnvironment = null;
+        /** @var EnvironmentInterface $environment */
+        foreach ($this as $environment) {
+            if ($environment->getApplicationQualifiedName() === $name) {
+                $namedEnvironment = $environment;
+            }
+        }
+        return $namedEnvironment;
     }
 
     /**

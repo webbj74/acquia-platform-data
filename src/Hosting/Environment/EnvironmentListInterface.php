@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting\Environment;
 
+use Acquia\Platform\Cloud\Hosting\EnvironmentInterface;
+
 interface EnvironmentListInterface
 {
     /**
@@ -21,6 +23,24 @@ interface EnvironmentListInterface
      * @return EnvironmentListInterface
      */
     public function filterByName($names);
+
+    /**
+     * Retrieves an environment object by its machine name.
+     *
+     * @param $name
+     *
+     * @return EnvironmentInterface
+     */
+    public function getEnvironmentByMachineName($name);
+
+    /**
+     * Retrieves an environment object by its application.environment name.
+     *
+     * @param $name
+     *
+     * @return EnvironmentInterface
+     */
+    public function getEnvironmentByApplicationQualifiedName($name);
 
     /**
      * Returns a simple array of environment names.

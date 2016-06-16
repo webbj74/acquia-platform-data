@@ -354,6 +354,23 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         $environment->getServerList();
     }
 
+    /**
+     * @covers ::getApplicationQualifiedName
+     */
+    public function testCanReturnApplicationQualifiedName()
+    {
+        $environment = new Environment('test');
+        $users = [
+            'myapp.dev',
+            'myapp.test',
+            'myapp.prod',
+        ];
+        foreach ($users as $user) {
+            $environment->setUnixUserName($user);
+            $this->assertEquals($user, $environment->getApplicationQualifiedName());
+        }
+    }
+
     public function commonDataProvider()
     {
         return array(

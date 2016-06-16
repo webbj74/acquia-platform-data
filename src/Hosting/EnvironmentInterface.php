@@ -144,4 +144,11 @@ interface EnvironmentInterface
      * @return ServerListInterface
      */
     public function getServerList();
+
+    /**
+     * Returns the application.environment name of the environment.
+     *
+     * @return string
+     */
+    public function getApplicationQualifiedName();
 }
