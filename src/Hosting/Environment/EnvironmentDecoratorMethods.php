@@ -176,4 +176,14 @@ trait EnvironmentDecoratorMethods
     {
         $this->environment->getServerList();
     }
+
+    /**
+     * Returns the application.environment name of the environment.
+     *
+     * @return string
+     */
+    public function getApplicationQualifiedName()
+    {
+        return $this->environment->getApplicationQualifiedName();
+    }
 }
