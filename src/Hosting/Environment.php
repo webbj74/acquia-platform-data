@@ -12,6 +12,7 @@
 namespace Acquia\Platform\Cloud\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Server\ServerListInterface;
+use Acquia\Platform\Cloud\Tests\Hosting\Environment\EnvironmentFactory;
 
 final class Environment implements EnvironmentInterface
 {
@@ -72,32 +73,13 @@ final class Environment implements EnvironmentInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public static function create(array $environmentData)
     {
-        $environment = new static($environmentData['name']);
-        if (isset($environmentData['vcs_path'])) {
-            $environment->setRevision($environmentData['vcs_path']);
-        }
-        if (isset($environmentData['ssh_host'])) {
-            $environment->setDefaultHostName($environmentData['ssh_host']);
-        }
-        if (isset($environmentData['db_clusters'])) {
-            $environment->setDatabaseClusterList($environmentData['db_clusters']);
-        }
-        if (isset($environmentData['default_domain']) && !empty($environmentData['default_domain'])) {
-            $environment->setDefaultDomainName($environmentData['default_domain']);
-            $nameParts = explode('.', $environmentData['default_domain']);
-            $environment->setMachineName($nameParts[0]);
-        }
-        if (isset($environmentData['livedev'])) {
-            $environment->setInLiveDev(($environmentData['livedev'] != 'disabled'));
-        }
-        if (isset($environmentData['unix_username'])) {
-            $environment->setUnixUserName($environmentData['unix_username']);
-        }
-
-        return $environment;
+        return EnvironmentFactory::getEnvironmentFromCloudApiData($environmentData);
     }
 
     /**
@@ -318,5 +300,27 @@ final class Environment implements EnvironmentInterface
          * Considering data from Cloud API, Unix Username provides the same result.
          */
         return $this->getUnixUserName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDocumentRootPath()
+    {
+        /**
+         * @var string $appQualifiedName
+         */
+        $appQualifiedName = $this->getApplicationQualifiedName();
+        
+        /**
+         * @var string $documentRootPath
+         */
+        $documentRootPath = sprintf('/var/www/html/%s/docroot', $appQualifiedName);
+
+        if ($this->isInLiveDev()) {
+            $documentRootPath = sprintf('/mnt/gfs/%s/livedev/docroot', $appQualifiedName);
+        }
+
+        return $documentRootPath;
     }
 }

@@ -178,12 +178,18 @@ trait EnvironmentDecoratorMethods
     }
 
     /**
-     * Returns the application.environment name of the environment.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getApplicationQualifiedName()
     {
         return $this->environment->getApplicationQualifiedName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDocumentRootPath()
+    {
+        return $this->environment->getDocumentRootPath();
     }
 }
