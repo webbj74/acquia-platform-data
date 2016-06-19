@@ -371,6 +371,19 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @covers ::getDocumentRootPath
+     */
+    public function testCanReturnDocumentRootPath()
+    {
+        $environment = new Environment('test');
+        $environment->setUnixUserName('test.prod');
+        $environment->setInLiveDev(false);
+        $this->assertEquals('/var/www/html/test.prod/docroot', $environment->getDocumentRootPath());
+        $environment->setInLiveDev(true);
+        $this->assertEquals('/mnt/gfs/test.prod/livedev/docroot', $environment->getDocumentRootPath());
+    }
+
     public function commonDataProvider()
     {
         return array(

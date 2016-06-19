@@ -18,9 +18,13 @@ interface EnvironmentInterface
     /**
      * Factory method for Environment classes.
      *
+     * Deprecated in favor of EnvironmentFactory method(s).
+     *
      * @param array $environmentData
      *
      * @return EnvironmentInterface
+     *
+     * @deprecated
      */
     public static function create(array $environmentData);
 
@@ -151,4 +155,11 @@ interface EnvironmentInterface
      * @return string
      */
     public function getApplicationQualifiedName();
+
+    /**
+     * Returns the path of the DocumentRoot for this environment.
+     *
+     * @return string
+     */
+    public function getDocumentRootPath();
 }

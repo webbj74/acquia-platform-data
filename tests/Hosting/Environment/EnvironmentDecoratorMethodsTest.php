@@ -96,6 +96,7 @@ class EnvironmentDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
             ['getDefaultHostName', 'test1-123.test.hosting.acquia.com'],
             ['getDatabaseClusterList', [1,2]],
             ['getDefaultDomainName', 'test1stg.acquia-sites.com'],
+            ['getDocumentRootPath', '/var/www/html/test.test/docroot'],
             ['isInLiveDev', true],
             ['getUnixUserName', 'test1.test'],
             ['getMachineName', 'test1stg'],
