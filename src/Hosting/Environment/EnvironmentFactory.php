@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Tests\Hosting\Environment;
+namespace Acquia\Platform\Cloud\Hosting\Environment;
 
 use Acquia\Platform\Cloud\Hosting\Environment;
 

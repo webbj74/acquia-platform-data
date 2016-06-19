@@ -11,8 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentFactory;
 use Acquia\Platform\Cloud\Hosting\Server\ServerListInterface;
-use Acquia\Platform\Cloud\Tests\Hosting\Environment\EnvironmentFactory;
 
 final class Environment implements EnvironmentInterface
 {
