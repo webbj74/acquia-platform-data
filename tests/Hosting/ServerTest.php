@@ -163,7 +163,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server('test');
         $server->setEc2Region($ec2region);
         $this->assertEquals($ec2region, $server->getEc2Region());
-
     }
 
     /**
@@ -206,7 +205,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server('test');
         $server->setEc2AvailabilityZone($ec2AvailabilityZone);
         $this->assertEquals($ec2AvailabilityZone, $server->getEc2AvailabilityZone());
-
     }
 
     /**
@@ -249,7 +247,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server('test');
         $server->setServices($services);
         $this->assertEquals($services, $server->getServices());
-
     }
 
     /**
