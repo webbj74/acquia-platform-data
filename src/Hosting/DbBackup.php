@@ -60,12 +60,12 @@ final class DbBackup implements DbBackupInterface
 
     public function __construct($backupId)
     {
-        if (!is_int($backupId)) {
+        if (!is_numeric($backupId)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    '%s: DbBackup ID must be an alphanumeric int (%s given)',
+                    '%s: DbBackup ID must be a numeric value (%s given)',
                     __METHOD__,
-                    is_int($backupId) ? $backupId : gettype($backupId)
+                    gettype($backupId)
                 )
             );
         }
@@ -77,7 +77,7 @@ final class DbBackup implements DbBackupInterface
      */
     public static function create(array $dbBackupData)
     {
-        $app = new static($dbBackupData['id']);
+        $dbBackup = new static($dbBackupData['id']);
 
         $propertySetters = [
             'type' => 'setType',
@@ -91,12 +91,12 @@ final class DbBackup implements DbBackupInterface
         ];
 
         foreach ($propertySetters as $property => $setter) {
-            if (isset($dbBackupData[$property]) && method_exists($app, $setter)) {
-                call_user_func([$app, $setter], $dbBackupData[$property]);
+            if (isset($dbBackupData[$property]) && method_exists($dbBackup, $setter)) {
+                call_user_func([$dbBackup, $setter], $dbBackupData[$property]);
             }
         }
 
-        return $app;
+        return $dbBackup;
     }
 
     /**
@@ -229,7 +229,7 @@ final class DbBackup implements DbBackupInterface
      */
     public function setStarted($started)
     {
-        if (!is_int($started) || empty($started)) {
+        if (!is_numeric($started) || empty($started)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $started expects an int.', __METHOD__)
             );
@@ -255,7 +255,7 @@ final class DbBackup implements DbBackupInterface
      */
     public function setCompleted($completed)
     {
-        if (!is_int($completed) || empty($completed)) {
+        if (!is_numeric($completed) || empty($completed)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $completed expects an int.', __METHOD__)
             );
@@ -281,7 +281,7 @@ final class DbBackup implements DbBackupInterface
      */
     public function setDeleted($deleted)
     {
-        if (!is_int($deleted) || !($deleted == 0 || $deleted == 1)) {
+        if (!is_numeric($deleted) || !($deleted == 0 || $deleted == 1)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $deleted expects an int of value 0 or 1.', __METHOD__)
             );
