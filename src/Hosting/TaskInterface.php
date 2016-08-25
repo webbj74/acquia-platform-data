@@ -107,14 +107,14 @@ interface TaskInterface
     /**
      * Returns the UNIX timestamp of when the task was started.
      *
-     * @return int UNIX Timestamp when the task was started.
+     * @return int|null UNIX Timestamp when the task was started.
      */
     public function getStarted();
 
     /**
      * Sets the UNIX timestamp for when the task was started.
      *
-     * @param int $started UNIX timestamp when the task was started.
+     * @param int|null $started UNIX timestamp when the task was started.
      */
     public function setStarted($started);
 

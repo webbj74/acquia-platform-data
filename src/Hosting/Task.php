@@ -228,11 +228,6 @@ final class Task implements TaskInterface
      */
     public function getStarted()
     {
-        if ($this->started === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Task object has no started date.', __METHOD__)
-            );
-        }
         return $this->started;
     }
 
@@ -241,9 +236,9 @@ final class Task implements TaskInterface
      */
     public function setStarted($started)
     {
-        if (!is_numeric($started) || empty($started)) {
+        if (!is_numeric($started) && !is_null($started)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $started expects an integer.', __METHOD__)
+                sprintf('%s: $started expects an integer or null value.', __METHOD__)
             );
         }
         $this->started = $started;
@@ -275,11 +270,6 @@ final class Task implements TaskInterface
      */
     public function getSender()
     {
-        if ($this->sender === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This Task object does not know sender.', __METHOD__)
-            );
-        }
         return $this->sender;
     }
 
@@ -288,9 +278,9 @@ final class Task implements TaskInterface
      */
     public function setSender($sender)
     {
-        if (!is_string($sender) || empty($sender)) {
+        if (!is_string($sender)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $sender expects an integer.', __METHOD__)
+                sprintf('%s: $sender expects a string.', __METHOD__)
             );
         }
         $this->sender = $sender;
