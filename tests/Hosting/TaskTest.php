@@ -237,16 +237,6 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getStarted
-     * @expectedException \RuntimeException
-     */
-    public function testGetStartedWillThrowExceptionIfPropertyNotSet()
-    {
-        $task = new Task(1234);
-        $task->getStarted();
-    }
-
-    /**
      * @covers ::setStarted
      * @expectedException \InvalidArgumentException
      */
@@ -300,16 +290,6 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getSender
-     * @expectedException \RuntimeException
-     */
-    public function testGetSenderWillThrowExceptionIfPropertyNotSet()
-    {
-        $task = new Task(1234);
-        $task->getSender();
-    }
-
-    /**
      * @covers ::setSender
      * @expectedException \InvalidArgumentException
      */
@@ -317,16 +297,6 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
         $task = new Task(1234);
         $task->setSender([]);
-    }
-
-    /**
-     * @covers ::setSender
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetSenderWillThrowExceptionIfEmptyString()
-    {
-        $task = new Task(1234);
-        $task->setSender('');
     }
 
     /**
