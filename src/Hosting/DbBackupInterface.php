@@ -87,14 +87,14 @@ interface DbBackupInterface
     /**
      * Returns the path for the database backup.
      *
-     * @return string The path for the database backup.
+     * @return string|null The path for the database backup.
      */
     public function getPath();
     
     /**
      * Sets the path of the dbbackup.
      *
-     * @param string $path The path of the dbbackup.
+     * @param string|null $path The path of the dbbackup.
      */
     public function setPath($path);
 

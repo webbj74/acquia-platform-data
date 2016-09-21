@@ -182,33 +182,24 @@ class DbBackupTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getPath
-     * @expectedException \RuntimeException
-     */
-    public function testGetPathWillThrowExceptionIfPropertyNotSet()
-    {
-        $dbBackup = new DbBackup(12345678);
-        $dbBackup->getPath();
-    }
-
-    /**
      * @covers ::setPath
      * @expectedException \InvalidArgumentException
      */
-    public function testSetPathWillThrowExceptionIfNotAString()
+    public function testSetPathWillThrowExceptionIfNotStringOrNull()
     {
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setPath([]);
     }
 
     /**
+     * @covers ::getPath
      * @covers ::setPath
-     * @expectedException \InvalidArgumentException
      */
-    public function testSetPathWillThrowExceptionIfEmptyString()
+    public function testPathPropertyCanBeEmptyString()
     {
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setPath('');
+        $this->assertEquals('', $dbBackup->getPath());
     }
 
     /**
@@ -353,9 +344,9 @@ class DbBackupTest extends \PHPUnit_Framework_TestCase
      * @covers ::setChecksum
      * @expectedException \InvalidArgumentException
      */
-    public function testSetChecksumWillThrowExceptionIfEmptyString()
+    public function testSetChecksumWillThrowExceptionIfNull()
     {
         $dbBackup = new DbBackup(12345678);
-        $dbBackup->setChecksum('');
+        $dbBackup->setChecksum(null);
     }
 }

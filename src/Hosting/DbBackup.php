@@ -190,11 +190,6 @@ final class DbBackup implements DbBackupInterface
      */
     public function getPath()
     {
-        if ($this->path === null) {
-            throw new \RuntimeException(
-                sprintf('%s: This DbBackup object does not know the path.', __METHOD__)
-            );
-        }
         return $this->path;
     }
 
@@ -203,9 +198,9 @@ final class DbBackup implements DbBackupInterface
      */
     public function setPath($path)
     {
-        if (!is_string($path) || empty($path)) {
+        if (!is_string($path) && !is_null($path)) {
             throw new \InvalidArgumentException(
-                sprintf('%s: $path expects a string.', __METHOD__)
+                sprintf('%s: $path expects a string or null value.', __METHOD__)
             );
         }
         $this->path = $path;
@@ -255,7 +250,7 @@ final class DbBackup implements DbBackupInterface
      */
     public function setCompleted($completed)
     {
-        if (!is_numeric($completed) || empty($completed)) {
+        if (!is_numeric($completed) || is_null($completed)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $completed expects an int.', __METHOD__)
             );
@@ -307,7 +302,7 @@ final class DbBackup implements DbBackupInterface
      */
     public function setChecksum($checksum)
     {
-        if (!is_string($checksum) || empty($checksum)) {
+        if (!is_string($checksum) || is_null($checksum)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $checksum expects a string.', __METHOD__)
             );
