@@ -12,9 +12,12 @@
 namespace Acquia\Platform\Cloud\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentListInterface;
+use Acquia\Platform\Cloud\Hosting\Monitor\Monitorable;
 
 final class Application implements ApplicationInterface
 {
+    use Monitorable;
+
     /**
      * @var EnvironmentListInterface
      */
