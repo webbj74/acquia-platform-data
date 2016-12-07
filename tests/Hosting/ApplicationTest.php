@@ -351,12 +351,13 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::setUUID
-     * @expectedException \InvalidArgumentException
+     * @expectedException \RuntimeException
      */
-    public function testSetUUIDWillThrowExceptionIfEmptyString()
+    public function testSetUUIDWillSetNullIfEmptyString()
     {
         $application = new Application('test');
         $application->setUUID('');
+        $application->getUUID();
     }
 
     /**

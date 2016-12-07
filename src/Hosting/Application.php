@@ -169,12 +169,12 @@ final class Application implements ApplicationInterface
      */
     public function setUUID($uuid)
     {
-        if (!is_string($uuid) || empty($uuid)) {
+        if (!is_string($uuid)) {
             throw new \InvalidArgumentException(
                 sprintf('%s: $uuid expects a string.', __METHOD__)
             );
         }
-        $this->uuid = $uuid;
+        $this->uuid = empty($uuid) ? null : $uuid;
     }
 
     /**
