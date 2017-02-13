@@ -20,30 +20,13 @@ class GitRepository extends Repository implements RepositoryInterface
     {
         $checkoutCommand = "git clone {$this->repoUrl} {$destination}";
         if ($this->revision) {
-            $gitDir = $this->applicationName;
-            if (!empty($destination)) {
-                $gitDir = $destination;
-            }
-            $gitPath = sprintf(
-                "--git-dir=./%s/.git --work-tree=./%s",
-                $gitDir,
-                $gitDir
-            );
+            $revision = preg_replace('#^tags/#', '', $this->revision);
             $checkoutCommand = sprintf(
-                "git clone %s %s && git %s checkout %s",
+                "git clone -b %s %s %s",
+                $revision,
                 $this->repoUrl,
-                $destination,
-                $gitPath,
-                $this->revision
+                $destination
             );
-            if (!preg_match('|^tags/|', $this->revision)) {
-                $checkoutCommand = sprintf(
-                    "git clone -b %s %s %s",
-                    $this->revision,
-                    $this->repoUrl,
-                    $destination
-                );
-            }
         }
 
         return $checkoutCommand;
