@@ -45,7 +45,7 @@ final class DbInstance implements DbInstanceInterface
 
     public function __construct($instanceName)
     {
-        if (!is_string($instanceName) || !preg_match('#^[a-z0-9]+$#i', $instanceName)) {
+        if (!is_string($instanceName) || !preg_match('/^([a-z]|[0-9][\w]*[a-z_])[\w]*$/i', $instanceName)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%s: DbInstance name must be an alphanumeric string (%s given)',

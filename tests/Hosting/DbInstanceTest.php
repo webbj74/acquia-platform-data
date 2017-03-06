@@ -19,31 +19,62 @@ use Acquia\Platform\Cloud\Hosting\DbInstance;
 class DbInstanceTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Data provider of valid instance names.
+     *
+     * @return array
+     */
+    public function instanceNameDataProvider()
+    {
+        return [
+            ['foo'],
+            ['Bar01'],
+            ['Baz_02'],
+            ['qux_Foo_3'],
+            ['4BarBaz_321'],
+            ['55_qux'],
+            ['foo_bar_baz'],
+        ];
+    }
+
+    /**
+     * @dataProvider instanceNameDataProvider
      * @covers ::__construct
      * @covers ::getInstanceName
+     * @param string $instanceName A valid db instance name.
      */
-    public function testInstanceNamePropertyMayBeAccessedViaMethods()
+    public function testInstanceNamePropertyMayBeAccessedViaMethods($instanceName)
     {
-        $dbInstance = new DbInstance('test');
-        $this->assertEquals('test', $dbInstance->getInstanceName());
+        $dbInstance = new DbInstance($instanceName);
+        $this->assertEquals($instanceName, $dbInstance->getInstanceName());
     }
 
     /**
-     * @covers ::__construct
-     * @expectedException \InvalidArgumentException
+     * Data provider of invalid instance names.
+     *
+     * @return array
      */
-    public function testInstanceNamePropertyMustBeAString()
+    public function invalidInstanceNameDataProvider()
     {
-        $dbInstance = new DbInstance([]);
+        return [
+            [''],
+            [' '],
+            [[]],
+            ['*foo*'],
+            ['9'],
+            ['88'],
+            ['_foo'],
+        ];
     }
 
     /**
+     * @dataProvider invalidInstanceNameDataProvider
      * @covers ::__construct
      * @expectedException \InvalidArgumentException
+     * @param mixed $instanceName An invalid db instance name.
      */
-    public function testInstanceNamePropertyMustBeAnAlphanumericString()
+    public function testInstanceNamePropertyMustBeAnAlphanumericString($instanceName)
     {
-        $dbInstance = new DbInstance(' ');
+        $dbInstance = new DbInstance($instanceName);
     }
 
     /**
