@@ -15,11 +15,12 @@ use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
 use Acquia\Platform\Cloud\Hosting\Realm;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Application
  */
-class ApplicationTest extends \PHPUnit_Framework_TestCase
+class ApplicationTest extends TestCase
 {
     /**
      * @covers ::__construct

@@ -14,11 +14,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\VersionControl;
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\VersionControl\SubversionRepository;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\VersionControl\SubversionRepository
  */
-class SubversionRepositoryTest extends \PHPUnit_Framework_TestCase
+class SubversionRepositoryTest extends TestCase
 {
     const SVN_REPO_URL = 'https://svn-123.test/sample';
     const SVN_REPO_BRANCH = 'testbranch';

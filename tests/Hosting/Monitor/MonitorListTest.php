@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Monitor;
 
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface;
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Monitor\MonitorList
  */
-class MonitorListTest extends \PHPUnit_Framework_TestCase
+class MonitorListTest extends TestCase
 {
     protected function getMonitor($serviceName = 'service')
     {

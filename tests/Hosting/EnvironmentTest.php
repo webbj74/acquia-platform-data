@@ -14,11 +14,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Server;
 use Acquia\Platform\Cloud\Hosting\Server\ServerList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Environment
  */
-class EnvironmentTest extends \PHPUnit_Framework_TestCase
+class EnvironmentTest extends TestCase
 {
     /**
      * @covers ::__construct()

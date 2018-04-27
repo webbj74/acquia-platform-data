@@ -14,11 +14,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Realm;
 use Acquia\Platform\Cloud\Hosting\Realm\RealmDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\RealmInterface;
 use Acquia\Platform\Cloud\Hosting\Realm;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Realm\RealmDecoratorMethods
  */
-class RealmDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class RealmDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Realm\RealmDecoratorMethods';
     const TEST_APP = 'Acquia\Platform\Cloud\Hosting\RealmInterface';

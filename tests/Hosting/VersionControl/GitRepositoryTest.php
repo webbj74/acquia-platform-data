@@ -14,11 +14,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\VersionControl;
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\VersionControl\GitRepository;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\VersionControl\GitRepository
  */
-class GitRepositoryTest extends \PHPUnit_Framework_TestCase
+class GitRepositoryTest extends TestCase
 {
     const GIT_REPO_URL = 'sample@vcs-123.test:sample.git';
     const GIT_REPO_BRANCH = 'testbranch';
