@@ -21,7 +21,7 @@ class MonitorListTest extends \PHPUnit_Framework_TestCase
 {
     protected function getMonitor($serviceName = 'service')
     {
-        $mock = $this->getMock('Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface');
+        $mock = $this->getMockBuilder(MonitorInterface::class)->getMock();
         $mock->expects($this->any())
             ->method('getMonitoringUrls')
             ->willReturn(['url'])
@@ -49,7 +49,7 @@ class MonitorListTest extends \PHPUnit_Framework_TestCase
     public function testAllowsMonitorToBeAppended()
     {
         $list = new MonitorList();
-        $list->append($this->getMock('Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface'));
+        $list->append($this->getMockBuilder(MonitorInterface::class)->getMock());
         $this->assertTrue($list[0] instanceof MonitorInterface);
     }
 
