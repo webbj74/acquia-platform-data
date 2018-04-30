@@ -16,7 +16,7 @@
     "require-dev": {
         "phpmd/phpmd": "@stable",
         "phpunit/phpunit": "~4.4",
-        "satooshi/php-coveralls": "*",
+        "php-coveralls/php-coveralls": "~2.0",
         "squizlabs/php_codesniffer": "*",
         "symfony/yaml": " ~3.0"
     },
