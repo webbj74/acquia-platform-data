@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\VersionControl;
 
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\VersionControl\RepositoryFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\VersionControl\RepositoryFactory
  */
-class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
+class RepositoryFactoryTest extends TestCase
 {
     /**
      * @covers ::getRepository

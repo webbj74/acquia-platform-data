@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Task;
 
 use Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\TaskInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods
  */
-class TaskDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class TaskDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Task\TaskDecoratorMethods';
     const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\TaskInterface';

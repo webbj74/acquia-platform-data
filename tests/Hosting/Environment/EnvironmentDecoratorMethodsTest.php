@@ -14,11 +14,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\EnvironmentInterface;
 use Acquia\Platform\Cloud\Hosting\Realm;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Environment\EnvironmentDecoratorMethods
  */
-class EnvironmentDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class EnvironmentDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Environment\EnvironmentDecoratorMethods';
     const TEST_APP = 'Acquia\Platform\Cloud\Hosting\EnvironmentInterface';

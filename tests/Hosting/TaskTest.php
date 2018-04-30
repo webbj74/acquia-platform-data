@@ -12,11 +12,12 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Task;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Task
  */
-class TaskTest extends \PHPUnit_Framework_TestCase
+class TaskTest extends TestCase
 {
     /**
      * @covers ::__construct

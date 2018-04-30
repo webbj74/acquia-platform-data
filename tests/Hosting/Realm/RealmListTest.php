@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Realm;
 
 use Acquia\Platform\Cloud\Hosting\Realm;
 use Acquia\Platform\Cloud\Hosting\Realm\RealmList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Realm\RealmList
  */
-class RealmListTest extends \PHPUnit_Framework_TestCase
+class RealmListTest extends TestCase
 {
     private $daughtersOfGaia = ['Mnemosyne',  'Tethys', 'Theia', 'Phoebe', 'Rhea', 'Themis'];
     private $sonsOfUranus = ['Oceanus', 'Hyperion', 'Coeus', 'Cronus', 'Crius', 'Iapetus'];

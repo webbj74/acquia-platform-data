@@ -11,12 +11,14 @@
 
 namespace Acquia\Platform\Cloud\Tests\Hosting\Monitor;
 
+use Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface;
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Monitor\Monitorable
  */
-class MonitorableTest extends \PHPUnit_Framework_TestCase
+class MonitorableTest extends TestCase
 {
     protected function getMonitorable()
     {
@@ -25,7 +27,7 @@ class MonitorableTest extends \PHPUnit_Framework_TestCase
 
     protected function getMonitor($serviceName = 'service')
     {
-        $mock = $this->getMock('Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface');
+        $mock = $this->getMockBuilder(MonitorInterface::class)->getMock();
         $mock->expects($this->any())
             ->method('getMonitoringUrls')
             ->willReturn(['url'])

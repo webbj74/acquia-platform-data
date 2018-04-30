@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Server;
 
 use Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\ServerInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods
  */
-class ServerDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class ServerDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Server\ServerDecoratorMethods';
     const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\ServerInterface';

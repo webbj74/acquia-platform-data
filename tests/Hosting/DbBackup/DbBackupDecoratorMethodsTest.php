@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\DbBackup;
 
 use Acquia\Platform\Cloud\Hosting\DbBackup\DbBackupDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\DbBackupInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DbBackup\DbBackupDecoratorMethods
  */
-class DbBackupDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class DbBackupDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\DbBackup\DbBackupDecoratorMethods';
     const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\DbBackupInterface';

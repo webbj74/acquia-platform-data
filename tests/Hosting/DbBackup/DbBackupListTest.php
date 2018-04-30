@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\DbBackup;
 
 use Acquia\Platform\Cloud\Hosting\DbBackup;
 use Acquia\Platform\Cloud\Hosting\DbBackup\DbBackupList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\DbBackup\DbBackupList
  */
-class DbBackupListTest extends \PHPUnit_Framework_TestCase
+class DbBackupListTest extends TestCase
 {
     private $primesUnderTen = [2, 3, 5, 7];
     private $primesUnderTwenty = [11, 13, 17, 19];

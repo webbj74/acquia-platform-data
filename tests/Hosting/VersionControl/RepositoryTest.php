@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\VersionControl;
 
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Environment;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\VersionControl\Repository
  */
-class RepositoryTest extends \PHPUnit_Framework_TestCase
+class RepositoryTest extends TestCase
 {
     protected function getConcreteRepository()
     {

@@ -18,11 +18,12 @@ use Acquia\Platform\Cloud\Hosting\Server\DatabaseServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\FileServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\VcsServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\WebServerListInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Server\ServerList
  */
-class ServerListTest extends \PHPUnit_Framework_TestCase
+class ServerListTest extends TestCase
 {
     private $childrenOfHyperion = ['Helios-10', 'Selene-20', 'Eos-30'];
     private $childrenOfCoeus = ['Lelantos-100', 'Leto-110', 'Asteria-120'];

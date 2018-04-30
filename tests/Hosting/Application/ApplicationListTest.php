@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Application;
 
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Application\ApplicationList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Application\ApplicationList
  */
-class ApplicationListTest extends \PHPUnit_Framework_TestCase
+class ApplicationListTest extends TestCase
 {
     private $childrenOfHyperion = ['Helios', 'Selene', 'Eos'];
     private $childrenOfCoeus = ['Lelantos', 'Leto', 'Asteria'];

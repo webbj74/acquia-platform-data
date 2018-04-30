@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Environment;
 
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList
  */
-class EnvironmentListTest extends \PHPUnit_Framework_TestCase
+class EnvironmentListTest extends TestCase
 {
     private $childrenOfLeto = ['Apollo','Artemis'];
     private $childrenOfAtlas = ['Hesperides', 'Hyades', 'Hyas', 'Pleiades', 'Calypso', 'Dione', 'Maera'];

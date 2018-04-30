@@ -15,11 +15,12 @@ use Acquia\Platform\Cloud\Hosting\Server;
 use Acquia\Platform\Cloud\Hosting\Server\BalancerServerList;
 use Acquia\Platform\Cloud\Hosting\Server\BalancerServerListInterface;
 use Acquia\Platform\Cloud\Hosting\ServerInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Server\BalancerServerList
  */
-class BalancerServerListTest extends \PHPUnit_Framework_TestCase
+class BalancerServerListTest extends TestCase
 {
     /**
      * @covers ::getActiveBalancers

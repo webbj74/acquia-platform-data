@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\DbInstance;
 
 use Acquia\Platform\Cloud\Hosting\DbInstance;
 use Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceList
  */
-class DbInstanceListTest extends \PHPUnit_Framework_TestCase
+class DbInstanceListTest extends TestCase
 {
     private $childrenOfHyperion = ['Helios', 'Selene', 'Eos'];
     private $childrenOfCoeus = ['Lelantos', 'Leto', 'Asteria'];

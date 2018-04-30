@@ -12,11 +12,12 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\DbInstance;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DbInstance
  */
-class DbInstanceTest extends \PHPUnit_Framework_TestCase
+class DbInstanceTest extends TestCase
 {
     /**
      * Data provider of valid instance names.

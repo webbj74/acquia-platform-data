@@ -15,7 +15,7 @@
     },
     "require-dev": {
         "phpmd/phpmd": "@stable",
-        "phpunit/phpunit": "~4.4",
+        "phpunit/phpunit": "~5.7|~6.5|~7.1",
         "php-coveralls/php-coveralls": "~2.0",
         "squizlabs/php_codesniffer": "*",
         "symfony/yaml": " ~3.0"

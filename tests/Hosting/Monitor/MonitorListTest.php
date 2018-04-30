@@ -13,15 +13,16 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Monitor;
 
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface;
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Monitor\MonitorList
  */
-class MonitorListTest extends \PHPUnit_Framework_TestCase
+class MonitorListTest extends TestCase
 {
     protected function getMonitor($serviceName = 'service')
     {
-        $mock = $this->getMock('Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface');
+        $mock = $this->getMockBuilder(MonitorInterface::class)->getMock();
         $mock->expects($this->any())
             ->method('getMonitoringUrls')
             ->willReturn(['url'])
@@ -49,7 +50,7 @@ class MonitorListTest extends \PHPUnit_Framework_TestCase
     public function testAllowsMonitorToBeAppended()
     {
         $list = new MonitorList();
-        $list->append($this->getMock('Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface'));
+        $list->append($this->getMockBuilder(MonitorInterface::class)->getMock());
         $this->assertTrue($list[0] instanceof MonitorInterface);
     }
 

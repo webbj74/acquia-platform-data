@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Task;
 
 use Acquia\Platform\Cloud\Hosting\Task;
 use Acquia\Platform\Cloud\Hosting\Task\TaskList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Task\TaskList
  */
-class TaskListTest extends \PHPUnit_Framework_TestCase
+class TaskListTest extends TestCase
 {
     private $idsOfHyperion = [123, 345, 567];
     private $idsOfCoeus = [890, 980, 827];

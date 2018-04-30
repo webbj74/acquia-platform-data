@@ -12,11 +12,12 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\DbBackup;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DbBackup
  */
-class DbBackupTest extends \PHPUnit_Framework_TestCase
+class DbBackupTest extends TestCase
 {
     /**
      * @covers ::__construct

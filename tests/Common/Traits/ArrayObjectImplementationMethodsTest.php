@@ -11,10 +11,12 @@
 
 namespace Acquia\Platform\Cloud\Tests\Common\Traits;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Common\Traits\ArrayObjectImplementationMethods
  */
-class ArrayObjectImplementationMethodsTest extends \PHPUnit_Framework_TestCase
+class ArrayObjectImplementationMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Common\Traits\ArrayObjectImplementationMethods';
     const TEST_ITERATOR = 'Acquia\Platform\Cloud\Tests\Fixtures\MockArrayIterator';

@@ -13,11 +13,12 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\DbInstance;
 
 use Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceDecoratorMethods;
 use Acquia\Platform\Cloud\Hosting\DbInstanceInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceDecoratorMethods
  */
-class DbInstanceDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class DbInstanceDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceDecoratorMethods';
     const TEST_CLASS = 'Acquia\Platform\Cloud\Hosting\DbInstanceInterface';

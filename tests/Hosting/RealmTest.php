@@ -12,11 +12,12 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Realm;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Realm
  */
-class RealmTest extends \PHPUnit_Framework_TestCase
+class RealmTest extends TestCase
 {
     /**
      * @covers ::__construct()

@@ -16,11 +16,12 @@ use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
 use Acquia\Platform\Cloud\Hosting\Realm;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Application\ApplicationDecoratorMethods
  */
-class ApplicationDecoratorMethodsTest extends \PHPUnit_Framework_TestCase
+class ApplicationDecoratorMethodsTest extends TestCase
 {
     const TEST_TRAIT = 'Acquia\Platform\Cloud\Hosting\Application\ApplicationDecoratorMethods';
     const TEST_APP = 'Acquia\Platform\Cloud\Hosting\ApplicationInterface';
