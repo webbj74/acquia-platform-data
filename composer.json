@@ -18,7 +18,7 @@
         "phpunit/phpunit": "~5.7|~6.5|~7.1",
         "php-coveralls/php-coveralls": "~2.0",
         "squizlabs/php_codesniffer": "*",
-        "symfony/yaml": " ~3.0"
+        "symfony/yaml": "~3.0|~4.0"
     },
     "autoload": {
         "psr-4": {
