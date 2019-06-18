@@ -15,6 +15,7 @@ use Acquia\Platform\Cloud\Hosting\DnsRecord;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * Class DnsRecordTest.
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DnsRecord
  */
 class DnsRecordTest extends TestCase
