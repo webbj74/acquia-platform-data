@@ -10,13 +10,16 @@
             "homepage": "https://github.com/webbj74/acquia-platform-cloud-data-model/graphs/contributors"
         }
     ],
+    "config": {
+        "sort-packages": true
+    },
     "require": {
-        "php": ">=5.5.9"
+        "php": "^7.1"
     },
     "require-dev": {
-        "phpmd/phpmd": "@stable",
-        "phpunit/phpunit": "~5.7|~6.5|~7.1",
         "php-coveralls/php-coveralls": "~2.0",
+        "phpmd/phpmd": "@stable",
+        "phpunit/phpunit": "^7.5|^8.0",
         "squizlabs/php_codesniffer": "*",
         "symfony/yaml": "~3.0|~4.0"
     },
