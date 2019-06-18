@@ -56,11 +56,9 @@ class DnsRecord implements DnsRecordInterface
         // Validate value based on record type.
         if ($type == 'A' && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             throw new InvalidArgumentException('$value must be a valid IPv4 address.');
-        }
-        elseif ($type == 'AAAA' && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+        } elseif ($type == 'AAAA' && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             throw new InvalidArgumentException('$value must be a valid IPv6 address.');
-        }
-        elseif ($type == 'CNAME' && !filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+        } elseif ($type == 'CNAME' && !filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
             throw new InvalidArgumentException('$value must be a valid domain name.');
         }
         $this->value = $value;
