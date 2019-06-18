@@ -31,13 +31,14 @@ class DnsRecordListTest extends TestCase
     /**
      * Set up test fixtures.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dnsRecordList = new DnsRecordList();
         $this->dnsRecordList->append(new DnsRecord('A', '1.1.1.1'));
         $this->dnsRecordList->append(new DnsRecord('AAAA', '2600:1800:5::10'));
         $this->dnsRecordList->append(new DnsRecord('CNAME', 'foo.realm.acquia-sites.com'));
         $this->dnsRecordList->append(new DnsRecord('CNAME', 'bar.example.com'));
+        parent::setUp();
     }
 
     /**
