@@ -19,6 +19,17 @@ use InvalidArgumentException;
 class DnsRecord implements DnsRecordInterface
 {
     /**
+     * Supported DNS record types.
+     *
+     * @var string[]
+     */
+    public CONST SUPPORTED_TYPES = [
+        'A',
+        'AAAA',
+        'CNAME',
+    ];
+
+    /**
      * The type of DNS record (A, AAAA, CNAME).
      *
      * @var string
@@ -43,11 +54,10 @@ class DnsRecord implements DnsRecordInterface
     public function __construct(string $type, string $value)
     {
         // Validate record type.
-        $allowedTypes = ['A', 'AAAA', 'CNAME'];
-        if (!in_array($type, $allowedTypes)) {
+        if (!in_array($type, self::SUPPORTED_TYPES)) {
             throw new InvalidArgumentException(sprintf(
                 '$type must be one of %s; %s provided.',
-                implode(', ', $allowedTypes),
+                implode(', ', self::SUPPORTED_TYPES),
                 $type
             ));
         }
@@ -56,9 +66,11 @@ class DnsRecord implements DnsRecordInterface
         // Validate value based on record type.
         if ($type == 'A' && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             throw new InvalidArgumentException('$value must be a valid IPv4 address.');
-        } elseif ($type == 'AAAA' && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+        }
+        if ($type == 'AAAA' && !filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             throw new InvalidArgumentException('$value must be a valid IPv6 address.');
-        } elseif ($type == 'CNAME' && !filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+        }
+        if ($type == 'CNAME' && !filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
             throw new InvalidArgumentException('$value must be a valid domain name.');
         }
         $this->value = $value;
