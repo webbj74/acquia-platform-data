@@ -23,7 +23,7 @@ class DnsRecord implements DnsRecordInterface
      *
      * @var string[]
      */
-    public CONST SUPPORTED_TYPES = [
+    public const SUPPORTED_TYPES = [
         'A',
         'AAAA',
         'CNAME',
