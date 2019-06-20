@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Acquia\Platform\Cloud\Hosting\DnsRecord;
+namespace Acquia\Platform\Cloud\Hosting\DnsConfig;
 
-use Acquia\Platform\Cloud\Hosting\DnsRecord;
+use Acquia\Platform\Cloud\Hosting\DnsConfig;
 use InvalidArgumentException;
 
 /**
- * Class DnsRecordList.
+ * Class DnsConfigList.
  */
-class DnsRecordList extends \ArrayObject implements DnsRecordListInterface
+class DnsConfigList extends \ArrayObject implements DnsConfigListInterface
 {
     /**
-     * Validate that appended records are DnsRecord objects.
+     * Validate that appended records are DnsConfig objects.
      *
-     * @param DnsRecord $value
+     * @param \Acquia\Platform\Cloud\Hosting\DnsConfig $value
      */
     public function append($value)
     {
-        if (!$value instanceof DnsRecord) {
-            throw new InvalidArgumentException('$value must be an instance of DnsRecord');
+        if (!$value instanceof DnsConfig) {
+            throw new InvalidArgumentException('$value must be an instance of DnsConfig');
         }
         parent::append($value);
     }
@@ -35,7 +35,7 @@ class DnsRecordList extends \ArrayObject implements DnsRecordListInterface
     /**
      * {@inheritdoc}
      */
-    public function getARecords(): DnsRecordList
+    public function getARecords(): DnsConfigList
     {
         return $this->filterByTypes(['A']);
     }
@@ -43,7 +43,7 @@ class DnsRecordList extends \ArrayObject implements DnsRecordListInterface
     /**
      * {@inheritdoc}
      */
-    public function getAaaaRecords(): DnsRecordList
+    public function getAaaaRecords(): DnsConfigList
     {
         return $this->filterByTypes(['AAAA']);
     }
@@ -51,32 +51,32 @@ class DnsRecordList extends \ArrayObject implements DnsRecordListInterface
     /**
      * {@inheritdoc}
      */
-    public function getCnameRecords(): DnsRecordList
+    public function getCnameRecords(): DnsConfigList
     {
         return $this->filterByTypes(['CNAME']);
     }
 
     /**
-     * Return a subset of the DnsRecordList filtered by one or more types.
+     * Return a subset of the DnsConfigList filtered by one or more types.
      *
      * @param string[] $types
      *   An array of the types to filter (A, AAAA, CNAME).
      *
-     * @return DnsRecordList A list of DNS records.
+     * @return \Acquia\Platform\Cloud\Hosting\DnsConfig\DnsConfigList
      *   A list of DNS records.
      */
-    protected function filterByTypes(array $types): DnsRecordList
+    protected function filterByTypes(array $types): DnsConfigList
     {
-        $filteredDnsrecords = new static();
+        $filteredDnsConfigs = new static();
 
         $listIterator = $this->getIterator();
         while ($listIterator->valid()) {
             if (in_array($listIterator->current()->getType(), $types)) {
-                $filteredDnsrecords->append($listIterator->current());
+                $filteredDnsConfigs->append($listIterator->current());
             }
             $listIterator->next();
         }
 
-        return $filteredDnsrecords;
+        return $filteredDnsConfigs;
     }
 }

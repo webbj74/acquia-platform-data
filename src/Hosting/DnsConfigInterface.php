@@ -12,9 +12,9 @@
 namespace Acquia\Platform\Cloud\Hosting;
 
 /**
- * Interface DnsRecordInterface.
+ * Interface DnsConfigInterface.
  */
-interface DnsRecordInterface
+interface DnsConfigInterface
 {
     /**
      * Return the type of DNS record (A, AAAA, CNAME).

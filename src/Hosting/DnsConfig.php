@@ -14,9 +14,9 @@ namespace Acquia\Platform\Cloud\Hosting;
 use InvalidArgumentException;
 
 /**
- * Class DnsRecord.
+ * Class DnsConfig.
  */
-class DnsRecord implements DnsRecordInterface
+class DnsConfig implements DnsConfigInterface
 {
     /**
      * Supported DNS record types.
@@ -44,7 +44,7 @@ class DnsRecord implements DnsRecordInterface
     protected $value;
 
     /**
-     * DnsRecord constructor.
+     * DnsConfig constructor.
      *
      * @param string $type
      *   The type of DNS record (A, AAAA, CNAME).

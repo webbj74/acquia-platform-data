@@ -11,14 +11,14 @@
 
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
-use Acquia\Platform\Cloud\Hosting\DnsRecord;
+use Acquia\Platform\Cloud\Hosting\DnsConfig;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class DnsRecordTest.
- * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DnsRecord
+ * Class DnsConfigTest.
+ * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DnsConfig
  */
-class DnsRecordTest extends TestCase
+class DnsConfigTest extends TestCase
 {
     /**
      * Data provider of valid DNS records.
@@ -26,7 +26,7 @@ class DnsRecordTest extends TestCase
      * @return array[]
      *   An array of test fixtures.
      */
-    public function validDnsRecordDataProvider()
+    public function validDnsConfigDataProvider()
     {
         return [
             ['A', '1.1.1.1'],
@@ -38,21 +38,21 @@ class DnsRecordTest extends TestCase
     }
 
     /**
-     * Test that valid types and values can be used to construct a DnsRecord object.
+     * Test that valid types and values can be used to construct a DnsConfig object.
      *
-     * @dataProvider validDnsRecordDataProvider
+     * @dataProvider validDnsConfigDataProvider
      *
      * @param string $type
      *   The type of DNS record (A, AAAA, CNAME).
      * @param string $value
      *   The value of the DNS record (IPv4 address, IPv6 address, CNAME).
      */
-    public function testInstanceNamePropertyMayBeAccessedViaMethods(string $type, string $value)
+    public function testDnsConfigPropertiesMayBeAccessedViaMethods(string $type, string $value)
     {
-        $dnsRecord = new DnsRecord($type, $value);
-        $this->assertInstanceOf(DnsRecord::class, $dnsRecord);
-        $this->assertEquals($type, $dnsRecord->getType());
-        $this->assertEquals($value, $dnsRecord->getValue());
+        $dnsConfig = new DnsConfig($type, $value);
+        $this->assertInstanceOf(DnsConfig::class, $dnsConfig);
+        $this->assertEquals($type, $dnsConfig->getType());
+        $this->assertEquals($value, $dnsConfig->getValue());
     }
 
     /**
@@ -61,7 +61,7 @@ class DnsRecordTest extends TestCase
      * @return array[]
      *   An array of test fixtures.
      */
-    public function invalidDnsRecordDataProvider()
+    public function invalidDnsConfigDataProvider()
     {
         return [
             ['', ''],
@@ -82,16 +82,16 @@ class DnsRecordTest extends TestCase
     /**
      * Test that invalid types and values result in an exception being thrown.
      *
-     * @dataProvider invalidDnsRecordDataProvider
+     * @dataProvider invalidDnsConfigDataProvider
      *
      * @param string $type
      *   The type of DNS record (A, AAAA, CNAME).
      * @param string $value
      *   The value of the DNS record (IPv4 address, IPv6 address, CNAME).
      */
-    public function testInstanceNamePropertyMustBeAnAlphanumericString(string $type, string $value)
+    public function testDnsConfigConstructorValidatesTypeAndValue(string $type, string $value)
     {
         $this->expectException('InvalidArgumentException');
-        $dnsRecord = new DnsRecord($type, $value);
+        $dnsConfig = new DnsConfig($type, $value);
     }
 }
