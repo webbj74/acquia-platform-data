@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Monitor;
 
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface;
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -56,10 +57,10 @@ class MonitorListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      */
     public function testThrowsExceptionIfNonMonitorIsAppended()
     {
+        $this->expectException(InvalidArgumentException::class);
         $list = new MonitorList();
         $list->append(new static);
     }

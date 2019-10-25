@@ -14,7 +14,9 @@ namespace Acquia\Platform\Cloud\Tests\Hosting;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Server;
 use Acquia\Platform\Cloud\Hosting\Server\ServerList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Environment
@@ -35,10 +37,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::__construct()
      * @dataProvider invalidNameDataProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testRealmCannotBeInstantiatedWithInvalidName($envName)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment($envName);
     }
 
@@ -94,10 +96,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getRevision
-     * @expectedException \RuntimeException
      */
     public function testRevisionPropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getRevision();
     }
@@ -105,10 +107,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::setRevision
      * @dataProvider nonStringProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testRevisionPropertyRejectsNonString($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
         $environment->setRevision($value);
     }
@@ -132,10 +134,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getDefaultHostName
-     * @expectedException \RuntimeException
      */
     public function testDefaultHostNamePropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getDefaultHostName();
     }
@@ -143,10 +145,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::setDefaultHostName
      * @dataProvider nonStringProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testDefaultHostNamePropertyRejectsNonString($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
         $environment->setDefaultHostName($value);
     }
@@ -170,10 +172,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getDatabaseClusterList
-     * @expectedException \RuntimeException
      */
     public function testDatabaseClusterListPropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getDatabaseClusterList();
     }
@@ -197,10 +199,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getDefaultDomainName
-     * @expectedException \RuntimeException
      */
     public function testDefaultDomainNamePropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getDefaultDomainName();
     }
@@ -208,10 +210,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::setDefaultDomainName
      * @dataProvider nonStringProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testDefaultDomainNamePropertyRejectsNonString($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
         $environment->setDefaultDomainName($value);
     }
@@ -235,10 +237,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::isInLiveDev
-     * @expectedException \RuntimeException
      */
     public function testInLiveDevPropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->isInLiveDev();
     }
@@ -246,10 +248,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::setInLiveDev
      * @dataProvider nonBoolProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testInLiveDevPropertyRejectsNonBool($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
         $environment->setInLiveDev($value);
     }
@@ -274,10 +276,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getUnixUserName
-     * @expectedException \RuntimeException
      */
     public function testUnixUserNamePropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getUnixUserName();
     }
@@ -285,10 +287,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::setUnixUserName
      * @dataProvider nonStringProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testUnixUserNamePropertyRejectsNonString($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
         $environment->setUnixUserName($value);
     }
@@ -313,10 +315,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getMachineName
-     * @expectedException \RuntimeException
      */
     public function testMachineNamePropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getMachineName();
     }
@@ -324,10 +326,10 @@ class EnvironmentTest extends TestCase
     /**
      * @covers ::setMachineName
      * @dataProvider nonStringProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testMachineNamePropertyRejectsNonString($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
         $environment->setMachineName($value);
     }
@@ -347,10 +349,10 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::getMachineName
-     * @expectedException \RuntimeException
      */
     public function testServerListPropertyWhenUnset()
     {
+        $this->expectException(RuntimeException::class);
         $environment = new Environment('test');
         $environment->getServerList();
     }

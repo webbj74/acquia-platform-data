@@ -12,7 +12,9 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\DbInstance;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DbInstance
@@ -70,11 +72,11 @@ class DbInstanceTest extends TestCase
     /**
      * @dataProvider invalidInstanceNameDataProvider
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      * @param mixed $instanceName An invalid db instance name.
      */
     public function testInstanceNamePropertyMustBeAnAlphanumericString($instanceName)
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance($instanceName);
     }
 
@@ -115,30 +117,30 @@ class DbInstanceTest extends TestCase
 
     /**
      * @covers ::getName
-     * @expectedException \RuntimeException
      */
     public function testGetNameWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->getName();
     }
 
     /**
      * @covers ::setName
-     * @expectedException \InvalidArgumentException
      */
     public function testSetNameWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setName([]);
     }
 
     /**
      * @covers ::setName
-     * @expectedException \InvalidArgumentException
      */
     public function testSetNameWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setName('');
     }
@@ -157,30 +159,30 @@ class DbInstanceTest extends TestCase
 
     /**
      * @covers ::getUsername
-     * @expectedException \RuntimeException
      */
     public function testGetUsernameWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->getUsername();
     }
 
     /**
      * @covers ::setUsername
-     * @expectedException \InvalidArgumentException
      */
     public function testSetUsernameWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setUsername([]);
     }
 
     /**
      * @covers ::setUsername
-     * @expectedException \InvalidArgumentException
      */
     public function testSetUsernameWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setUsername('');
     }
@@ -199,30 +201,30 @@ class DbInstanceTest extends TestCase
 
     /**
      * @covers ::getPassword
-     * @expectedException \RuntimeException
      */
     public function testGetPasswordWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->getPassword();
     }
 
     /**
      * @covers ::setPassword
-     * @expectedException \InvalidArgumentException
      */
     public function testSetPasswordWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setPassword([]);
     }
 
     /**
      * @covers ::setPassword
-     * @expectedException \InvalidArgumentException
      */
     public function testSetPasswordWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setPassword('');
     }
@@ -241,30 +243,30 @@ class DbInstanceTest extends TestCase
 
     /**
      * @covers ::getHost
-     * @expectedException \RuntimeException
      */
     public function testGetHostWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->getHost();
     }
 
     /**
      * @covers ::setHost
-     * @expectedException \InvalidArgumentException
      */
     public function testSetHostWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setHost([]);
     }
 
     /**
      * @covers ::setHost
-     * @expectedException \InvalidArgumentException
      */
     public function testSetHostWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setHost('');
     }
@@ -283,30 +285,30 @@ class DbInstanceTest extends TestCase
 
     /**
      * @covers ::getClusterID
-     * @expectedException \RuntimeException
      */
     public function testGetClusterIDWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->getClusterID();
     }
 
     /**
      * @covers ::setClusterID
-     * @expectedException \InvalidArgumentException
      */
     public function testSetClusterIDWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setClusterID([]);
     }
 
     /**
      * @covers ::setClusterID
-     * @expectedException \InvalidArgumentException
      */
     public function testSetClusterIDWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstance = new DbInstance('test');
         $dbInstance->setClusterID('');
     }

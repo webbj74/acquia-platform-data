@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Realm;
 
 use Acquia\Platform\Cloud\Hosting\Realm;
 use Acquia\Platform\Cloud\Hosting\Realm\RealmList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -77,11 +78,11 @@ class RealmListTest extends TestCase
 
     /**
      * @covers ::filterByName
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $realmList = $this->getBasicRealmList();
         $realmList->filterByName($filter);
     }
@@ -96,11 +97,11 @@ class RealmListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonRealm($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $realmList = $this->getBasicRealmList();
         $realmList->offsetSet(0, $value);
     }

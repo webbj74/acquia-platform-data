@@ -14,6 +14,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\VersionControl;
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\VersionControl\RepositoryFactory;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\VersionControl\RepositoryFactory
@@ -48,10 +49,10 @@ class RepositoryFactoryTest extends TestCase
 
     /**
      * @covers ::getRepository
-     * @expectedException \RuntimeException
      */
     public function testFactoryThrowsExceptionForUnknownRepository()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->setVcsRepositoryUrl(':pserver:sample@svn-123.test:/cvs/sample');
         RepositoryFactory::getRepository($application, null);

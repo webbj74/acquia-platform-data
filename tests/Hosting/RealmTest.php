@@ -12,6 +12,7 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Realm;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,10 +34,10 @@ class RealmTest extends TestCase
     /**
      * @covers ::__construct()
      * @dataProvider invalidNameDataProvider()
-     * @expectedException \InvalidArgumentException
      */
     public function testRealmCannotBeInstantiatedWithInvalidName($name)
     {
+        $this->expectException(InvalidArgumentException::class);
         $realm = new Realm($name);
     }
 

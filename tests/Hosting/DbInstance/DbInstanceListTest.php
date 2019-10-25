@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\DbInstance;
 
 use Acquia\Platform\Cloud\Hosting\DbInstance;
 use Acquia\Platform\Cloud\Hosting\DbInstance\DbInstanceList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -81,11 +82,11 @@ class DbInstanceListTest extends TestCase
 
     /**
      * @covers ::filterByName
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstanceList = $this->getBasicDbInstanceList();
         $dbInstanceList->filterByName($filter);
     }
@@ -100,11 +101,11 @@ class DbInstanceListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonDbInstance($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbInstanceList = $this->getBasicDbInstanceList();
         $dbInstanceList->offsetSet(0, $value);
     }

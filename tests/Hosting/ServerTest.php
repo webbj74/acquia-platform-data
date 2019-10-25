@@ -12,7 +12,9 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Server;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Server
@@ -31,19 +33,19 @@ class ServerTest extends TestCase
 
     /**
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      */
     public function testNamePropertyMustBeAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server([]);
     }
 
     /**
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      */
     public function testNamePropertyMustBeAnAlphanumericString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server(' ');
     }
 
@@ -84,30 +86,30 @@ class ServerTest extends TestCase
 
     /**
      * @covers ::getFullyQualifiedDomainName
-     * @expectedException \RuntimeException
      */
     public function testGetFullyQualifiedDomainNameWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $server = new Server('test');
         $server->getFullyQualifiedDomainName();
     }
 
     /**
      * @covers ::setFullyQualifiedDomainName
-     * @expectedException \InvalidArgumentException
      */
     public function testSetFullyQualifiedDomainNameWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setFullyQualifiedDomainName([]);
     }
 
     /**
      * @covers ::setFullyQualifiedDomainName
-     * @expectedException \InvalidArgumentException
      */
     public function testSetFullyQualifiedDomainNameWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setFullyQualifiedDomainName('');
     }
@@ -126,30 +128,30 @@ class ServerTest extends TestCase
 
     /**
      * @covers ::getAmiType
-     * @expectedException \RuntimeException
      */
     public function testGetAmiTypeWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $server = new Server('test');
         $server->getAmiType();
     }
 
     /**
      * @covers ::setAmiType
-     * @expectedException \InvalidArgumentException
      */
     public function testSetAmiTypeWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setAmiType([]);
     }
 
     /**
      * @covers ::setAmiType
-     * @expectedException \InvalidArgumentException
      */
     public function testSetAmiTypeWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setAmiType('');
     }
@@ -168,30 +170,30 @@ class ServerTest extends TestCase
 
     /**
      * @covers ::getEc2Region
-     * @expectedException \RuntimeException
      */
     public function testGetEc2RegionWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $server = new Server('test');
         $server->getEc2Region();
     }
 
     /**
      * @covers ::setEc2Region
-     * @expectedException \InvalidArgumentException
      */
     public function testSetEc2RegionWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setEc2Region([]);
     }
 
     /**
      * @covers ::setEc2Region
-     * @expectedException \InvalidArgumentException
      */
     public function testSetEc2RegionWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setEc2Region('');
     }
@@ -210,30 +212,30 @@ class ServerTest extends TestCase
 
     /**
      * @covers ::getEc2AvailabilityZone
-     * @expectedException \RuntimeException
      */
     public function testGetEc2AvailabilityZoneWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $server = new Server('test');
         $server->getEc2AvailabilityZone();
     }
 
     /**
      * @covers ::setEc2AvailabilityZone
-     * @expectedException \InvalidArgumentException
      */
     public function testSetEc2AvailabilityZoneWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setEc2AvailabilityZone([]);
     }
 
     /**
      * @covers ::setEc2AvailabilityZone
-     * @expectedException \InvalidArgumentException
      */
     public function testSetEc2AvailabilityZoneWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setEc2AvailabilityZone('');
     }
@@ -252,20 +254,20 @@ class ServerTest extends TestCase
 
     /**
      * @covers ::getServices
-     * @expectedException \RuntimeException
      */
     public function testGetServicesWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $server = new Server('test');
         $server->getServices();
     }
 
     /**
      * @covers ::setServices
-     * @expectedException \InvalidArgumentException
      */
     public function testSetServicesWillThrowExceptionIfNotAnArray()
     {
+        $this->expectException(InvalidArgumentException::class);
         $server = new Server('test');
         $server->setServices('');
     }
