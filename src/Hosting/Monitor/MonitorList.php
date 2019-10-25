@@ -11,7 +11,10 @@
 
 namespace Acquia\Platform\Cloud\Hosting\Monitor;
 
-class MonitorList extends \ArrayObject implements MonitorListInterface
+use ArrayObject;
+use InvalidArgumentException;
+
+class MonitorList extends ArrayObject implements MonitorListInterface
 {
     /**
      * {@inheritdoc}
@@ -21,7 +24,7 @@ class MonitorList extends \ArrayObject implements MonitorListInterface
     public function offsetSet($index, $newval)
     {
         if (!is_subclass_of($newval, 'Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $newval must be an implementation of MonitorInterface', __METHOD__)
             );
         }

@@ -11,6 +11,9 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use InvalidArgumentException;
+use RuntimeException;
+
 final class Task implements TaskInterface
 {
     /**
@@ -71,7 +74,7 @@ final class Task implements TaskInterface
     public function __construct($taskID)
     {
         if (!is_numeric($taskID)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     '%s: Task ID must be an integer (%s given)',
                     __METHOD__,
@@ -125,7 +128,7 @@ final class Task implements TaskInterface
     public function getQueue()
     {
         if ($this->queue === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Task object has no the queue.', __METHOD__)
             );
         }
@@ -138,7 +141,7 @@ final class Task implements TaskInterface
     public function setQueue($queue)
     {
         if (!is_string($queue) || empty($queue)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $queue expects a string.', __METHOD__)
             );
         }
@@ -151,7 +154,7 @@ final class Task implements TaskInterface
     public function getState()
     {
         if ($this->state === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Task object has no the state.', __METHOD__)
             );
         }
@@ -164,7 +167,7 @@ final class Task implements TaskInterface
     public function setState($state)
     {
         if (!is_string($state) || empty($state)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $state expects a string.', __METHOD__)
             );
         }
@@ -177,7 +180,7 @@ final class Task implements TaskInterface
     public function getDescription()
     {
         if ($this->description === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Task object has no description.', __METHOD__)
             );
         }
@@ -190,7 +193,7 @@ final class Task implements TaskInterface
     public function setDescription($description)
     {
         if (!is_string($description) || empty($description)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $description expects a string.', __METHOD__)
             );
         }
@@ -203,7 +206,7 @@ final class Task implements TaskInterface
     public function getCreated()
     {
         if ($this->created === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Task object has no created date.', __METHOD__)
             );
         }
@@ -216,7 +219,7 @@ final class Task implements TaskInterface
     public function setCreated($created)
     {
         if (!is_numeric($created) || empty($created)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $created expects an integer.', __METHOD__)
             );
         }
@@ -237,7 +240,7 @@ final class Task implements TaskInterface
     public function setStarted($started)
     {
         if (!is_numeric($started) && !is_null($started)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $started expects an integer or null value.', __METHOD__)
             );
         }
@@ -258,7 +261,7 @@ final class Task implements TaskInterface
     public function setCompleted($completed)
     {
         if (!is_numeric($completed) && !is_null($completed)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $completed expects an integer or null value.', __METHOD__)
             );
         }
@@ -279,7 +282,7 @@ final class Task implements TaskInterface
     public function setSender($sender)
     {
         if (!is_string($sender)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $sender expects a string.', __METHOD__)
             );
         }
@@ -324,7 +327,7 @@ final class Task implements TaskInterface
     public function getLogs()
     {
         if ($this->logs === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Task object has no log data.', __METHOD__)
             );
         }
@@ -337,7 +340,7 @@ final class Task implements TaskInterface
     public function setLogs($logs)
     {
         if (!is_string($logs)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $logs expects a string.', __METHOD__)
             );
         }

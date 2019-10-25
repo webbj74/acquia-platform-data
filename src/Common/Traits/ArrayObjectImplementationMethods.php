@@ -11,6 +11,9 @@
 
 namespace Acquia\Platform\Cloud\Common\Traits;
 
+use ArrayAccess;
+use ArrayObject;
+
 /**
  * This trait provides a framework of methods and internal storage which may
  * be useful when using the Decorator pattern to wrap ArrayObject instances.
@@ -49,7 +52,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param \ArrayAccess $arrayObject
      */
-    public function setArrayObject(\ArrayAccess $arrayObject)
+    public function setArrayObject(ArrayAccess $arrayObject)
     {
         $this->arrayObject = $arrayObject;
     }

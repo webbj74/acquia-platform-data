@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\Task;
 
 use Acquia\Platform\Cloud\Hosting\TaskInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class TaskList extends \ArrayObject implements TaskListInterface
+class TaskList extends ArrayObject implements TaskListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
@@ -29,7 +31,7 @@ class TaskList extends \ArrayObject implements TaskListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\TaskInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of TaskInterface', __METHOD__)
             );
         }
@@ -46,7 +48,7 @@ class TaskList extends \ArrayObject implements TaskListInterface
         }
 
         if (!is_array($ids)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $ids must be an array (or comma-delimited string)', __METHOD__)
             );
         }

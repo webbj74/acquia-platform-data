@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\Realm;
 
 use Acquia\Platform\Cloud\Hosting\RealmInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class RealmList extends \ArrayObject implements RealmListInterface
+class RealmList extends ArrayObject implements RealmListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
@@ -29,7 +31,7 @@ class RealmList extends \ArrayObject implements RealmListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\RealmInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of RealmInterface', __METHOD__)
             );
         }
@@ -46,7 +48,7 @@ class RealmList extends \ArrayObject implements RealmListInterface
         }
 
         if (!is_array($names)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $names must be an array (or comma-delimited string)', __METHOD__)
             );
         }

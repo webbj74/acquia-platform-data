@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\DbBackup;
 
 use Acquia\Platform\Cloud\Hosting\DbBackupInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class DbBackupList extends \ArrayObject implements DbBackupListInterface
+class DbBackupList extends ArrayObject implements DbBackupListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
@@ -29,7 +31,7 @@ class DbBackupList extends \ArrayObject implements DbBackupListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\DbBackupInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of DbBackupInterface', __METHOD__)
             );
         }
@@ -42,7 +44,7 @@ class DbBackupList extends \ArrayObject implements DbBackupListInterface
     public function filterById($backupIds)
     {
         if (!is_array($backupIds)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $backupIds must be an array', __METHOD__)
             );
         }
