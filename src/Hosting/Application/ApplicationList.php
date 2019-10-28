@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\Application;
 
 use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class ApplicationList extends \ArrayObject implements ApplicationListInterface
+class ApplicationList extends ArrayObject implements ApplicationListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
@@ -29,7 +31,7 @@ class ApplicationList extends \ArrayObject implements ApplicationListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ApplicationInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of ApplicationInterface', __METHOD__)
             );
         }
@@ -46,7 +48,7 @@ class ApplicationList extends \ArrayObject implements ApplicationListInterface
         }
 
         if (!is_array($names)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $names must be an array (or comma-delimited string)', __METHOD__)
             );
         }

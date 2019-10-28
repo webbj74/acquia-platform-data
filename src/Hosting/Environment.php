@@ -14,6 +14,8 @@ namespace Acquia\Platform\Cloud\Hosting;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentFactory;
 use Acquia\Platform\Cloud\Hosting\Monitor\Monitorable;
 use Acquia\Platform\Cloud\Hosting\Server\ServerListInterface;
+use InvalidArgumentException;
+use RuntimeException;
 
 final class Environment implements EnvironmentInterface
 {
@@ -67,7 +69,7 @@ final class Environment implements EnvironmentInterface
     public function __construct($name)
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-_]+$#i', $name)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: Environment name must be an alphanumeric string (%s)', __METHOD__, $name)
             );
         }
@@ -99,7 +101,7 @@ final class Environment implements EnvironmentInterface
     public function getRevision()
     {
         if ($this->revision === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its VCS revision.', __METHOD__)
             );
         }
@@ -112,7 +114,7 @@ final class Environment implements EnvironmentInterface
     public function setRevision($revision)
     {
         if (!is_string($revision) || empty($revision)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $revision expects a string.', __METHOD__)
             );
         }
@@ -125,7 +127,7 @@ final class Environment implements EnvironmentInterface
     public function getDefaultHostName()
     {
         if ($this->defaultHostName === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its default host name.', __METHOD__)
             );
         }
@@ -138,7 +140,7 @@ final class Environment implements EnvironmentInterface
     public function setDefaultHostName($defaultHostName)
     {
         if (!is_string($defaultHostName) || empty($defaultHostName)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $defaultHostName expects a string.', __METHOD__)
             );
         }
@@ -151,7 +153,7 @@ final class Environment implements EnvironmentInterface
     public function getDatabaseClusterList()
     {
         if ($this->databaseClusterList === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its database cluster list.', __METHOD__)
             );
         }
@@ -172,7 +174,7 @@ final class Environment implements EnvironmentInterface
     public function getDefaultDomainName()
     {
         if ($this->defaultDomainName === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its default domain name.', __METHOD__)
             );
         }
@@ -185,7 +187,7 @@ final class Environment implements EnvironmentInterface
     public function setDefaultDomainName($defaultDomainName)
     {
         if (!is_string($defaultDomainName) || empty($defaultDomainName)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $defaultDomainName expects a string.', __METHOD__)
             );
         }
@@ -198,7 +200,7 @@ final class Environment implements EnvironmentInterface
     public function isInLiveDev()
     {
         if ($this->inLiveDevelopment === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know if the application is in Live Dev mode.', __METHOD__)
             );
         }
@@ -211,7 +213,7 @@ final class Environment implements EnvironmentInterface
     public function setInLiveDev($inLiveDevelopment)
     {
         if (!is_bool($inLiveDevelopment)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $inLiveDevelopment expects a boolean value.', __METHOD__)
             );
         }
@@ -224,7 +226,7 @@ final class Environment implements EnvironmentInterface
     public function getUnixUserName()
     {
         if ($this->unixUserName === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its UNIX user name.', __METHOD__)
             );
         }
@@ -237,7 +239,7 @@ final class Environment implements EnvironmentInterface
     public function setUnixUserName($unixUserName)
     {
         if (!is_string($unixUserName) || empty($unixUserName)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $unixUserName expects a string.', __METHOD__)
             );
         }
@@ -250,7 +252,7 @@ final class Environment implements EnvironmentInterface
     public function getMachineName()
     {
         if ($this->machineName === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its machine name.', __METHOD__)
             );
         }
@@ -263,7 +265,7 @@ final class Environment implements EnvironmentInterface
     public function setMachineName($machineName)
     {
         if (!is_string($machineName) || empty($machineName)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $machineName expects a string.', __METHOD__)
             );
         }
@@ -284,7 +286,7 @@ final class Environment implements EnvironmentInterface
     public function getServerList()
     {
         if ($this->serverList === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf(
                     '%s: This object does not know which servers are assigned to the environment.',
                     __METHOD__

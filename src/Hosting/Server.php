@@ -11,6 +11,9 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use InvalidArgumentException;
+use RuntimeException;
+
 final class Server implements ServerInterface
 {
     /**
@@ -46,7 +49,7 @@ final class Server implements ServerInterface
     public function __construct($name)
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     '%s: Server name must be an alphanumeric string (%s given)',
                     __METHOD__,
@@ -96,7 +99,7 @@ final class Server implements ServerInterface
     public function getFullyQualifiedDomainName()
     {
         if ($this->fqdn === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Server object does not know the Fully Qualified Domain Name.', __METHOD__)
             );
         }
@@ -109,7 +112,7 @@ final class Server implements ServerInterface
     public function setFullyQualifiedDomainName($fqdn)
     {
         if (!is_string($fqdn) || empty($fqdn)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $fullyQualifiedDomainName expects a string.', __METHOD__)
             );
         }
@@ -122,7 +125,7 @@ final class Server implements ServerInterface
     public function getAmiType()
     {
         if ($this->amiType === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Server object does not know the AMI Type.', __METHOD__)
             );
         }
@@ -135,7 +138,7 @@ final class Server implements ServerInterface
     public function setAmiType($amiType)
     {
         if (!is_string($amiType) || empty($amiType)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $amiType expects a string.', __METHOD__)
             );
         }
@@ -148,7 +151,7 @@ final class Server implements ServerInterface
     public function getEc2Region()
     {
         if ($this->ec2Region === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Server object does not know the EC2 Region.', __METHOD__)
             );
         }
@@ -161,7 +164,7 @@ final class Server implements ServerInterface
     public function setEc2Region($ec2Region)
     {
         if (!is_string($ec2Region) || empty($ec2Region)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $ec2Region expects a string.', __METHOD__)
             );
         }
@@ -174,7 +177,7 @@ final class Server implements ServerInterface
     public function getEc2AvailabilityZone()
     {
         if ($this->ec2AvailabilityZone === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Server object does not know the EC2 Availability Zone.', __METHOD__)
             );
         }
@@ -187,7 +190,7 @@ final class Server implements ServerInterface
     public function setEc2AvailabilityZone($ec2AvailabilityZone)
     {
         if (!is_string($ec2AvailabilityZone) || empty($ec2AvailabilityZone)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $ec2AvailabilityZone expects a string.', __METHOD__)
             );
         }
@@ -200,7 +203,7 @@ final class Server implements ServerInterface
     public function getServices()
     {
         if ($this->services === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Server object does not know the services array.', __METHOD__)
             );
         }
@@ -213,7 +216,7 @@ final class Server implements ServerInterface
     public function setServices($services)
     {
         if (!is_array($services)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $services expects an array.', __METHOD__)
             );
         }

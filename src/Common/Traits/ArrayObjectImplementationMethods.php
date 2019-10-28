@@ -11,6 +11,10 @@
 
 namespace Acquia\Platform\Cloud\Common\Traits;
 
+use ArrayAccess;
+use ArrayIterator;
+use ArrayObject;
+
 /**
  * This trait provides a framework of methods and internal storage which may
  * be useful when using the Decorator pattern to wrap ArrayObject instances.
@@ -38,7 +42,7 @@ namespace Acquia\Platform\Cloud\Common\Traits;
  */
 trait ArrayObjectImplementationMethods
 {
-    /** @var \ArrayObject $arrayObject */
+    /** @var ArrayObject $arrayObject */
     private $arrayObject;
 
     /**
@@ -47,9 +51,9 @@ trait ArrayObjectImplementationMethods
      *
      * No value is returned.
      *
-     * @param \ArrayAccess $arrayObject
+     * @param ArrayAccess $arrayObject
      */
-    public function setArrayObject(\ArrayAccess $arrayObject)
+    public function setArrayObject(ArrayAccess $arrayObject): void
     {
         $this->arrayObject = $arrayObject;
     }
@@ -58,9 +62,9 @@ trait ArrayObjectImplementationMethods
      * Gets the ArrayObject instance which is to be wrapped by the class using
      * this trait.
      *
-     * @return \ArrayObject The array wrapped by this class.
+     * @return ArrayObject The array wrapped by this class.
      */
-    public function getArrayObject()
+    public function getArrayObject(): ArrayObject
     {
         return $this->arrayObject;
     }
@@ -72,9 +76,9 @@ trait ArrayObjectImplementationMethods
      *
      * Create a new iterator from an ArrayObject instance.
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return $this->arrayObject->getIterator();
     }
@@ -90,7 +94,7 @@ trait ArrayObjectImplementationMethods
      *
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->arrayObject->offsetExists($offset);
     }
@@ -119,7 +123,7 @@ trait ArrayObjectImplementationMethods
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->arrayObject->offsetSet($offset, $value);
     }
@@ -133,7 +137,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->arrayObject->offsetUnset($offset);
     }
@@ -147,7 +151,7 @@ trait ArrayObjectImplementationMethods
      *
      * @return string The serialized representation of the ArrayObject.
      */
-    public function serialize()
+    public function serialize(): string
     {
         return $this->arrayObject->serialize();
     }
@@ -162,7 +166,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param string $serialized
      */
-    public function unserialize($serialized)
+    public function unserialize(string $serialized): void
     {
         $this->arrayObject->unserialize($serialized);
     }
@@ -176,7 +180,7 @@ trait ArrayObjectImplementationMethods
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return $this->arrayObject->count();
     }
@@ -192,7 +196,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param mixed $value The value being appended.
      */
-    public function append($value)
+    public function append($value): void
     {
         $this->arrayObject->append($value);
     }
@@ -206,7 +210,7 @@ trait ArrayObjectImplementationMethods
      *
      * No value is returned.
      */
-    public function asort()
+    public function asort(): void
     {
         $this->arrayObject->asort();
     }
@@ -221,7 +225,7 @@ trait ArrayObjectImplementationMethods
      *
      * @return array Returns the old array.
      */
-    public function exchangeArray($input)
+    public function exchangeArray($input): array
     {
         return $this->arrayObject->exchangeArray($input);
     }
@@ -235,7 +239,7 @@ trait ArrayObjectImplementationMethods
      *               to an object an array of the public properties of that
      *               object will be returned.
      */
-    public function getArrayCopy()
+    public function getArrayCopy(): array
     {
         return $this->arrayObject->getArrayCopy();
     }
@@ -248,7 +252,7 @@ trait ArrayObjectImplementationMethods
      *
      * @return int Returns the behavior flags of the ArrayObject.
      */
-    public function getFlags()
+    public function getFlags(): int
     {
         return $this->arrayObject->getFlags();
     }
@@ -261,7 +265,7 @@ trait ArrayObjectImplementationMethods
      *
      * @return string
      */
-    public function getIteratorClass()
+    public function getIteratorClass(): string
     {
         return $this->arrayObject->getIteratorClass();
     }
@@ -274,7 +278,7 @@ trait ArrayObjectImplementationMethods
      *
      * No value is returned.
      */
-    public function ksort()
+    public function ksort(): void
     {
         $this->arrayObject->ksort();
     }
@@ -290,7 +294,7 @@ trait ArrayObjectImplementationMethods
      *
      * No value is returned.
      */
-    public function natcasesort()
+    public function natcasesort(): void
     {
         $this->arrayObject->natcasesort();
     }
@@ -306,7 +310,7 @@ trait ArrayObjectImplementationMethods
      *
      * No value is returned.
      */
-    public function natsort()
+    public function natsort(): void
     {
         $this->arrayObject->natsort();
     }
@@ -320,7 +324,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param int $flags
      */
-    public function setFlags($flags)
+    public function setFlags(int $flags): void
     {
         $this->arrayObject->setFlags($flags);
     }
@@ -334,7 +338,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param string $iteratorClass
      */
-    public function setIteratorClass($iteratorClass)
+    public function setIteratorClass(string $iteratorClass): void
     {
         $this->arrayObject->setIteratorClass($iteratorClass);
     }
@@ -353,7 +357,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param callable $cmpFunction The callback comparison function.
      */
-    public function uasort($cmpFunction)
+    public function uasort(callable $cmpFunction): void
     {
         $this->arrayObject->uasort($cmpFunction);
     }
@@ -368,7 +372,7 @@ trait ArrayObjectImplementationMethods
      *
      * @param callable $cmpFunction The callback comparison function.
      */
-    public function uksort($cmpFunction)
+    public function uksort(callable $cmpFunction): void
     {
         $this->arrayObject->uksort($cmpFunction);
     }

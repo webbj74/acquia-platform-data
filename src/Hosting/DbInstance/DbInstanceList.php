@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\DbInstance;
 
 use Acquia\Platform\Cloud\Hosting\DbInstanceInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class DbInstanceList extends \ArrayObject implements DbInstanceListInterface
+class DbInstanceList extends ArrayObject implements DbInstanceListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetSet()
@@ -29,7 +31,7 @@ class DbInstanceList extends \ArrayObject implements DbInstanceListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\DbInstanceInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of DbInstanceInterface', __METHOD__)
             );
         }
@@ -46,7 +48,7 @@ class DbInstanceList extends \ArrayObject implements DbInstanceListInterface
         }
 
         if (!is_array($names)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $names must be an array (or comma-delimited string)', __METHOD__)
             );
         }

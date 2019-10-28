@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\Environment;
 
 use Acquia\Platform\Cloud\Hosting\EnvironmentInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
+class EnvironmentList extends ArrayObject implements EnvironmentListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetGet()
@@ -50,7 +52,7 @@ class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\EnvironmentInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of EnvironmentInterface', __METHOD__)
             );
         }
@@ -67,7 +69,7 @@ class EnvironmentList extends \ArrayObject implements EnvironmentListInterface
         }
 
         if (!is_array($names)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $names must be an array (or comma-delimited string)', __METHOD__)
             );
         }

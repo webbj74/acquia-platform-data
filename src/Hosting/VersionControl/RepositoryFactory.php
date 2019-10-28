@@ -12,6 +12,7 @@
 namespace Acquia\Platform\Cloud\Hosting\VersionControl;
 
 use Acquia\Platform\Cloud\Hosting\ApplicationInterface;
+use RuntimeException;
 
 class RepositoryFactory
 {
@@ -25,7 +26,7 @@ class RepositoryFactory
             $repo = new SubversionRepository($application, $environment);
         }
         if (!$repo) {
-            throw new \RuntimeException("Unsupported Version Control System");
+            throw new RuntimeException("Unsupported Version Control System");
         }
         return $repo;
     }
