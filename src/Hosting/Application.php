@@ -13,6 +13,8 @@ namespace Acquia\Platform\Cloud\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentListInterface;
 use Acquia\Platform\Cloud\Hosting\Monitor\Monitorable;
+use InvalidArgumentException;
+use RuntimeException;
 
 final class Application implements ApplicationInterface
 {
@@ -66,7 +68,7 @@ final class Application implements ApplicationInterface
     public function __construct($name)
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9_-]+$#i', $name)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     '%s: Application name must be an alphanumeric string (%s given)',
                     __METHOD__,
@@ -127,7 +129,7 @@ final class Application implements ApplicationInterface
     public function getTitle()
     {
         if ($this->title === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the title.', __METHOD__)
             );
         }
@@ -142,7 +144,7 @@ final class Application implements ApplicationInterface
     public function setTitle($title)
     {
         if (!is_string($title) || empty($title)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $title expects a string.', __METHOD__)
             );
         }
@@ -155,7 +157,7 @@ final class Application implements ApplicationInterface
     public function getUUID()
     {
         if ($this->uuid === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the UUID.', __METHOD__)
             );
         }
@@ -170,7 +172,7 @@ final class Application implements ApplicationInterface
     public function setUUID($uuid)
     {
         if (!is_string($uuid)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $uuid expects a string.', __METHOD__)
             );
         }
@@ -183,7 +185,7 @@ final class Application implements ApplicationInterface
     public function getVcsType()
     {
         if ($this->vcsType === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the VCS type.', __METHOD__)
             );
         }
@@ -198,7 +200,7 @@ final class Application implements ApplicationInterface
     public function setVcsType($vcsType)
     {
         if (!is_string($vcsType) || empty($vcsType)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $vcsType expects a string.', __METHOD__)
             );
         }
@@ -211,7 +213,7 @@ final class Application implements ApplicationInterface
     public function getVcsRepositoryUrl()
     {
         if ($this->vcsUrl === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the VCS URL.', __METHOD__)
             );
         }
@@ -226,7 +228,7 @@ final class Application implements ApplicationInterface
     public function setVcsRepositoryUrl($vcsUrl)
     {
         if (!is_string($vcsUrl) || empty($vcsUrl)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $vcsUrl expects a string.', __METHOD__)
             );
         }
@@ -239,7 +241,7 @@ final class Application implements ApplicationInterface
     public function isInProduction()
     {
         if ($this->productionMode === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the production mode.', __METHOD__)
             );
         }
@@ -254,7 +256,7 @@ final class Application implements ApplicationInterface
     public function setProductionMode($productionMode)
     {
         if (!is_bool($productionMode)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $productionMode expects a boolean.', __METHOD__)
             );
         }
@@ -267,7 +269,7 @@ final class Application implements ApplicationInterface
     public function getUnixUsername()
     {
         if ($this->unixUsername === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the unix username.', __METHOD__)
             );
         }
@@ -282,7 +284,7 @@ final class Application implements ApplicationInterface
     public function setUnixUsername($unixUsername)
     {
         if (!is_string($unixUsername) || empty($unixUsername)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $unixUsername expects a string.', __METHOD__)
             );
         }
@@ -295,7 +297,7 @@ final class Application implements ApplicationInterface
     public function getRealm()
     {
         if ($this->realm === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the realm.', __METHOD__)
             );
         }
@@ -318,7 +320,7 @@ final class Application implements ApplicationInterface
     public function getEnvironmentList()
     {
         if ($this->environmentList === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This Application object does not know the environment list.', __METHOD__)
             );
         }

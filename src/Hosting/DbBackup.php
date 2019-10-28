@@ -11,6 +11,9 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use InvalidArgumentException;
+use RuntimeException;
+
 final class DbBackup implements DbBackupInterface
 {
     /**
@@ -61,7 +64,7 @@ final class DbBackup implements DbBackupInterface
     public function __construct($backupId)
     {
         if (!is_numeric($backupId)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     '%s: DbBackup ID must be a numeric value (%s given)',
                     __METHOD__,
@@ -113,7 +116,7 @@ final class DbBackup implements DbBackupInterface
     public function getType()
     {
         if ($this->type === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the type.', __METHOD__)
             );
         }
@@ -126,7 +129,7 @@ final class DbBackup implements DbBackupInterface
     public function setType($type)
     {
         if (!is_string($type) || empty($type)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $type expects a string.', __METHOD__)
             );
         }
@@ -139,7 +142,7 @@ final class DbBackup implements DbBackupInterface
     public function getName()
     {
         if ($this->name === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the name.', __METHOD__)
             );
         }
@@ -152,7 +155,7 @@ final class DbBackup implements DbBackupInterface
     public function setName($name)
     {
         if (!is_string($name) || empty($name)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $name expects a string.', __METHOD__)
             );
         }
@@ -165,7 +168,7 @@ final class DbBackup implements DbBackupInterface
     public function getLink()
     {
         if ($this->link === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the link.', __METHOD__)
             );
         }
@@ -178,7 +181,7 @@ final class DbBackup implements DbBackupInterface
     public function setLink($link)
     {
         if (!is_string($link) || empty($link)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $link expects an string.', __METHOD__)
             );
         }
@@ -199,7 +202,7 @@ final class DbBackup implements DbBackupInterface
     public function setPath($path)
     {
         if (!is_string($path) && !is_null($path)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $path expects a string or null value.', __METHOD__)
             );
         }
@@ -212,7 +215,7 @@ final class DbBackup implements DbBackupInterface
     public function getStarted()
     {
         if ($this->started === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the started time.', __METHOD__)
             );
         }
@@ -225,7 +228,7 @@ final class DbBackup implements DbBackupInterface
     public function setStarted($started)
     {
         if (!is_numeric($started) || empty($started)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $started expects an int.', __METHOD__)
             );
         }
@@ -238,7 +241,7 @@ final class DbBackup implements DbBackupInterface
     public function getCompleted()
     {
         if ($this->completed === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the completed time.', __METHOD__)
             );
         }
@@ -251,7 +254,7 @@ final class DbBackup implements DbBackupInterface
     public function setCompleted($completed)
     {
         if (!is_numeric($completed) || is_null($completed)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $completed expects an int.', __METHOD__)
             );
         }
@@ -264,7 +267,7 @@ final class DbBackup implements DbBackupInterface
     public function getDeleted()
     {
         if ($this->deleted === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the deleted status.', __METHOD__)
             );
         }
@@ -277,7 +280,7 @@ final class DbBackup implements DbBackupInterface
     public function setDeleted($deleted)
     {
         if (!is_numeric($deleted) || !($deleted == 0 || $deleted == 1)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $deleted expects an int of value 0 or 1.', __METHOD__)
             );
         }
@@ -290,7 +293,7 @@ final class DbBackup implements DbBackupInterface
     public function getChecksum()
     {
         if ($this->checksum === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbBackup object does not know the checksum.', __METHOD__)
             );
         }
@@ -303,7 +306,7 @@ final class DbBackup implements DbBackupInterface
     public function setChecksum($checksum)
     {
         if (!is_string($checksum) || is_null($checksum)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $checksum expects a string.', __METHOD__)
             );
         }

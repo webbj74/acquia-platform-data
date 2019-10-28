@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use InvalidArgumentException;
+
 final class Realm implements RealmInterface
 {
     /**
@@ -26,7 +28,7 @@ final class Realm implements RealmInterface
     public function __construct($name)
     {
         if (!is_string($name) || !preg_match('#^[a-z0-9-]+$#i', $name)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: Realm name must be an alphanumeric string', __METHOD__)
             );
         }
