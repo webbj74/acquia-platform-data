@@ -11,6 +11,9 @@
 
 namespace Acquia\Platform\Cloud\Hosting;
 
+use InvalidArgumentException;
+use RuntimeException;
+
 final class DbInstance implements DbInstanceInterface
 {
     /**
@@ -46,7 +49,7 @@ final class DbInstance implements DbInstanceInterface
     public function __construct($instanceName)
     {
         if (!is_string($instanceName) || !preg_match('/^([a-z]|[0-9][\w]*[a-z_])[\w]*$/i', $instanceName)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     '%s: DbInstance name must be an alphanumeric string (%s given)',
                     __METHOD__,
@@ -96,7 +99,7 @@ final class DbInstance implements DbInstanceInterface
     public function getName()
     {
         if ($this->name === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbInstance object does not know the name.', __METHOD__)
             );
         }
@@ -109,7 +112,7 @@ final class DbInstance implements DbInstanceInterface
     public function setName($name)
     {
         if (!is_string($name) || empty($name)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $name expects a string.', __METHOD__)
             );
         }
@@ -122,7 +125,7 @@ final class DbInstance implements DbInstanceInterface
     public function getUsername()
     {
         if ($this->username === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbInstance object does not know the username.', __METHOD__)
             );
         }
@@ -135,7 +138,7 @@ final class DbInstance implements DbInstanceInterface
     public function setUsername($username)
     {
         if (!is_string($username) || empty($username)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $username expects a string.', __METHOD__)
             );
         }
@@ -148,7 +151,7 @@ final class DbInstance implements DbInstanceInterface
     public function getPassword()
     {
         if ($this->password === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbInstance object does not know the password.', __METHOD__)
             );
         }
@@ -161,7 +164,7 @@ final class DbInstance implements DbInstanceInterface
     public function setPassword($password)
     {
         if (!is_string($password) || empty($password)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $password expects a string.', __METHOD__)
             );
         }
@@ -174,7 +177,7 @@ final class DbInstance implements DbInstanceInterface
     public function getHost()
     {
         if ($this->host === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbInstance object does not know the host.', __METHOD__)
             );
         }
@@ -187,7 +190,7 @@ final class DbInstance implements DbInstanceInterface
     public function setHost($host)
     {
         if (!is_string($host) || empty($host)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $host expects a string.', __METHOD__)
             );
         }
@@ -200,7 +203,7 @@ final class DbInstance implements DbInstanceInterface
     public function getClusterID()
     {
         if ($this->clusterID === null) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('%s: This DbInstance object does not know the clusterID.', __METHOD__)
             );
         }
@@ -213,7 +216,7 @@ final class DbInstance implements DbInstanceInterface
     public function setClusterID($clusterID)
     {
         if (!is_string($clusterID) || empty($clusterID)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $clusterID expects a string.', __METHOD__)
             );
         }

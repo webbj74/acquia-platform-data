@@ -12,8 +12,10 @@
 namespace Acquia\Platform\Cloud\Hosting\Server;
 
 use Acquia\Platform\Cloud\Hosting\ServerInterface;
+use ArrayObject;
+use InvalidArgumentException;
 
-class ServerList extends \ArrayObject implements ServerListInterface
+class ServerList extends ArrayObject implements ServerListInterface
 {
     /**
      * Implementation of ArrayAccess::offsetGet()
@@ -56,7 +58,7 @@ class ServerList extends \ArrayObject implements ServerListInterface
     public function offsetSet($offset, $value)
     {
         if (!is_subclass_of($value, 'Acquia\Platform\Cloud\Hosting\ServerInterface')) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $value must be an implementation of ServerInterface', __METHOD__)
             );
         }
@@ -73,7 +75,7 @@ class ServerList extends \ArrayObject implements ServerListInterface
         }
 
         if (!is_array($names)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('%s: $names must be an array (or comma-delimited string)', __METHOD__)
             );
         }

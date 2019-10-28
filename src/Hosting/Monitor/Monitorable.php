@@ -11,6 +11,8 @@
 
 namespace Acquia\Platform\Cloud\Hosting\Monitor;
 
+use RuntimeException;
+
 trait Monitorable
 {
     /**
@@ -40,7 +42,7 @@ trait Monitorable
     {
         $monitorList = $this->monitorList;
         if (!$monitorList) {
-            throw new \RuntimeException('The monitorList has not been initialized.');
+            throw new RuntimeException('The monitorList has not been initialized.');
         }
         $monitorList->append($monitor);
     }
@@ -57,7 +59,7 @@ trait Monitorable
     {
         $monitorList = $this->monitorList;
         if (!$monitorList) {
-            throw new \RuntimeException('The monitorList has not been initialized.');
+            throw new RuntimeException('The monitorList has not been initialized.');
         }
         return $monitorList->getMonitoringUrls($monitorName);
     }
