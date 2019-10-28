@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Application;
 
 use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Application\ApplicationList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -81,11 +82,11 @@ class ApplicationListTest extends TestCase
 
     /**
      * @covers ::filterByName
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $applicationList = $this->getBasicApplicationList();
         $applicationList->filterByName($filter);
     }
@@ -100,11 +101,11 @@ class ApplicationListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonApplication($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $applicationList = $this->getBasicApplicationList();
         $applicationList->offsetSet(0, $value);
     }

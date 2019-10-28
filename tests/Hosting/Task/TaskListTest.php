@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Task;
 
 use Acquia\Platform\Cloud\Hosting\Task;
 use Acquia\Platform\Cloud\Hosting\Task\TaskList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -81,11 +82,11 @@ class TaskListTest extends TestCase
 
     /**
      * @covers ::filterByIDs
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $taskList = $this->getBasicTaskList();
         $taskList->filterByIDs($filter);
     }
@@ -100,11 +101,11 @@ class TaskListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonTask($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $taskList = $this->getBasicTaskList();
         $taskList->offsetSet(0, $value);
     }

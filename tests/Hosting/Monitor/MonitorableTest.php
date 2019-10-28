@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Monitor;
 
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorInterface;
 use Acquia\Platform\Cloud\Hosting\Monitor\MonitorList;
+use RuntimeException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -46,22 +47,20 @@ class MonitorableTest extends TestCase
 
     /**
      * @covers ::addMonitor
-     * @expectedException \RuntimeException
      */
     public function testThrowsExceptionIfMonitorAppendedBeforeInitialization()
     {
-        
+        $this->expectException(RuntimeException::class);
         $monitorable = $this->getMonitorable();
         $monitorable->addMonitor($this->getMonitor());
     }
 
     /**
      * @covers ::getMonitoringUrls
-     * @expectedException \RuntimeException
      */
     public function testThrowsExceptionIfUrlsRequestedBeforeInitialization()
     {
-        
+        $this->expectException(RuntimeException::class);
         $monitorable = $this->getMonitorable();
         $monitorable->getMonitoringUrls();
     }

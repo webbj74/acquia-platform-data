@@ -15,7 +15,9 @@ use Acquia\Platform\Cloud\Hosting\Application;
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
 use Acquia\Platform\Cloud\Hosting\Realm;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Application
@@ -50,19 +52,19 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      */
     public function testNamePropertyMustBeAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application([]);
     }
 
     /**
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      */
     public function testNamePropertyMustBeAnAlphanumericString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application(' ');
     }
 
@@ -107,30 +109,30 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getVcsType
-     * @expectedException \RuntimeException
      */
     public function testGetVcsTypeWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getVcsType();
     }
 
     /**
      * @covers ::setVcsType
-     * @expectedException \InvalidArgumentException
      */
     public function testSetVcsTypeWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setVcsType([]);
     }
 
     /**
      * @covers ::setVcsType
-     * @expectedException \InvalidArgumentException
      */
     public function testSetVcsTypeWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setVcsType('');
     }
@@ -154,30 +156,30 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getVcsRepositoryUrl
-     * @expectedException \RuntimeException
      */
     public function testGetVcsRepositoryUrlWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getVcsRepositoryUrl();
     }
 
     /**
      * @covers ::setVcsRepositoryUrl
-     * @expectedException \InvalidArgumentException
      */
     public function testSetVcsRepositoryUrlWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setVcsRepositoryUrl([]);
     }
 
     /**
      * @covers ::setVcsRepositoryUrl
-     * @expectedException \InvalidArgumentException
      */
     public function testSetVcsRepositoryUrlWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setVcsRepositoryUrl('');
     }
@@ -201,20 +203,20 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::isInProduction
-     * @expectedException \RuntimeException
      */
     public function testIsInProductionWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->isInProduction();
     }
 
     /**
      * @covers ::setProductionMode
-     * @expectedException \InvalidArgumentException
      */
     public function testSetProductionModeWillThrowExceptionIfNotABoolean()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setProductionMode([]);
     }
@@ -238,30 +240,30 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getUnixUsername
-     * @expectedException \RuntimeException
      */
     public function testGetUnixUsernameWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getUnixUsername();
     }
 
     /**
      * @covers ::setUnixUsername
-     * @expectedException \InvalidArgumentException
      */
     public function testSetUnixUsernameWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setUnixUsername([]);
     }
 
     /**
      * @covers ::setUnixUsername
-     * @expectedException \InvalidArgumentException
      */
     public function testSetUnixUsernameWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setUnixUsername('');
     }
@@ -285,30 +287,30 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getTitle
-     * @expectedException \RuntimeException
      */
     public function testGetTitleWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getTitle();
     }
 
     /**
      * @covers ::setTitle
-     * @expectedException \InvalidArgumentException
      */
     public function testSetTitleWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setTitle([]);
     }
 
     /**
      * @covers ::setTitle
-     * @expectedException \InvalidArgumentException
      */
     public function testSetTitleWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setTitle('');
     }
@@ -332,30 +334,30 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getUUID
-     * @expectedException \RuntimeException
      */
     public function testGetUUIDWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getUUID();
     }
 
     /**
      * @covers ::setUUID
-     * @expectedException \InvalidArgumentException
      */
     public function testSetUUIDWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $application = new Application('test');
         $application->setUUID([]);
     }
 
     /**
      * @covers ::setUUID
-     * @expectedException \RuntimeException
      */
     public function testSetUUIDWillSetNullIfEmptyString()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->setUUID('');
         $application->getUUID();
@@ -381,10 +383,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getRealm
-     * @expectedException \RuntimeException
      */
     public function testGetRealmWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getRealm();
     }
@@ -405,10 +407,10 @@ class ApplicationTest extends TestCase
 
     /**
      * @covers ::getEnvironmentList
-     * @expectedException \RuntimeException
      */
     public function testEnvironmentListWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $application = new Application('test');
         $application->getEnvironmentList();
     }

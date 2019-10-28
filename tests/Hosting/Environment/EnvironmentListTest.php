@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\Environment;
 
 use Acquia\Platform\Cloud\Hosting\Environment;
 use Acquia\Platform\Cloud\Hosting\Environment\EnvironmentList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -75,11 +76,11 @@ class EnvironmentListTest extends TestCase
 
     /**
      * @covers ::filterByName
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environmentList = $this->getBasicEnvironmentList();
         $environmentList->filterByName($filter);
     }
@@ -94,11 +95,11 @@ class EnvironmentListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonEnvironment($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $environmentList = $this->getBasicEnvironmentList();
         $environmentList->offsetSet(0, $value);
     }

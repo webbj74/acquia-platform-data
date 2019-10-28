@@ -12,6 +12,7 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\DnsConfig;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -91,7 +92,7 @@ class DnsConfigTest extends TestCase
      */
     public function testDnsConfigConstructorValidatesTypeAndValue(string $type, string $value)
     {
-        $this->expectException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $dnsConfig = new DnsConfig($type, $value);
     }
 }

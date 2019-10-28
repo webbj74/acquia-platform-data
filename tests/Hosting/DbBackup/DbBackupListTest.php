@@ -13,6 +13,7 @@ namespace Acquia\Platform\Cloud\Tests\Hosting\DbBackup;
 
 use Acquia\Platform\Cloud\Hosting\DbBackup;
 use Acquia\Platform\Cloud\Hosting\DbBackup\DbBackupList;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -67,11 +68,11 @@ class DbBackupListTest extends TestCase
 
     /**
      * @covers ::filterById
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackupList = $this->getBasicDbBackupList();
         $dbBackupList->filterById($filter);
     }
@@ -86,11 +87,11 @@ class DbBackupListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonDbBackup($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackupList = $this->getBasicDbBackupList();
         $dbBackupList->offsetSet(0, $value);
     }

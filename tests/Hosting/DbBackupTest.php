@@ -12,7 +12,9 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\DbBackup;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\DbBackup
@@ -31,10 +33,10 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      */
     public function testIdPropertyMustBeAnInt()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup([]);
     }
 
@@ -78,30 +80,30 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getType
-     * @expectedException \RuntimeException
      */
     public function testGetTypeWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getType();
     }
 
     /**
      * @covers ::setType
-     * @expectedException \InvalidArgumentException
      */
     public function testSetTypeWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setType([]);
     }
 
     /**
      * @covers ::setType
-     * @expectedException \InvalidArgumentException
      */
     public function testSetTypeWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setType('');
     }
@@ -120,20 +122,20 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getName
-     * @expectedException \RuntimeException
      */
     public function testGetNameWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getName();
     }
 
     /**
      * @covers ::setName
-     * @expectedException \InvalidArgumentException
      */
     public function testSetNameWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setName([]);
     }
@@ -152,20 +154,20 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getLink
-     * @expectedException \RuntimeException
      */
     public function testGetLinkWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getLink();
     }
 
     /**
      * @covers ::setLink
-     * @expectedException \InvalidArgumentException
      */
     public function testSetLinkWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setLink([]);
     }
@@ -184,10 +186,10 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::setPath
-     * @expectedException \InvalidArgumentException
      */
     public function testSetPathWillThrowExceptionIfNotStringOrNull()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setPath([]);
     }
@@ -217,20 +219,20 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getStarted
-     * @expectedException \RuntimeException
      */
     public function testGetStartedWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getStarted();
     }
 
     /**
      * @covers ::setStarted
-     * @expectedException \InvalidArgumentException
      */
     public function testSetStartedWillThrowExceptionIfNotAnInt()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setStarted([]);
     }
@@ -249,20 +251,20 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getCompleted
-     * @expectedException \RuntimeException
      */
     public function testGetCompletedWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getCompleted();
     }
 
     /**
      * @covers ::setCompleted
-     * @expectedException \InvalidArgumentException
      */
     public function testSetCompletedWillThrowExceptionIfNotAnInt()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setCompleted([]);
     }
@@ -281,30 +283,30 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getDeleted
-     * @expectedException \RuntimeException
      */
     public function testGetDeletedWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getDeleted();
     }
 
     /**
      * @covers ::setDeleted
-     * @expectedException \InvalidArgumentException
      */
     public function testSetDeletedWillThrowExceptionIfNotAnInt()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setDeleted([]);
     }
 
     /**
      * @covers ::setDeleted
-     * @expectedException \InvalidArgumentException
      */
     public function testSetDeletedWillThrowExceptionIfNotZeroOrOne()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setDeleted(5);
     }
@@ -323,30 +325,30 @@ class DbBackupTest extends TestCase
 
     /**
      * @covers ::getChecksum
-     * @expectedException \RuntimeException
      */
     public function testGetChecksumWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->getChecksum();
     }
 
     /**
      * @covers ::setChecksum
-     * @expectedException \InvalidArgumentException
      */
     public function testSetChecksumWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setChecksum([]);
     }
 
     /**
      * @covers ::setChecksum
-     * @expectedException \InvalidArgumentException
      */
     public function testSetChecksumWillThrowExceptionIfNull()
     {
+        $this->expectException(InvalidArgumentException::class);
         $dbBackup = new DbBackup(12345678);
         $dbBackup->setChecksum(null);
     }

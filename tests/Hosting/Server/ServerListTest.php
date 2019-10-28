@@ -18,6 +18,7 @@ use Acquia\Platform\Cloud\Hosting\Server\DatabaseServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\FileServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\VcsServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\WebServerListInterface;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -86,11 +87,11 @@ class ServerListTest extends TestCase
 
     /**
      * @covers ::filterByName
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalFilterProvider()
      */
     public function testFilterWillThrowExceptionForBadParameter($filter)
     {
+        $this->expectException(InvalidArgumentException::class);
         $serverList = $this->getBasicServerList();
         $serverList->filterByName($filter);
     }
@@ -105,11 +106,11 @@ class ServerListTest extends TestCase
 
     /**
      * @covers ::offsetSet
-     * @expectedException \InvalidArgumentException
      * @dataProvider exceptionalValueProvider()
      */
     public function testOffsetSetWillThrowExceptionForNonServer($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $serverList = $this->getBasicServerList();
         $serverList->offsetSet(0, $value);
     }

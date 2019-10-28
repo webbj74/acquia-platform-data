@@ -12,7 +12,9 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting;
 
 use Acquia\Platform\Cloud\Hosting\Task;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \Acquia\Platform\Cloud\Hosting\Task
@@ -31,10 +33,10 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::__construct
-     * @expectedException \InvalidArgumentException
      */
     public function testIDPropertyMustBeAnInteger()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task('test');
     }
 
@@ -81,30 +83,30 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::getQueue
-     * @expectedException \RuntimeException
      */
     public function testGetQueueWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $task = new Task(1234);
         $task->getQueue();
     }
 
     /**
      * @covers ::setQueue
-     * @expectedException \InvalidArgumentException
      */
     public function testSetQueueWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setQueue([]);
     }
 
     /**
      * @covers ::setQueue
-     * @expectedException \InvalidArgumentException
      */
     public function testSetQueueWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setQueue('');
     }
@@ -123,30 +125,30 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::getState
-     * @expectedException \RuntimeException
      */
     public function testGetStateWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $task = new Task(1234);
         $task->getState();
     }
 
     /**
      * @covers ::setState
-     * @expectedException \InvalidArgumentException
      */
     public function testSetStateWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setState([]);
     }
 
     /**
      * @covers ::setState
-     * @expectedException \InvalidArgumentException
      */
     public function testSetStateWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setState('');
     }
@@ -165,30 +167,30 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::getDescription
-     * @expectedException \RuntimeException
      */
     public function testGetDescriptionWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $task = new Task(1234);
         $task->getDescription();
     }
 
     /**
      * @covers ::setDescription
-     * @expectedException \InvalidArgumentException
      */
     public function testSetDescriptionWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setDescription([]);
     }
 
     /**
      * @covers ::setDescription
-     * @expectedException \InvalidArgumentException
      */
     public function testSetDescriptionWillThrowExceptionIfEmptyString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setDescription('');
     }
@@ -207,20 +209,20 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::getCreated
-     * @expectedException \RuntimeException
      */
     public function testGetCreatedWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $task = new Task(1234);
         $task->getCreated();
     }
 
     /**
      * @covers ::setCreated
-     * @expectedException \InvalidArgumentException
      */
     public function testSetCreatedWillThrowExceptionIfNotAnInteger()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setCreated(' ');
     }
@@ -239,10 +241,10 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::setStarted
-     * @expectedException \InvalidArgumentException
      */
     public function testSetStartedWillThrowExceptionIfNotAnInteger()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setStarted(' ');
     }
@@ -270,10 +272,10 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::setCompleted
-     * @expectedException \InvalidArgumentException
      */
     public function testSetCompletedWillThrowExceptionIfNotAnInteger()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setCompleted(' ');
     }
@@ -292,10 +294,10 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::setSender
-     * @expectedException \InvalidArgumentException
      */
     public function testSetSenderWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setSender([]);
     }
@@ -338,20 +340,20 @@ class TaskTest extends TestCase
 
     /**
      * @covers ::getLogs
-     * @expectedException \RuntimeException
      */
     public function testGetLogsWillThrowExceptionIfPropertyNotSet()
     {
+        $this->expectException(RuntimeException::class);
         $task = new Task(1234);
         $task->getLogs();
     }
 
     /**
      * @covers ::setLogs
-     * @expectedException \InvalidArgumentException
      */
     public function testSetLogsWillThrowExceptionIfNotAString()
     {
+        $this->expectException(InvalidArgumentException::class);
         $task = new Task(1234);
         $task->setLogs([]);
     }
