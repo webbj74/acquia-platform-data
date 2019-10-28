@@ -18,6 +18,7 @@
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "~2.0",
+        "phpcompatibility/php-compatibility": "*",
         "phpmd/phpmd": "@stable",
         "phpunit/phpunit": "^7.5|^8.0",
         "squizlabs/php_codesniffer": "*",
@@ -32,5 +33,9 @@
         "psr-4": {
             "Acquia\\Platform\\Cloud\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility",
+        "post-update-cmd" : "vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility"
     }
 }
