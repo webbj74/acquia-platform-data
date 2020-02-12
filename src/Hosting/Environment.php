@@ -100,7 +100,7 @@ final class Environment implements EnvironmentInterface
      */
     public function getRevision()
     {
-        if ($this->revision === null) {
+        if (empty($this->revision)) {
             throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its VCS revision.', __METHOD__)
             );
@@ -113,7 +113,7 @@ final class Environment implements EnvironmentInterface
      */
     public function setRevision($revision)
     {
-        if (!is_string($revision) || empty($revision)) {
+        if (!is_string($revision)) {
             throw new InvalidArgumentException(
                 sprintf('%s: $revision expects a string.', __METHOD__)
             );
