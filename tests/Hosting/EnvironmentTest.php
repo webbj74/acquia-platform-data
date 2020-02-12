@@ -106,9 +106,9 @@ class EnvironmentTest extends TestCase
 
     /**
      * @covers ::setRevision
-     * @dataProvider nonStringProvider()
+     * @dataProvider nullDataProvider()
      */
-    public function testRevisionPropertyRejectsNonString($value)
+    public function testRevisionPropertyRejectsNullValue($value)
     {
         $this->expectException(InvalidArgumentException::class);
         $environment = new Environment('test');
@@ -417,6 +417,13 @@ class EnvironmentTest extends TestCase
     {
         return [
             'empty string' => [''],
+            'NULL' => [null],
+        ];
+    }
+
+    public function nullDataProvider()
+    {
+        return [
             'NULL' => [null],
         ];
     }
