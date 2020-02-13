@@ -100,7 +100,7 @@ final class Environment implements EnvironmentInterface
      */
     public function getRevision()
     {
-        if (empty($this->revision)) {
+        if ($this->revision === null) {
             throw new RuntimeException(
                 sprintf('%s: This Environment object does not know its VCS revision.', __METHOD__)
             );
