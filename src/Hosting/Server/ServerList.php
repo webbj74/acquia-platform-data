@@ -94,6 +94,11 @@ class ServerList extends ArrayObject implements ServerListInterface
 
     /**
      * {@inheritdoc}
+     *
+     * PHPMD is incorrectly flagging $matches as an undefined variable.
+     * @see https://github.com/phpmd/phpmd/issues/672
+     *
+     * @SuppressWarnings(PHPMD.UndefinedVariable)
      */
     public function getLowestNumberedServer()
     {

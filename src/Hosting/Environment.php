@@ -113,7 +113,7 @@ final class Environment implements EnvironmentInterface
      */
     public function setRevision($revision)
     {
-        if (!is_string($revision) || empty($revision)) {
+        if (!is_string($revision)) {
             throw new InvalidArgumentException(
                 sprintf('%s: $revision expects a string.', __METHOD__)
             );
