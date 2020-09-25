@@ -20,7 +20,7 @@ use Acquia\Platform\Cloud\Hosting\Server\VcsServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\WebServerListInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
+use Acquia\Platform\Cloud\Hosting\Server\EmptyServerListException;
 
 /**
  * @coversDefaultClass Acquia\Platform\Cloud\Hosting\Server\ServerList
@@ -133,7 +133,7 @@ class ServerListTest extends TestCase
         $this->assertEquals('Pallas-1', $serverList->getLowestNumberedServer()->getName());
 
         $serverList = new ServerList();
-        $this->expectException(RuntimeException::class);
+        $this->expectException(EmptyServerListException::class);
         $serverList->getLowestNumberedServer();
     }
 
