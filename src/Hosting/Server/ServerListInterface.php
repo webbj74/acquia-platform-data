@@ -12,7 +12,6 @@
 namespace Acquia\Platform\Cloud\Hosting\Server;
 
 use Acquia\Platform\Cloud\Hosting\ServerInterface;
-use RuntimeException;
 
 interface ServerListInterface
 {
@@ -32,7 +31,7 @@ interface ServerListInterface
      * @return ServerInterface
      *   An Server instance.
      *
-     * @throws RuntimeException
+     * @throws EmptyServerListException
      *   Exception is thrown if no servers are in the list.
      */
     public function getLowestNumberedServer();

@@ -14,7 +14,6 @@ namespace Acquia\Platform\Cloud\Hosting\Server;
 use Acquia\Platform\Cloud\Hosting\ServerInterface;
 use ArrayObject;
 use InvalidArgumentException;
-use RuntimeException;
 
 class ServerList extends ArrayObject implements ServerListInterface
 {
@@ -107,7 +106,7 @@ class ServerList extends ArrayObject implements ServerListInterface
         $lowestId = 999999;
 
         if (!$this->count()) {
-            throw new RuntimeException(
+            throw new EmptyServerListException(
                 "There are no servers in this ServerList to choose from.",
             );
         }
