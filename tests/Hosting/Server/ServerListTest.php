@@ -12,10 +12,11 @@
 namespace Acquia\Platform\Cloud\Tests\Hosting\Server;
 
 use Acquia\Platform\Cloud\Hosting\Server;
-use Acquia\Platform\Cloud\Hosting\Server\ServerList;
 use Acquia\Platform\Cloud\Hosting\Server\BalancerServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\DatabaseServerListInterface;
+use Acquia\Platform\Cloud\Hosting\Server\EmptyServerListException;
 use Acquia\Platform\Cloud\Hosting\Server\FileServerListInterface;
+use Acquia\Platform\Cloud\Hosting\Server\ServerList;
 use Acquia\Platform\Cloud\Hosting\Server\VcsServerListInterface;
 use Acquia\Platform\Cloud\Hosting\Server\WebServerListInterface;
 use InvalidArgumentException;
@@ -32,6 +33,12 @@ class ServerListTest extends TestCase
     private $childrenOfOceanus = ['Metis-4'];
     private $childrenOfCrius = ['Astraeus-200', 'Pallas-1', 'Perses-3'];
 
+    /**
+     * Returns a ServerList for testing.
+     *
+     * @return ServerList
+     *   A list of servers of various types.
+     */
     protected function getBasicServerList()
     {
         $serverList = new ServerList();
@@ -58,13 +65,13 @@ class ServerListTest extends TestCase
 
         // filter by array
         $childrenOfHyperion = $serverList->filterByName($this->childrenOfHyperion);
-        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server\ServerList', $childrenOfHyperion);
+        $this->assertInstanceOf(ServerList::class, $childrenOfHyperion);
         $this->assertEquals(3, $childrenOfHyperion->count());
         $iterator = $childrenOfHyperion->getIterator();
         while ($iterator->valid()) {
             /** @var \Acquia\Platform\Cloud\Hosting\Server $server */
             $server = $iterator->current();
-            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server', $server);
+            $this->assertInstanceOf(Server::class, $server);
             $this->assertTrue(in_array($server->getName(), $this->childrenOfHyperion));
             $this->assertFalse(in_array($server->getName(), $this->childrenOfIapetus));
             $iterator->next();
@@ -72,13 +79,13 @@ class ServerListTest extends TestCase
 
         // filter by comma-delimited string
         $childrenOfIapetus = $serverList->filterByName(implode(',', $this->childrenOfIapetus));
-        $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server\ServerList', $childrenOfIapetus);
+        $this->assertInstanceOf(ServerList::class, $childrenOfIapetus);
         $this->assertEquals(4, $childrenOfIapetus->count());
         $iterator = $childrenOfIapetus->getIterator();
         while ($iterator->valid()) {
             /** @var \Acquia\Platform\Cloud\Hosting\Server $server */
             $server = $iterator->current();
-            $this->assertInstanceOf('Acquia\Platform\Cloud\Hosting\Server', $server);
+            $this->assertInstanceOf(Server::class, $server);
             $this->assertTrue(in_array($server->getName(), $this->childrenOfIapetus));
             $this->assertFalse(in_array($server->getName(), $this->childrenOfHyperion));
             $iterator->next();
@@ -128,11 +135,12 @@ class ServerListTest extends TestCase
      */
     public function testGetLowestNumberedServer()
     {
-        $serverList = new ServerList();
-        $this->assertNull($serverList->getLowestNumberedServer());
-
         $serverList = $this->getBasicServerList();
         $this->assertEquals('Pallas-1', $serverList->getLowestNumberedServer()->getName());
+
+        $serverList = new ServerList();
+        $this->expectException(EmptyServerListException::class);
+        $serverList->getLowestNumberedServer();
     }
 
     /**

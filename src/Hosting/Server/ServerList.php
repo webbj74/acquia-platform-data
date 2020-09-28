@@ -105,6 +105,12 @@ class ServerList extends ArrayObject implements ServerListInterface
         $lowestServer = null;
         $lowestId = 999999;
 
+        if (!$this->count()) {
+            throw new EmptyServerListException(
+                "There are no servers in this ServerList to choose from.",
+            );
+        }
+
         /** @var ServerInterface $server */
         foreach ($this as $server) {
             preg_match('/^[^-]+-(\d+)$/', $server->getName(), $matches);

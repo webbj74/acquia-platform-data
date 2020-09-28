@@ -29,6 +29,10 @@ interface ServerListInterface
      * Returns the lowest numbered server in the list.
      *
      * @return ServerInterface
+     *   An Server instance.
+     *
+     * @throws EmptyServerListException
+     *   Exception is thrown if no servers are in the list.
      */
     public function getLowestNumberedServer();
 
